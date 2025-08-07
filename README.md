@@ -24,6 +24,7 @@ sudo pacman -S mpv
 sudo pacman -S hyprpaper
 sudo pacman -S kitty
 sudo pacman -S rofi
+sudo yay -S ttf-twemoji
 
 ---
 
