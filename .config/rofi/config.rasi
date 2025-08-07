@@ -1,0 +1,9 @@
+@theme "/usr/share/rofi/themes/DarkBlue.rasi"
+
+configuration {
+    modi: "drun,run,window";
+    font: "monospace 12";
+    show-icons: true;
+    icon-theme: "Papirus";
+    fullscreen: true;
+}
