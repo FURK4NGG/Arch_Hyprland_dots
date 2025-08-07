@@ -32,9 +32,6 @@ Ekran kilidi	swaylock,wlogout
 Bildirim swaync
 Clipboard	wl-clipboard
 Terminal	kitty
-Dosya Yöneticisi	thunar
-Ağ	networkmanager, nm-applet	
-Ses	pipewire, pipewire-pulse, pavucontrol
 Ekran Parlaklığı	brightnessctl	
 Ekran Görüntüsü	grim
 Video Oynatıcı mpv
