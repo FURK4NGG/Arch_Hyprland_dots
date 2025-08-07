@@ -19,7 +19,7 @@ sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils
 sudo pacman -S grim
 sudo pacman -S slurp
 sudo yay -S swaync
-sudo yay -S wlogout
+sudo yay -S wlogout,swaylock
 sudo pacman -S mpv
 sudo pacman -S hyprpaper
 sudo pacman -S kitty
