@@ -14,12 +14,20 @@ sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.pn
 sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
 
 -Basic Apps and Packets-
+sudo pacman -S sddm
 sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils
 sudo pacman -S grim
 sudo pacman -S slurp
+sudo yay -S swaync
+sudo pacman -S mpv
+sudo pacman -S hyprpaper
+sudo pacman -S kitty
+sudo pacman -S rofi
+
+---
 
 Ekran kilidi	swaylock
-*Bildirim	mako veya dunst	Wayland uyumlu
+Bildirim swaync
 Clipboard	wl-clipboard
 Terminal	kitty
 Dosya Yöneticisi	thunar
@@ -30,6 +38,10 @@ Ekran Görüntüsü	grim
 Video Oynatıcı mpv
 Panel/Bar	waybar
 
+---
+
+sudo systemctl enable sddm
+sudo systemctl start sddm
 
 xdg-mime default mpv.desktop video/mp4
 xdg-mime default mpv.desktop video/x-matroska
