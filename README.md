@@ -7,9 +7,7 @@ cd Arch_Hyprland_dots
 
 sudo cp -r .config/ /home/$USER/
 
-sudo cp -r .config/wlogout /home/$USER/.config/
-
-sudo cp -r .config/rofi /home/$USER/.config/
+//remove after try sudo cp -r .config/wlogout /home/$USER/.config/
 
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
