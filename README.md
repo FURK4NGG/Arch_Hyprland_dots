@@ -7,6 +7,8 @@ cd Arch_Hyprland_dots
 
 sudo cp -r .config/ /home/$USER/.config/
 
+sudo cp -r .config/wlogout /home/$USER/.config/wlogout/
+
 sudo cp themes_bg/DarkBlue.rasi /usr/share/rofi/themes/DarkBlue.rasi
 
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
