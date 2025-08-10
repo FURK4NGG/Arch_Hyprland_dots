@@ -1,48 +1,48 @@
 * {
-    border: none;
     font-family: Font Awesome, Roboto, Arial, sans-serif;
     font-size: 13px;
     color: #ffffff;
     border-radius: 20px;
 }
-window#waybar{
-     all:unset;
-}
 window {
-	/*font-weight: bold;*/
+    font-weight: bold;
 }
 window#waybar {
-  color: #a5adcb;
+    color: #a5adcb;
+    border: 1.5px solid #555183;
+    background-color:#2b2d45;
 }
 /*-----module groups----*/
 .modules-right {
-    background-color: #a5adcb;
-    margin: 2px 10px 0 0;
+    background-color: inherit;
+    margin: 1.5px 14px 0 0;
 }
 .modules-center {
-    background-color: transparent;
-    font-weight: bold;
+    background-color: inherit;
     margin: 2px 0 0 0;
 }
 .modules-left {
-    margin: 2px 0 0 7px;
+    margin: 7px 0 7px 10px;
 }
 /*-----modules indv----*/
 #workspaces {
-    background-color: #a5adcb;
+    background-color: inherit;
     padding: 0px 5px;
 }
 #workspaces button {
   margin: 0 2px;
-  color: #5b6078;
+  color: #555183;
   background: none;
   padding: 0;
 }
 #workspaces button:hover {
-  color: #a6da95;
+  color: #555183;
 }
 #workspaces button.active {
-  color: #f5bde6;
+  color: #555183;
+}
+#workspaces button.urgent {
+  color: #555183;
 }
 
 #clock,
