@@ -7,7 +7,7 @@ cd Arch_Hyprland_dots
 
 sudo cp -r .config/ /home/$USER/
 
-//remove after try sudo cp -r .config/wlogout /home/$USER/.config/
+//Configuration for a specific file. sudo cp -r .config/wlogout /home/$USER/.config/
 
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
