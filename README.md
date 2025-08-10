@@ -5,11 +5,11 @@ git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git
 
 cd Arch_Hyprland_dots
 
-sudo cp -r .config/ /home/$USER/.config/
+sudo cp -r .config/ /home/$USER/
 
-sudo cp -r .config/wlogout /home/$USER/.config/wlogout/
+sudo cp -r .config/wlogout /home/$USER/.config/
 
-sudo cp -r .config/rofi /home/$USER/.config/rofi/
+sudo cp -r .config/rofi /home/$USER/.config/
 
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
