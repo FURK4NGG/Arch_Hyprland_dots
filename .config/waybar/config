@@ -49,9 +49,9 @@
     "on-scroll-up": "hyprctl dispatch workspace -1",
     "on-scroll-down": "hyprctl dispatch workspace +1",
     "format-icons": {
-      "active": "",
-      "urgent": "",
-      "default": ""
+      "active": "",
+      "urgent": "",
+      "default": ""
     },
     "persistent-workspaces": {
                 "*": [ 1,2 ]
