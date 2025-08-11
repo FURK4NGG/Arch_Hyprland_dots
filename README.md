@@ -29,8 +29,8 @@ sudo yay -S ttf-twemoji
 ---
 
 Ekran Kilidi: swaylock,wlogout  
-Wayland Compositor: Hyprland
-Panel/Bar: waybar
+Wayland Compositor: Hyprland  
+Panel/Bar: waybar  
 Bildirim: swaync  
 Clipboard: wl-clipboard  
 Terminal: kitty  
