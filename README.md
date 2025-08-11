@@ -50,6 +50,7 @@ neofetch
 Delete negligible packages: contrib  
 Iso image creator: balena-etcher  
 ExifCleaner: metadata-cleaner  
+LocalFileTransfer: localsend  
 Image converter: switcheroo  
 Snapshot: timeshift  
 Mic audio effects: easyeffects  
