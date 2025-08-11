@@ -1,3 +1,4 @@
+![Image](https://github.com/user-attachments/assets/e5eb3571-d735-4504-9ab3-bd4b3825c462)
 # Arch_Hyprland_dots
 Hyprland configration files
 
