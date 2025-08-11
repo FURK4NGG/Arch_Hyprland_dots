@@ -28,6 +28,7 @@ sudo yay -S ttf-twemoji
 
 ---
 
+Linux Kernel: linux+linux-zen
 Lock Screen: swaylock,wlogout  
 Wayland Compositor: Hyprland  
 Panel/Bar: waybar  
@@ -45,10 +46,10 @@ Thumbnail Viewer: Tumbler
 Audio Manager: pipewire+pipewire-pulse+wireplumber+alsa-utils+pavucontrol  
 Packet Manager: pacman+yay+flatpak  
 Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
-Pdf Viewer:  
-Image Viewer:  
+Pdf Viewer:  *Atril
+Image Viewer:  *Ristretto
 
-Extras:
+Extras:neofetch+pacman-contrib(delete negligible packages)+balena-etcher(iso)+metadata-cleaner
 
 ---
 
