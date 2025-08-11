@@ -11,8 +11,8 @@ sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.pn
 
 sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
 
-//Configuration for a specific file. 
-//sudo cp -r .config/wlogout /home/$USER/.config/
+//Configuration for a specific file.  
+//sudo cp -r .config/wlogout /home/$USER/.config/  
 
 ---
 
