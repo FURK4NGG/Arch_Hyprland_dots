@@ -69,7 +69,9 @@ GameScope(AI-powered FPS boosting): gamescope
 
 
 *sudo systemctl enable --now portmaster  
+
 *sudo systemctl enable --now waydroid-container  
+
 *sudo systemctl enable --now libvirtd  
 *->sudo usermod -aG libvirt $USER
 
