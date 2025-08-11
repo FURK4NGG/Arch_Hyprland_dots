@@ -28,14 +28,16 @@ sudo yay -S ttf-twemoji
 
 ---
 
-Ekran kilidi	swaylock,wlogout  
-Bildirim swaync  
-Clipboard	wl-clipboard  
-Terminal	kitty  
-Ekran Parlaklığı	brightnessctl  
-Ekran Görüntüsü	grim  
-Video Oynatıcı mpv  
-Panel/Bar	waybar  
+Ekran Kilidi: swaylock,wlogout  
+Wayland Compositor: Hyprland
+Panel/Bar: waybar
+Bildirim: swaync  
+Clipboard: wl-clipboard  
+Terminal: kitty  
+Arama Aracı: rofi
+Ekran Parlaklığı: brightnessctl  
+Ekran Görüntüsü: grim  
+Video Oynatıcı: mpv    
 
 ---
 
