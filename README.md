@@ -20,16 +20,15 @@ sudo pacman -S grim
 sudo pacman -S slurp  
 sudo yay -S swaync  
 sudo yay -S wlogout,swaylock  
-sudo pacman -S mpv  
-sudo pacman -S hyprpaper  
-sudo pacman -S kitty  
-sudo pacman -S rofi  
+sudo pacman -S mpv   
+
 sudo yay -S ttf-twemoji  
 
 ---
 
 Linux Kernel: linux+linux-zen
 Lock Screen: swaylock,wlogout  
+Background Manager: hyprpaper
 Wayland Compositor: Hyprland  
 Panel/Bar: waybar  
 System Notification: swaync  
@@ -47,10 +46,10 @@ Thumbnail Viewer: Tumbler
 Audio Manager: pipewire+pipewire-pulse+wireplumber+alsa-utils+pavucontrol  
 Packet Manager: pacman+yay+flatpak  
 Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
-Pdf Viewer:  *Atril
-Image Viewer:  *Ristretto
+Pdf Viewer: Atril  
+Image Viewer: Ristretto  
 
-Extras:neofetch+contrib(delete negligible packages)+balena-etcher(iso image creator)+metadata-cleaner+switcheroo(image converter)+timeshift(snapshot)+easyeffects(mic audio effects)+gamescope(AI-powered FPS boosting)+bottles(windows app runner)+piper(Drivers and app manager for Logitech producs)+playlist-dl(Youtube Playlist Downloader)
+Extras:neofetch+contrib(delete negligible packages)+balena-etcher(iso image creator)+metadata-cleaner+switcheroo(image converter)+timeshift(snapshot)+easyeffects(mic audio effects)+gamescope(AI-powered FPS boosting)+bottles(windows app runner)+piper(Drivers and app manager for Logitech producs)+playlist-dl(Youtube Playlist Downloader),textpieces(premium text settings)
 
 ---
 
