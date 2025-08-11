@@ -7,36 +7,29 @@ cd Arch_Hyprland_dots
 
 sudo cp -r .config/ /home/$USER/
 
-//Configuration for a specific file. sudo cp -r .config/wlogout /home/$USER/.config/
-
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
 sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
 
--Basic Apps and Packets-  
-sudo pacman -S sddm  
-sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils  
-sudo pacman -S grim  
-sudo pacman -S slurp  
-sudo yay -S swaync  
-sudo yay -S wlogout,swaylock  
-sudo pacman -S mpv   
-
-sudo yay -S ttf-twemoji  
+//Configuration for a specific file. 
+//sudo cp -r .config/wlogout /home/$USER/.config/
 
 ---
 
+-Basic Apps and Packets-  
+
 Linux Kernel: linux+linux-zen  
 Lock Screen: swaylock,wlogout  
+Greeter: sddm
 Background Manager: hyprpaper  
 Wayland Compositor: Hyprland  
-Panel/Bar: waybar  
+Panel/Bar: waybar,ttf-twemoji  
 System Notification: swaync  
 Clipboard: wl-clipboard  
 Terminal: kitty  
 App Launcher: rofi  
 Screen Brightness: brightnessctl  
-Print Screen: grim  
+Print Screen: grim,slurp  
 Screen Recorder: wf-recorder  
 Video Player: mpv  
 File Manager: Thunar+thunar-archive-plugin+thunar-volman+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
