@@ -37,7 +37,7 @@ Video Player: mpv
 File Manager: Thunar+thunar-archive-plugin+thunar-volman+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
 Network Manager: networkmanager+network-manager-applet  
 Text Editor: Mousepad  
-Thumbnail Viewer: Tumbler  
+File Thumbnail Viewer: Tumbler  
 Audio Manager: pipewire+pipewire-pulse+wireplumber+alsa-utils+pavucontrol  
 Packet Manager: pacman+yay+flatpak  
 Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
@@ -47,23 +47,23 @@ Image Viewer: Ristretto
 Extra Apps:
 
 neofetch  
-Delete negligible packages: bleachbit+contrib  
-Iso image creator: balena-etcher  
-ExifCleaner: metadata-cleaner  
-LocalFileTransfer: localsend  
-Image converter: switcheroo  
+Delete Negligible Packages: bleachbit+contrib  
+Iso Image Creator: balena-etcher  
+Exif Cleaner: metadata-cleaner  
+Local File Transfer: localsend  
+Image Converter: switcheroo  
 Snapshot: timeshift  
-Mic audio effects: easyeffects  
-Windows app runner: bottles  
-Drivers and app manager for Logitech producs: piper  
+Mic and Audio Effects: easyeffects  
+Windows App Runner on Linux: bottles  
+Driver and App Manager for Logitech Producs: piper  
 Youtube Playlist Downloader: playlist-dl  
-Premium text settings for developers: textpieces  
+Premium Text Settings for Developers: textpieces  
 M3U Provider: hypnotix  
 
 PortMaster(for DNS and Ports): portmaster  
 Waydroid(Android in a Linux container): waydroid linux-headers waydroid-image  
 Virt(Virtual Machine): virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils openbsd-netcat  
-GameScope(AI-powered FPS boosting): gamescope  
+GameScope(AI-Powered FPS Boosting): gamescope  
 
 ---
 
