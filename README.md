@@ -37,7 +37,17 @@ Terminal: kitty
 Arama Aracı: rofi  
 Ekran Parlaklığı: brightnessctl  
 Ekran Görüntüsü: grim  
-Video Oynatıcı: mpv    
+Video Oynatıcı: mpv  
+
+File Manager: Thunar+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
+Network Manager: networkmanager+network-manager-applet  
+Text Editor: Mousepad  
+Thumbnail Viewer: Tumbler  
+Audio Manager: pipewire+pipewire-pulse+wireplumber+alsa-utils+pavucontrol  
+Packet Manager: pacman+yay+flatpak  
+Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
+Pdf Viewer:  
+Image Viewer:  
 
 ---
 
