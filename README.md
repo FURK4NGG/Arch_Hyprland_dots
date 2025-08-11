@@ -39,7 +39,7 @@ Ekran Parlaklığı: brightnessctl
 Ekran Görüntüsü: grim  
 Video Oynatıcı: mpv  
 
-File Manager: Thunar+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
+File Manager: Thunar+thunar-archive-plugin+thunar-volman+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
 Network Manager: networkmanager+network-manager-applet  
 Text Editor: Mousepad  
 Thumbnail Viewer: Tumbler  
