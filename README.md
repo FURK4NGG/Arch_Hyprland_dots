@@ -28,17 +28,16 @@ sudo yay -S ttf-twemoji
 
 ---
 
-Ekran Kilidi: swaylock,wlogout  
+Lock Screen: swaylock,wlogout  
 Wayland Compositor: Hyprland  
 Panel/Bar: waybar  
-Bildirim: swaync  
+System Notification: swaync  
 Clipboard: wl-clipboard  
 Terminal: kitty  
-Arama Aracı: rofi  
-Ekran Parlaklığı: brightnessctl  
-Ekran Görüntüsü: grim  
-Video Oynatıcı: mpv  
-
+App Launcher: rofi  
+Screen Brightness: brightnessctl  
+Print Screen: grim  
+Video Player: mpv  
 File Manager: Thunar+thunar-archive-plugin+thunar-volman+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
 Network Manager: networkmanager+network-manager-applet  
 Text Editor: Mousepad  
@@ -48,6 +47,8 @@ Packet Manager: pacman+yay+flatpak
 Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
 Pdf Viewer:  
 Image Viewer:  
+
+Extras:
 
 ---
 
