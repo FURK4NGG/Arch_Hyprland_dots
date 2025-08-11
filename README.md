@@ -21,27 +21,28 @@ sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
 
 You can install these packages using at least pacman and yay.
 
-Linux Kernel: linux+linux-zen  
-Lock Screen: swaylock,wlogout  
+Linux Kernel: linux linux-zen  
+Lock Screen: swaylock wlogout  
 Greeter: sddm  
 Background Manager: hyprpaper  
 Wayland Compositor: Hyprland  
-Panel/Bar: waybar,ttf-twemoji  
+Panel/Bar: waybar ttf-twemoji  
 System Notification: swaync  
 Clipboard: wl-clipboard  
 Terminal: kitty  
 App Launcher: rofi  
 Screen Brightness: brightnessctl  
-Print Screen: grim,slurp  
+Print Screen: grim slurp  
 Screen Recorder: wf-recorder  
 Video Player: mpv  
-File Manager: Thunar+thunar-archive-plugin+thunar-volman+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
-Network Manager: networkmanager+network-manager-applet  
-Text Editor: Mousepad  
-File Thumbnail Viewer: Tumbler  
-Audio Manager: pipewire+pipewire-pulse+wireplumber+alsa-utils+pavucontrol  
+File Manager: thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar  
+Network Manager: networkmanager network-manager-applet  
+Download: wget git  
+Text Editor: Mousepad VSCodium  
+File Thumbnail Viewer: tumbler  
+Audio Manager: pipewire pipewire-pulse wireplumber alsa-utils pavucontrol  
 Packet Manager: pacman+yay+flatpak  
-Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
+Nvidia Drivers: nvidia nvidia-settings nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
 Pdf Viewer: Atril  
 Image Viewer: Ristretto  
 
