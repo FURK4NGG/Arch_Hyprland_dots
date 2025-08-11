@@ -18,6 +18,8 @@ sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
 
 -Basic Apps and Packets-  
 
+You can install those packets only with 
+
 Linux Kernel: linux+linux-zen  
 Lock Screen: swaylock,wlogout  
 Greeter: sddm
@@ -45,27 +47,25 @@ Image Viewer: Ristretto
 Extra Apps:
 
 neofetch
-delete negligible packages:contrib  
-iso image creator:balena-etcher  
-metadata-cleaner  
-image converter: switcheroo  
-snapshot: timeshift  
-mic audio effects: easyeffects  
-windows app runner: bottles  
+Delete negligible packages: contrib  
+Iso image creator: balena-etcher  
+ExifCleaner: metadata-cleaner  
+Image converter: switcheroo  
+Snapshot: timeshift  
+Mic audio effects: easyeffects  
+Windows app runner: bottles  
 Drivers and app manager for Logitech producs: piper  
 Youtube Playlist Downloader: playlist-dl  
-premium text settings for developers: textpieces  
+Premium text settings for developers: textpieces  
 M3U Provider: hypnotix  
 
-PortMaster: portmaster  
-Waydroid: waydroid linux-headers waydroid-image  
-Virt: virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils openbsd-netcat  
+PortMaster(for DNS and Ports): portmaster  
+Waydroid(Android in a Linux container): waydroid linux-headers waydroid-image  
+Virt(Virtual Machine): virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils openbsd-netcat  
 GameScope(AI-powered FPS boosting): gamescope  
 
 ---
-Pacman Donwload
 
-Yay Download
 
 
 *sudo systemctl enable --now portmaster  
