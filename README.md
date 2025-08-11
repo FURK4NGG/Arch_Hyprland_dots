@@ -45,6 +45,10 @@ Image Viewer: Ristretto
 Extras:neofetch+,ontrib(delete negligible packages),balena-etcher(iso image creator),metadata-cleaner,switcheroo(image converter),timeshift(snapshot),easyeffects(mic audio effects),gamescope(AI-powered FPS boosting),bottles(windows app runner),piper(Drivers and app manager for Logitech producs),playlist-dl(Youtube Playlist Downloader),textpieces(premium text settings),hypnotix(M3U Provider)
 
 ---
+Pacman Donwload
+
+Yay Download
+
 
 sudo systemctl enable sddm  
 sudo systemctl start sddm  
