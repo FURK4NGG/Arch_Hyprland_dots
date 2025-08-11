@@ -31,7 +31,7 @@ System Notification: swaync
 Clipboard: wl-clipboard  
 Terminal: kitty  
 App Launcher: rofi  
-Screen Brightness: brightnessctl  
+Screen Brightness: gammastep  
 Print Screen: grim slurp  
 Screen Recorder: wf-recorder  
 Video Player: mpv  
