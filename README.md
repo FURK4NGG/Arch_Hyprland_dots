@@ -26,7 +26,7 @@ sudo yay -S ttf-twemoji
 
 ---
 
-Linux Kernel: linux+linux-zen
+Linux Kernel: linux+linux-zen  
 Lock Screen: swaylock,wlogout  
 Background Manager: hyprpaper
 Wayland Compositor: Hyprland  
