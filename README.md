@@ -28,20 +28,20 @@ sudo yay -S ttf-twemoji
 
 ---
 
-Ekran kilidi	swaylock,wlogout
-Bildirim swaync
-Clipboard	wl-clipboard
-Terminal	kitty
-Ekran Parlaklığı	brightnessctl	
-Ekran Görüntüsü	grim
-Video Oynatıcı mpv
-Panel/Bar	waybar
+Ekran kilidi	swaylock,wlogout  
+Bildirim swaync  
+Clipboard	wl-clipboard  
+Terminal	kitty  
+Ekran Parlaklığı	brightnessctl  
+Ekran Görüntüsü	grim  
+Video Oynatıcı mpv  
+Panel/Bar	waybar  
 
 ---
 
-sudo systemctl enable sddm
-sudo systemctl start sddm
+sudo systemctl enable sddm  
+sudo systemctl start sddm  
 
-xdg-mime default mpv.desktop video/mp4
-xdg-mime default mpv.desktop video/x-matroska
-xdg-mime default mpv.desktop video/webm
+xdg-mime default mpv.desktop video/mp4 
+xdg-mime default mpv.desktop video/x-matroska  
+xdg-mime default mpv.desktop video/webm  
