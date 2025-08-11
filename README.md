@@ -47,7 +47,7 @@ Image Viewer: Ristretto
 Extra Apps:
 
 neofetch
-Delete negligible packages: contrib  
+Delete negligible packages: bleachbit+contrib  
 Iso image creator: balena-etcher  
 ExifCleaner: metadata-cleaner  
 LocalFileTransfer: localsend  
