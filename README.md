@@ -18,7 +18,7 @@ sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
 
 -Basic Apps and Packets-  
 
-You can install those packets only with 
+You can install these packages using at least pacman and yay.
 
 Linux Kernel: linux+linux-zen  
 Lock Screen: swaylock,wlogout  
