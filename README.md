@@ -70,6 +70,8 @@ GameScope(AI-Powered FPS Boosting): gamescope
 
 ---
 
+*sudo systemctl enable tlp --now
+
 *sudo systemctl enable --now portmaster  
 
 *sudo systemctl enable --now waydroid-container  
