@@ -50,6 +50,8 @@ Pacman Donwload
 Yay Download
 
 
+*sudo systemctl enable --now portmaster
+
 sudo systemctl enable sddm  
 sudo systemctl start sddm  
 
