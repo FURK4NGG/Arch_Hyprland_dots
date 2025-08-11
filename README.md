@@ -39,7 +39,8 @@ File Manager: thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs 
 Network Manager: networkmanager network-manager-applet  
 Download: wget git  
 Text Editor: Mousepad VSCodium  
-File Thumbnail Viewer: tumbler  
+File Thumbnail  
+Viewer: tumbler  
 Audio Manager: pipewire pipewire-pulse wireplumber alsa-utils pavucontrol  
 Packet Manager: pacman+yay+flatpak  
 Nvidia Drivers: nvidia nvidia-settings nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
