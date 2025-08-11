@@ -34,7 +34,7 @@ Panel/Bar: waybar
 Bildirim: swaync  
 Clipboard: wl-clipboard  
 Terminal: kitty  
-Arama Aracı: rofi
+Arama Aracı: rofi  
 Ekran Parlaklığı: brightnessctl  
 Ekran Görüntüsü: grim  
 Video Oynatıcı: mpv    
