@@ -1,4 +1,3 @@
-/*@theme "/usr/share/rofi/themes/DarkBlue.rasi"*/
 /*****----- Global Properties -----*****/
 @import                          "themes/colors.rasi"
 @import                          "themes/fonts.rasi"
@@ -154,3 +153,4 @@ error-message {
     background-color:            @background;
     text-color:                  @foreground;
 }
+/*@theme "/usr/share/rofi/themes/DarkBlue.rasi"*/
