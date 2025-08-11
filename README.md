@@ -13,18 +13,18 @@ sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.pn
 
 sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
 
--Basic Apps and Packets-
-sudo pacman -S sddm
-sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils
-sudo pacman -S grim
-sudo pacman -S slurp
-sudo yay -S swaync
-sudo yay -S wlogout,swaylock
-sudo pacman -S mpv
-sudo pacman -S hyprpaper
-sudo pacman -S kitty
-sudo pacman -S rofi
-sudo yay -S ttf-twemoji
+-Basic Apps and Packets-  
+sudo pacman -S sddm  
+sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils  
+sudo pacman -S grim  
+sudo pacman -S slurp  
+sudo yay -S swaync  
+sudo yay -S wlogout,swaylock  
+sudo pacman -S mpv  
+sudo pacman -S hyprpaper  
+sudo pacman -S kitty  
+sudo pacman -S rofi  
+sudo yay -S ttf-twemoji  
 
 ---
 
