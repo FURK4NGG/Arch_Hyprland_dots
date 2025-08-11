@@ -42,7 +42,25 @@ Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-li
 Pdf Viewer: Atril  
 Image Viewer: Ristretto  
 
-Extras:neofetch+,ontrib(delete negligible packages),balena-etcher(iso image creator),metadata-cleaner,switcheroo(image converter),timeshift(snapshot),easyeffects(mic audio effects),gamescope(AI-powered FPS boosting),bottles(windows app runner),piper(Drivers and app manager for Logitech producs),playlist-dl(Youtube Playlist Downloader),textpieces(premium text settings),hypnotix(M3U Provider)
+Extras:neofetch+,ontrib(),balena-etcher(iso image creator),metadata-cleaner,switcheroo(image converter),timeshift(snapshot),easyeffects(mic audio effects),gamescope(AI-powered FPS boosting),bottles(windows app runner),piper(Drivers and app manager for Logitech producs),playlist-dl(Youtube Playlist Downloader),textpieces(premium text settings),hypnotix(M3U Provider)
+
+neofetch
+delete negligible packages:contrib  
+iso image creator:balena-etcher  
+metadata-cleaner  
+image converter: switcheroo  
+snapshot: timeshift  
+mic audio effects: easyeffects  
+windows app runner: bottles  
+Drivers and app manager for Logitech producs: piper  
+Youtube Playlist Downloader: playlist-dl  
+premium text settings: textpieces  
+M3U Provider: hypnotix  
+
+PortMaster: portmaster  
+Waydroid: waydroid linux-headers waydroid-image  
+Virt: virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils openbsd-netcat  
+GameScope(AI-powered FPS boosting): gamescope  
 
 ---
 Pacman Donwload
@@ -50,7 +68,11 @@ Pacman Donwload
 Yay Download
 
 
-*sudo systemctl enable --now portmaster
+*sudo systemctl enable --now portmaster  
+*sudo systemctl enable --now waydroid-container  
+*sudo systemctl enable --now libvirtd  
+*->sudo usermod -aG libvirt $USER
+
 
 sudo systemctl enable sddm  
 sudo systemctl start sddm  
