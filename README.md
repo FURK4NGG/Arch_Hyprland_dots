@@ -38,6 +38,7 @@ Terminal: kitty
 App Launcher: rofi  
 Screen Brightness: brightnessctl  
 Print Screen: grim  
+Screen Recorder: wf-recorder  
 Video Player: mpv  
 File Manager: Thunar+thunar-archive-plugin+thunar-volman+xarchiver+gparted+gvfs+udisk2+baobab+zip+unzip+unrar+p7zip+tar  
 Network Manager: networkmanager+network-manager-applet  
@@ -49,7 +50,7 @@ Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-li
 Pdf Viewer:  *Atril
 Image Viewer:  *Ristretto
 
-Extras:neofetch+pacman-contrib(delete negligible packages)+balena-etcher(iso)+metadata-cleaner
+Extras:neofetch+contrib(delete negligible packages)+balena-etcher(iso image creator)+metadata-cleaner+switcheroo(image converter)+timeshift(snapshot)+easyeffects(mic audio effects)+gamescope(AI-powered FPS boosting)+bottles(windows app runner)
 
 ---
 
