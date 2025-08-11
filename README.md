@@ -44,9 +44,11 @@ Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-li
 Pdf Viewer: Atril  
 Image Viewer: Ristretto  
 
-Extra Apps:
 
-neofetch  
+
+Extra Apps(Basic essential apps everyone needs on their PC):
+
+Show System Information: neofetch+fastfetch  
 Delete Negligible Packages: bleachbit+contrib  
 Iso Image Creator: balena-etcher  
 Exif Cleaner: metadata-cleaner  
@@ -66,8 +68,6 @@ Virt(Virtual Machine): virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils
 GameScope(AI-Powered FPS Boosting): gamescope  
 
 ---
-
-
 
 *sudo systemctl enable --now portmaster  
 
