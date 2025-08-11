@@ -37,11 +37,12 @@
         "spacing": 10
     },
     "clock": {
-        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        // "format-alt": "{:%Y-%m-%d}"
-		"on-click": "gnome-calendar",
-                "tooltip-format": "{:%A %d.%m.%Y}",
-  		"interval": 60
+         // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+         // "format-alt": "{:%A, %H:%M}"
+         "format": "{:%a %H:%M}",
+         "on-click": "gnome-calendar",
+         "tooltip-format": "{:%d.%m.%Y}",
+         "interval": 60
     },
     "hyprland/workspaces": {
     "format": "{icon}",
