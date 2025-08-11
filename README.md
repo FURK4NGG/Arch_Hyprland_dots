@@ -62,6 +62,7 @@ Youtube Playlist Downloader: playlist-dl
 Premium Text Settings for Developers: textpieces  
 M3U Provider: hypnotix  
 
+Battery Optimization is Especially Important for Laptops : tlp tlpui  
 PortMaster(for DNS and Ports): portmaster  
 Waydroid(Android in a Linux container): waydroid linux-headers waydroid-image  
 Virt(Virtual Machine): virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils openbsd-netcat  
