@@ -22,7 +22,7 @@ You can install these packages using at least pacman and yay.
 
 Linux Kernel: linux+linux-zen  
 Lock Screen: swaylock,wlogout  
-Greeter: sddm
+Greeter: sddm  
 Background Manager: hyprpaper  
 Wayland Compositor: Hyprland  
 Panel/Bar: waybar,ttf-twemoji  
