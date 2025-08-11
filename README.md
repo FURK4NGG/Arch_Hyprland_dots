@@ -42,7 +42,7 @@ Nvidia Drivers: nvidia+nvidia-settings+nvidia-utils+(lib32-nvidia-utils+lib32-li
 Pdf Viewer: Atril  
 Image Viewer: Ristretto  
 
-Extras:neofetch+,ontrib(),balena-etcher(iso image creator),metadata-cleaner,switcheroo(image converter),timeshift(snapshot),easyeffects(mic audio effects),gamescope(AI-powered FPS boosting),bottles(windows app runner),piper(Drivers and app manager for Logitech producs),playlist-dl(Youtube Playlist Downloader),textpieces(premium text settings),hypnotix(M3U Provider)
+Extra Apps:
 
 neofetch
 delete negligible packages:contrib  
@@ -54,7 +54,7 @@ mic audio effects: easyeffects
 windows app runner: bottles  
 Drivers and app manager for Logitech producs: piper  
 Youtube Playlist Downloader: playlist-dl  
-premium text settings: textpieces  
+premium text settings for developers: textpieces  
 M3U Provider: hypnotix  
 
 PortMaster: portmaster  
