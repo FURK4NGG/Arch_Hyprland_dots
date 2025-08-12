@@ -57,6 +57,11 @@ Gamescope(AI-Powered FPS Boosting): gamescope
 
 ---
 
+# For Extra XFCE Desktop  
+xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin xfce4-network-manager  
+
+---
+
 # Hyprland configration files
 
 git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git
@@ -106,7 +111,3 @@ systemctl --user enable --now gammastep-refresh.timer
 
 //If you use Flatpak  
 sudo systemctl enable --now flatpak-system-helper  
-
-
-# For Extra XFCE Desktop  
-xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin xfce4-network-manager  
