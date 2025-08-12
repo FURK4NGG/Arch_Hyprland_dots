@@ -55,12 +55,12 @@ Waydroid(Android in a Linux container): waydroid linux-headers waydroid-image
 Virt(Virtual Machine): virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils openbsd-netcat  
 Gamescope(AI-Powered FPS Boosting): gamescope  
 
----
+
 
 # For Extra XFCE Desktop  
 xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin xfce4-network-manager  
 
----
+
 
 # Hyprland configration files (Setup Section)
 
