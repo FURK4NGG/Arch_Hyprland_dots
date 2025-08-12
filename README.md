@@ -85,6 +85,10 @@ Gamescope(AI-Powered FPS Boosting): gamescope
 sudo systemctl enable sddm  
 sudo systemctl start sddm  
 
+systemctl --user enable --now pipewire  
+systemctl --user enable --now pipewire-pulse  
+systemctl --user enable --now wireplumber  
+
 xdg-mime default mpv.desktop video/mp4 
 xdg-mime default mpv.desktop video/x-matroska  
 xdg-mime default mpv.desktop video/webm  
@@ -92,7 +96,10 @@ xdg-mime default mpv.desktop video/webm
 sudo systemctl enable --now NetworkManager  
 sudo systemctl enable --now udisks2  
 
-//For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
+# If you use Flatpak
+sudo systemctl enable --now flatpak-system-helper
+
+# For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
 1-Control your display_name --> WAYLAND_DISPLAY=wayland-1  
 2-Check the (latitude) and (longitude) data --> 41.0:29.0 --> (Istanbul)  
 systemctl --user daemon-reload  
