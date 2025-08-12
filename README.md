@@ -87,6 +87,12 @@ sudo systemctl enable --now NetworkManager
 
 sudo systemctl enable --now udisks2  
 
+//For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
+1-Control your display_name --> WAYLAND_DISPLAY=wayland-1  
+2-Check the (latitude) and (longitude) data --> 41.0:29.0 --> (Istanbul)  
+systemctl --user daemon-reload  
+systemctl --user enable --now gammastep-refresh.timer  
+
 ---
 
 *sudo systemctl enable tlp --now
@@ -101,11 +107,6 @@ sudo systemctl enable --now udisks2
 //If you use Flatpak  
 sudo systemctl enable --now flatpak-system-helper  
 
-//For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
-1-Control your display_name --> WAYLAND_DISPLAY=wayland-1  
-2-Check the (latitude) and (longitude) data --> 41.0:29.0 --> (Istanbul)  
-systemctl --user daemon-reload  
-systemctl --user enable --now gammastep-refresh.timer  
 
 # For Extra XFCE Desktop  
 xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin xfce4-network-manager  
