@@ -97,8 +97,8 @@ xdg-mime default mpv.desktop video/webm
 sudo systemctl enable --now NetworkManager  
 sudo systemctl enable --now udisks2  
 
-//If you use Flatpak
-sudo systemctl enable --now flatpak-system-helper
+//If you use Flatpak  
+sudo systemctl enable --now flatpak-system-helper  
 
 //For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
 1-Control your display_name --> WAYLAND_DISPLAY=wayland-1  
