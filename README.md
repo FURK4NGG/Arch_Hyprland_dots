@@ -80,7 +80,7 @@ wlroots xdg-desktop-portal-hyprland qt5-graphicaleffects
 *sudo systemctl enable --now waydroid-container  
 
 *sudo systemctl enable --now libvirtd  
-*->sudo usermod -aG libvirt $USER
+*sudo usermod -aG libvirt $USER
 
 
 sudo systemctl enable sddm  
