@@ -48,7 +48,8 @@ Image Viewer: Ristretto
 
 
 
-Extra Apps(Basic essential apps everyone needs on their PC):
+
+//Extra Apps(Basic essential apps everyone needs on their PC):
 
 Show System Information: neofetch+fastfetch  
 Delete Negligible Packages: bleachbit+contrib  
