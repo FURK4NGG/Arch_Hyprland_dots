@@ -89,3 +89,9 @@ sudo systemctl start sddm
 xdg-mime default mpv.desktop video/mp4 
 xdg-mime default mpv.desktop video/x-matroska  
 xdg-mime default mpv.desktop video/webm  
+
+//For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service
+1-Control your display_name --> WAYLAND_DISPLAY=wayland-1
+2-Check the (latitude) and (longitude) data --> 41.0:29.0 --> (Istanbul)
+systemctl --user daemon-reload
+systemctl --user enable --now gammastep-refresh.timer
