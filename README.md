@@ -106,5 +106,5 @@ sudo systemctl enable --now flatpak-system-helper
 systemctl --user daemon-reload  
 systemctl --user enable --now gammastep-refresh.timer  
 
-#For Extra XFCE Desktop  
+# For Extra XFCE Desktop  
 xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin xfce4-network-manager  
