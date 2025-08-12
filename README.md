@@ -73,16 +73,6 @@ Gamescope(AI-Powered FPS Boosting): gamescope
 
 ---
 
-*sudo systemctl enable tlp --now
-
-*sudo systemctl enable --now portmaster  
-
-*sudo systemctl enable --now waydroid-container  
-
-*sudo systemctl enable --now libvirtd  
-*sudo usermod -aG libvirt $USER
-
-
 sudo systemctl enable sddm  
 sudo systemctl start sddm  
 
@@ -95,7 +85,19 @@ xdg-mime default mpv.desktop video/x-matroska
 xdg-mime default mpv.desktop video/webm  
 
 sudo systemctl enable --now NetworkManager  
+
 sudo systemctl enable --now udisks2  
+
+---
+
+*sudo systemctl enable tlp --now
+
+*sudo systemctl enable --now portmaster  
+
+*sudo systemctl enable --now waydroid-container  
+
+*sudo systemctl enable --now libvirtd  
+*sudo usermod -aG libvirt $USER
 
 //If you use Flatpak  
 sudo systemctl enable --now flatpak-system-helper  
