@@ -1,21 +1,5 @@
 ![Image](https://github.com/user-attachments/assets/881fa71c-82c7-4bff-9d3f-f6d838e971c0)
-# Arch_Hyprland_dots
-Hyprland configration files
-
-git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git
-
-cd Arch_Hyprland_dots
-
-sudo cp -r .config/ /home/$USER/
-
-sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
-
-sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
-
-//Configuration for a specific file.  
-//sudo cp -r .config/wlogout /home/$USER/.config/  
-
----
+# Arch_Hyprland_dots  
 
 -Basic Apps and Packets-  
 
@@ -72,6 +56,21 @@ Virt(Virtual Machine): virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils
 Gamescope(AI-Powered FPS Boosting): gamescope  
 
 ---
+
+# Hyprland configration files
+
+git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git
+
+cd Arch_Hyprland_dots
+
+sudo cp -r .config/ /home/$USER/
+
+sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
+
+sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
+
+//Configuration for a specific file.  
+//sudo cp -r .config/wlogout /home/$USER/.config/  
 
 sudo systemctl enable sddm  
 sudo systemctl start sddm  
