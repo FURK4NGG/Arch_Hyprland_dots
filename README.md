@@ -96,10 +96,10 @@ xdg-mime default mpv.desktop video/webm
 sudo systemctl enable --now NetworkManager  
 sudo systemctl enable --now udisks2  
 
-# If you use Flatpak
+//If you use Flatpak
 sudo systemctl enable --now flatpak-system-helper
 
-# For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
+//For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
 1-Control your display_name --> WAYLAND_DISPLAY=wayland-1  
 2-Check the (latitude) and (longitude) data --> 41.0:29.0 --> (Istanbul)  
 systemctl --user daemon-reload  
