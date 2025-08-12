@@ -25,7 +25,7 @@ Linux Kernel: linux linux-zen
 Lock Screen: swaylock wlogout  
 Greeter: sddm  
 Background Manager: hyprpaper  
-Wayland Compositor: Hyprland  
+Wayland Compositor: Hyprland wlroots xdg-desktop-portal-hyprland qt5-graphicaleffects  
 Panel/Bar: waybar ttf-twemoji  
 System Notification: swaync  
 Clipboard: wl-clipboard  
@@ -69,7 +69,6 @@ PortMaster(for DNS and Ports): portmaster
 Waydroid(Android in a Linux container): waydroid linux-headers waydroid-image  
 Virt(Virtual Machine): virt-manager qemu-full vde2 ebtables dnsmasq bridge-utils openbsd-netcat  
 GameScope(AI-Powered FPS Boosting): gamescope  
-wlroots xdg-desktop-portal-hyprland qt5-graphicaleffects
 
 ---
 
