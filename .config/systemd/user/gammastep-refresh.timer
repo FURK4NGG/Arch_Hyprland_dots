@@ -1,0 +1,11 @@
+[Unit]
+Description=Run gammastep refresh every hour
+
+[Timer]
+OnBootSec=1min
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+

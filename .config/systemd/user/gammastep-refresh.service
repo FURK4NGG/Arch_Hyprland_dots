@@ -1,0 +1,8 @@
+[Unit]
+Description=Refresh gammastep settings
+
+[Service]
+Type=simple
+Environment=WAYLAND_DISPLAY=wayland-1
+ExecStart=/bin/bash -c '/usr/bin/pkill gammastep; /usr/bin/gammastep -l 41.0:29.0 -t 6500:3000 -b 1.0:0.8'
+
