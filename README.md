@@ -1,7 +1,7 @@
 ![Image](https://github.com/user-attachments/assets/881fa71c-82c7-4bff-9d3f-f6d838e971c0)
 # Arch_Hyprland_dots  
 
--Basic Apps and Packets-  
+-Basic Apps and Packets(Download Section)-  
 
 You can install these packages using at least pacman and yay.
 
@@ -62,7 +62,7 @@ xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal x
 
 ---
 
-# Hyprland configration files
+# Hyprland configration files(Setup Section)
 
 git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git
 
