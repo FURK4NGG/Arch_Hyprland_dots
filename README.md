@@ -39,13 +39,13 @@ Iso Image Creator: balena-etcher
 Exif Cleaner: metadata-cleaner  
 Local File Transfer: localsend  
 Image Converter: switcheroo  
-Snapshot: timeshift  
-Mic and Audio Effects: easyeffects  
 Windows App Runner on Linux: bottles  
 Driver and App Manager for Logitech Producs: piper  
 Youtube Playlist Downloader: playlist-dl  
 Premium Text Settings for Developers: textpieces  
 M3U Provider: hypnotix  
+Snapshot: timeshift  
+Mic and Audio Effects: easyeffects  
 
 Battery Optimization is Especially Important for Laptops : tlp tlpui  
 Portmaster(for DNS and Ports): portmaster  
