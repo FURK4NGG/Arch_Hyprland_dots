@@ -100,14 +100,14 @@ systemctl --user enable --now gammastep-refresh.timer
 
 ---
 
-*sudo systemctl enable tlp --now
+Battery Optimization app --> sudo systemctl enable tlp --now
 
-*sudo systemctl enable --now portmaster  
+Portmaster --> sudo systemctl enable --now portmaster  
 
-*sudo systemctl enable --now waydroid-container  
+Waydroid --> sudo systemctl enable --now waydroid-container  
 
-*sudo systemctl enable --now libvirtd  
-*sudo usermod -aG libvirt $USER
+Virt --> sudo systemctl enable --now libvirtd  
+Virt --> sudo usermod -aG libvirt $USER
 
 //If you use Flatpak  
 sudo systemctl enable --now flatpak-system-helper  
