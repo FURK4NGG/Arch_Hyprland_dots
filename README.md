@@ -3,8 +3,8 @@
  
 # Basic Apps and Packets (Download Section)
 
-! You can install these packages using at least pacman and yay.
-! I use "+" to separate different packages serving the same purpose.
+! You can install these packages using at least pacman and yay.  
+! I use "+" to separate different packages serving the same purpose.  
 
 Linux Kernel: linux linux-zen  
 Lock Screen: hyprlock wlogout  
