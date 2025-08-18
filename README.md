@@ -68,6 +68,8 @@ cd Arch_Hyprland_dots
 
 sudo cp -r .config/ /home/$USER/
 
+sudo cp -r themes_bg/modest-dark/cursors /usr/share/icons/
+
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
 sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
