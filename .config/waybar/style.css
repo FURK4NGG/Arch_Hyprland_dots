@@ -1,0 +1,138 @@
+* {
+    font-family: JetBrains Mono;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 20px;
+}
+window {
+    font-weight: bold;
+}
+window#waybar {
+    color: #a5adcb;
+    /*border: 1.5px solid #555183;*/
+    background-color: transparent;
+}
+/*-----module groups----*/
+.modules-right {
+    background-color: inherit;
+    margin: 1.5px 14px 0 0;
+}
+.modules-center {
+    background-color: inherit;
+    margin: 2px 0 0 0;
+}
+.modules-left {
+    margin: 7px 0 7px 10px;
+}
+/*-----modules indv----*/
+#workspaces {
+    background-color: inherit;
+    padding: 0px 5px;
+}
+#workspaces button {
+  margin: 0 2px;
+  color: #555183;
+  background: none;
+  padding: 0;
+}
+#workspaces button:hover {
+  color: #555183;
+}
+#workspaces button.active {
+  color: #555183;
+}
+#workspaces button.urgent {
+  color: #555183;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#custom-weather,
+#custom-media,
+#tray,
+#mode,
+#custom-power,
+#custom-menu,
+#idle_inhibitor {
+    padding: 0 10px;
+}
+#mode {
+    color: #cc3436;
+    font-weight: bold;
+}
+#memory{
+font-weight: 300;
+}
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.warning {
+    color: orange;
+}
+
+#battery.critical {
+    color: red;
+}
+
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+#custom-power {
+    background-color: transparent;
+    border-radius: 100px;
+    margin: 5px 5px;
+    padding: 1px 1px 1px 6px;
+}
+
+/*-----Indicators----*/
+#idle_inhibitor.activated {
+    color: #ffffff;
+}
+#pulseaudio.muted {
+    color: #cc3436;
+}
+#battery.charging {
+    color: #2dcc36;
+}
+#custom-weather {
+    padding-right: 16px;
+    border-radius: 0px 10px 10px 0px;
+    transition: none;
+    color: #ffffff;
+    background-color: transparent;
+}
+#battery.warning:not(.charging) {
+	color: #e6e600;
+}
+#battery.critical:not(.charging) {
+    color: #cc3436;
+}
+#temperature.critical  {
+    background-color: @critical;
+}
+
+#disk.warning,
+#temperature.warning {
+    background-color: @warning;
+}
+/*-----Colors----*/
+/*
+ *rgba(0,85,102,1),#005566 --> Indigo(dye)
+ *rgba(0,43,51,1),#002B33 --> Dark Green 
+ *rgba(0,153,153,1),#009999 --> Persian Green 
+ *
+ */
