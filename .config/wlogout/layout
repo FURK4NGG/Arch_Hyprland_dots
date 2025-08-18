@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "swaylock -f -c 000000   --clock --indicator --fade-in 0.3   --text-color ffffff   --ring-color d9d9d9   --line-uses-ring   --key-hl-color 1e1f2f",
+    "action" : "hyprlock",
     "text" : "Lock",
     "keybind" : "l"
 }
