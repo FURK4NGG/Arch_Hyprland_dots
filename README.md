@@ -6,11 +6,11 @@
 ! You can install these packages using at least pacman and yay.  
 ! I use "+" to separate different packages serving the same purpose.  
 
-Linux Kernel: linux linux-zen  
+Linux Kernel: linux+linux-zen  
 Lock Screen: hyprlock wlogout  
 Greeter: sddm  
 Background Manager: hyprpaper  
-Wayland Compositor: Hyprland wlroots xdg-desktop-portal-hyprland qt5-graphicaleffects  
+Wayland Compositor: hyprland wlroots xdg-desktop-portal-hyprland qt5-graphicaleffects  
 Panel/Bar: waybar ttf-twemoji  
 System Notification: swaync  
 Clipboard: wl-clipboard  
@@ -29,7 +29,7 @@ Text Editor: Mousepad VSCodium
 File Thumbnail Viewer: tumbler  
 Audio Manager: pipewire pipewire-pulse wireplumber alsa-utils pavucontrol  
 Packet Manager: pacman+yay+flatpak  
-Nvidia Drivers: nvidia nvidia-settings nvidia-utils+(lib32-nvidia-utils+lib32-libg --> for 32 bits)  
+Nvidia Drivers: nvidia nvidia-settings nvidia-utils+(lib32-nvidia-utils lib32-libg --> for 32 bits)  
 
 
 # Extra Apps (Basic essential apps everyone needs on their PC)
