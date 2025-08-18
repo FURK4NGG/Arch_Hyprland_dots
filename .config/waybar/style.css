@@ -1,6 +1,6 @@
 * {
     font-family: Font Awesome, Roboto, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     color: #ffffff;
     border-radius: 20px;
 }
@@ -92,7 +92,7 @@ font-weight: 300;
     animation-duration: 2s;
 }
 #custom-power {
-    background-color: #2b2d45;
+    background-color: transparent;
     border-radius: 100px;
     margin: 5px 5px;
     padding: 1px 1px 1px 6px;
