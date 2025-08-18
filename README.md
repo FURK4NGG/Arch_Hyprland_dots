@@ -1,5 +1,5 @@
 # Arch_Hyprland_dots 
-![Image](https://github.com/user-attachments/assets/881fa71c-82c7-4bff-9d3f-f6d838e971c0)
+![Image](https://github.com/user-attachments/assets/d7107efe-178e-4b45-84fe-46b3b73ccf14)
  
 # Basic Apps and Packets (Download Section)
 
