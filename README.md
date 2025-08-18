@@ -6,7 +6,7 @@
 You can install these packages using at least pacman and yay.
 
 Linux Kernel: linux linux-zen  
-Lock Screen: swaylock wlogout  
+Lock Screen: hyprlock wlogout  
 Greeter: sddm  
 Background Manager: hyprpaper  
 Wayland Compositor: Hyprland wlroots xdg-desktop-portal-hyprland qt5-graphicaleffects  
