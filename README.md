@@ -15,6 +15,7 @@ Panel/Bar: waybar ttf-twemoji
 System Notification: swaync  
 Clipboard: wl-clipboard  
 Terminal: kitty  
+Resource Monitor: btop  
 App Launcher: rofi  
 Screen Brightness: gammastep  
 Print Screen: grim slurp  
