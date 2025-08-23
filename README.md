@@ -21,12 +21,12 @@ Screen Brightness: gammastep
 Print Screen: grim slurp  
 Screen Recorder: wf-recorder  
 Video Player: mpv  
-Pdf Viewer: Atril  
-Image Viewer: Ristretto  
+Pdf Viewer: atril  
+Image Viewer: ristretto  
 File Manager: thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar  
 Network Manager: networkmanager network-manager-applet  
 Download: wget git  
-Text Editor: Mousepad VSCodium  
+Text Editor: mousepad vscodium  
 File Thumbnail Viewer: tumbler  
 Audio Manager: pipewire pipewire-pulse wireplumber alsa-utils pavucontrol  
 Packet Manager: pacman+yay+flatpak  
