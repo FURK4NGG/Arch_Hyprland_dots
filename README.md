@@ -113,3 +113,7 @@ Virt --> sudo usermod -aG libvirt $USER
 
 //If you use Flatpak  
 sudo systemctl enable --now flatpak-system-helper  
+
+# Fast Installation  
+chmod +x install.sh
+./install.sh
