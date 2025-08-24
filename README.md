@@ -64,7 +64,7 @@ xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal x
 
 # Hyprland configration files (Setup Section)
 
-git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git
+git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git  
 
 cd Arch_Hyprland_dots
 
@@ -115,5 +115,6 @@ Virt --> sudo usermod -aG libvirt $USER
 sudo systemctl enable --now flatpak-system-helper  
 
 # Fast Installation  
+sudo pacman -Syu git
 chmod +x install.sh  
 ./install.sh  
