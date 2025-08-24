@@ -63,7 +63,7 @@ xfce4-panel
 xfce4-session  
 xfce4-settings  
 xfce4-terminal  
-xfdesktop 
+xfdesktop  
 xfconf  
 xfwm4  
 xfce4-notify-plugin  
