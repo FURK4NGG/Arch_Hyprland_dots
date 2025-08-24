@@ -58,7 +58,7 @@ Gamescope(AI-Powered FPS Boosting): gamescope
 ---
 
 # For Extra XFCE Desktop  
-xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin xfce4-network-manager  
+xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin   
 
 
 
