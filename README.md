@@ -66,7 +66,7 @@ xfce4-terminal
 xfdesktop  
 xfconf  
 xfwm4  
-xfce4-notify-plugin  
+xfce4-notifyd  
 xfce4-clipman-plugin   
 xorg  
 xorg-server  
