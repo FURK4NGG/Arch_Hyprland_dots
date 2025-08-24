@@ -62,12 +62,17 @@ xfce
 xfce4-panel  
 xfce4-session  
 xfce4-settings  
-xfconf 
-xfdesktop  
-xfwm4  
 xfce4-terminal  
+xfdesktop 
+xfconf  
+xfwm4  
 xfce4-notify-plugin  
 xfce4-clipman-plugin   
+xorg  
+xorg-server  
+xorg-xinit  
+xorg-xinput  
+xorg-xrandr
 
 
 
