@@ -58,6 +58,7 @@ Gamescope(AI-Powered FPS Boosting): gamescope
 ---
 
 # For Extra XFCE Desktop  
+xfce  
 xfce4-panel  
 xfce4-session  
 xfce4-settings  
