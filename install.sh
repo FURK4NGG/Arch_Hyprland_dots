@@ -65,6 +65,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	sudo mkdir /boot/loader/
 	sudo cp boot/loader/loader.conf /boot/loader/loader.conf
 
+	sudo chmod +x ~/.config/waybar/scripts/weather.py  
+ 
 	systemctl --user daemon-reload
 	systemctl --user enable --now gammastep-refresh.timer
 
