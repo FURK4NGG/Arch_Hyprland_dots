@@ -86,6 +86,10 @@ sudo cp -r .config/ /home/$USER/
 
 sudo cp -r themes_bg/modest-dark/ /usr/share/icons/
 
+sudo mkdir /etc/xdg/swaync/
+
+sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css
+
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
 sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
