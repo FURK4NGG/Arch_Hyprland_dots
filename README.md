@@ -76,25 +76,25 @@ xorg-xrandr
 
 
 
-# Hyprland configration files (Setup Section)
+# Hyprland configration files (Setup Section)  
 
 git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git  
 
-cd Arch_Hyprland_dots
+cd Arch_Hyprland_dots  
 
-sudo cp -r .config/ /home/$USER/
+sudo cp -r .config/ /home/$USER/  
 
-sudo cp -r themes_bg/modest-dark/ /usr/share/icons/
+sudo cp -r themes_bg/modest-dark/ /usr/share/icons/  
 
 sudo mkdir /etc/xdg/swaync/  
 sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css  
 sudo chmod +x ~/.config/scripts/*.sh  
 
-sudo mkdir /home/$USER/Resimler/wallpapers/
-sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
+sudo mkdir /home/$USER/Resimler/wallpapers/  
+sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png  
 
-sudo mkdir /boot/loader/
-sudo cp  boot/loader/loader.conf /boot/loader/loader.conf
+sudo mkdir /boot/loader/  
+sudo cp  boot/loader/loader.conf /boot/loader/loader.conf  
 
 //If you just take one specific file.  
 //sudo cp -r .config/wlogout /home/$USER/.config/  
@@ -113,6 +113,8 @@ xdg-mime default mpv.desktop video/webm
 sudo systemctl enable --now NetworkManager  
 
 sudo systemctl enable --now udisks2  
+
+sudo chmod +x ~/.config/waybar/scripts/weather.py  
 
 //For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
 1-Control your display_name --> WAYLAND_DISPLAY=wayland-1  
