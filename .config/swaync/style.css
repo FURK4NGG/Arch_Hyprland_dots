@@ -2,9 +2,10 @@
  * vim: ft=less
  */
 
-@define-color cc-bg rgba(0, 0, 70, 0.3);
+@define-color cc-bg rgba(50, 50, 79, 0.5);
 
-@define-color noti-border-color rgba(0, 0, 55, 0.1);
+@define-color border-color rgb(83, 86, 133);
+@define-color noti-border-color rgba(0, 0, 50, 0.6);
 @define-color noti-bg rgba(0, 0, 48, 0.3);
 @define-color noti-bg-darker rgba(0, 0, 38, 0.4);
 @define-color noti-bg-hover rgba(0, 0, 56, 0.5);
@@ -12,10 +13,10 @@
 @define-color noti-close-bg rgba(0, 0, 255, 0.4);
 @define-color noti-close-bg-hover rgba(0, 0, 255, 0.7);
 
-@define-color text-color rgb(0, 230, 255);
+@define-color text-color rgba(145, 200, 228, 255);
 @define-color text-color-disabled rgb(0, 0, 150);
 
-@define-color bg-selected rgba(0, 0, 255, 0.5);
+@define-color bg-selected rgba(145, 200, 228, .8);
 
 
 .notification-row {
@@ -190,7 +191,8 @@
 .control-center {
   background: @cc-bg;
   border-radius: 24px;
-  color: rgb(0, 230, 255);
+  border: 2px solid @border-color;
+  color: @text-color;
 }
 
 .control-center-list {
@@ -221,8 +223,8 @@
 }
 .widget-title > button {
   font-size: initial;
-  /*color: @text-color;*/
-  color: rgb(0, 230, 255);
+  color: @text-color;
+  /*color: rgb(0, 230, 255)*/;
   text-shadow: none;
   background: @noti-bg;
   border: 1px solid @noti-border-color;
@@ -235,7 +237,7 @@
 
 /* DND widget */
 .widget-dnd {
-  margin: 8px;
+  margin: 15px 8px 8px;
   font-size: 1.2rem;
 }
 .widget-dnd > switch {
