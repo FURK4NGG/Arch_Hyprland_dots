@@ -16,6 +16,7 @@
 @define-color text-color rgba(145, 200, 228, 255);
 @define-color text-color-disabled rgb(0, 0, 150);
 
+@define-color bg-unselected rgb(28, 110, 164);
 @define-color bg-selected rgba(145, 200, 228, .8);
 
 
@@ -243,8 +244,8 @@
 .widget-dnd > switch {
   font-size: initial;
   border-radius: 24px;
-  background: @noti-bg;
-  border: 1px solid @noti-border-color;
+  background: @bg-unselected;
+  border: 1px solid @bg-unselected;
   box-shadow: none;
 }
 .widget-dnd > switch:checked {
@@ -263,21 +264,76 @@
   font-size: 1.1rem;
 }
 
+
+
+
 /* Mpris widget */
+/* ------------------------
+   Container & Player Card
+   ------------------------ */
 .widget-mpris {
-  /* The parent to all players */
+  margin: 8px; /* spacing around the entire MPRIS widget */
 }
-.widget-mpris-player {
+
+.widget-mpris .widget-mpris-player {
+  margin: 4px; /* inner card padding */
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0 0 10px rgba(37, 36, 35, 0.75);
+}
+
+/* -------------------------
+   Blurred Background Layer
+   ------------------------- */
+.widget-mpris .widget-mpris-player .mpris-background {
+  filter: blur(10px);
+}
+
+/* -------------------
+   Overlay & Controls
+   ------------------- */
+.widget-mpris .widget-mpris-player .mpris-overlay {
   padding: 8px;
-  margin: 4px;
+  background-color: rgba(60, 56, 54, 0.55);
 }
-.widget-mpris-title {
+
+/* Button hover state */
+.widget-mpris .widget-mpris-player .mpris-overlay button:hover {
+  background-color: var(--noti-bg-hover);
+}
+
+/* -----------------
+   Album Art & Text
+   ----------------- */
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(37, 36, 35, 0.75);
+  -gtk-icon-size: 96px;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
   font-weight: bold;
-  font-size: 2.00rem;
+  font-size: 1.25rem;
+  color: var(--text-color);
 }
-.widget-mpris-subtitle {
-  font-size: 1.0rem;
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-color);
 }
+
+/* ----------------
+   Control Buttons
+   ---------------- */
+.widget-mpris .widget-mpris-player .mpris-overlay > box > button {
+  color: var(--text-color);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay > box > button:disabled {
+  color: var(--text-disabled);
+}
+
+
+
 
 /* Buttons widget */
 .widget-buttons-grid {
