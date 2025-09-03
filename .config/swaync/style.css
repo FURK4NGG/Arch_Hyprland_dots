@@ -296,6 +296,18 @@
   background: @noti-bg-hover;
 }
 
+
+.widget-buttons-grid>flowbox>flowboxchild>button:active {
+  background: @noti-bg-hover;
+  color: lime; /* tıklanırken yeşile dönsün */
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:checked {
+  background: @noti-bg-hover;
+  color: cyan; /* kalıcı aktif durumda mavi */
+}
+
+
 /* Menubar widget */
 .widget-menubar>box>.menu-button-bar>button {
   border: none;

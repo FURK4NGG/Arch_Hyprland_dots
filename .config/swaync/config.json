@@ -82,25 +82,31 @@
           "label": "󰌾",
           "command": "hyprlock"
         },
-        {
-          "label": "󰕾",
-          "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+	{
+        "label": "󰕾",
+        "type": "toggle",
+        "active": false,
+        "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         },
-        {
-          "label": "󰍬",
-          "command": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+	{
+        "label": "󰍬",
+        "type": "toggle",
+        "active": false,
+        "command": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         },
         {
           "label": "󰏘",
-          "command": "~/.config/scripts/screenprint.sh"
+          "command": ""
         },
         {
           "label": "",
+	  "type": "toggle",
+	  "active": false,
           "command": "~/.config/scripts/screenrec.sh"
         },
         {
           "label": "",
-          "command": "~/.config/scripts/screenrecstop.sh"
+          "command": "~/.config/scripts/screenprint.sh"
         },
         {
           "label": "󰂯",
