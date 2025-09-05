@@ -51,6 +51,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	# SDDM servisini enable + start (kurulum başarılı olduktan sonra)
         echo -e "${GREEN}Enabling services...${NC}"
 
+	cd ~/Arch_Hyprland_dots/
+
 	sudo cp -r .config/ /home/$USER/
 
 	sudo cp -r themes_bg/modest-dark/ /usr/share/icons/
