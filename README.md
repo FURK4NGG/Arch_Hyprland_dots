@@ -79,6 +79,7 @@ xorg-xrandr
 
 # Hyprland configration files (Setup Section)  
 
+sudo pacman -Syu git  
 git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git  
 
 cd Arch_Hyprland_dots  
