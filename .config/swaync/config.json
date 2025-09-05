@@ -96,7 +96,7 @@
         },
         {
           "label": "󰏘",
-          "command": "hyprpicker"
+          "command": "kitty --class hyprpicker --hold -e hyprpicker"
         },
         {
           "label": "",
