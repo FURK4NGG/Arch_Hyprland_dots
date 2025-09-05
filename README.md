@@ -23,7 +23,7 @@ Screen Recorder: wf-recorder
 Video Player: mpv  
 Pdf Viewer: atril  
 Image Viewer: ristretto  
-Color Picker: hyprpicker
+Color Picker: hyprpicker  
 File Manager: thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar  
 Network Manager: networkmanager network-manager-applet  
 Download: wget git  
