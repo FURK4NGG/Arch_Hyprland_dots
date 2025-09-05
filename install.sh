@@ -54,6 +54,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	cd ~/Arch_Hyprland_dots/
 
 	sudo cp -r .config/ /home/$USER/
+ 	sudo hyprctl reload
 
 	sudo cp -r themes_bg/modest-dark/ /usr/share/icons/
 
