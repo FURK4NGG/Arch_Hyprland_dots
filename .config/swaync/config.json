@@ -109,16 +109,22 @@
           "command": "~/.config/scripts/screenprint.sh"
         },
         {
+          "label": "󰤨",
+          "type": "toggle",
+          "active": true,
+          "command": "~/.config/scripts/wifi.sh toggle"
+        },
+        {
           "label": "󰂯",
-          "command": ""
+          "command": "blueman-manager &"
         },
         {
           "label": "󰀝",
-          "command": "/home/luka/.config/hypr/scripts/AirplaneMode.sh"
+          "command": "~/.config/scripts/AirplaneMode.sh"
         },
         {
           "label": "󰃟 ",
-          "command": ""
+          "command": "~/.local/bin/gammastep-toggle"
         }
       ]
     }
