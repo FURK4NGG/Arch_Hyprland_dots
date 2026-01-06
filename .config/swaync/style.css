@@ -99,7 +99,7 @@
 
 .notification-default-action:hover,
 .notification-action:hover {
-  -gtk-icon-effect: none;
+  /*-gtk-icon-effect: none;*/
   background: @noti-bg-hover;
 }
 
