@@ -26,7 +26,7 @@ Image Viewer: ristretto
 Color Picker: hyprpicker  
 File Manager: thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar  
 Network Manager: networkmanager network-manager-applet  
-Bluetooth: bluez bluez-utils blueman
+Bluetooth: bluez bluez-utils blueman  
 Download: wget git  
 Text Editor: mousepad vscodium  
 File Thumbnail Viewer: tumbler  
