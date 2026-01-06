@@ -7,7 +7,7 @@ NC="\e[0m" # reset
 
 # Kurulacak paket listesi
 PACKAGES="linux linux-zen hyprlock xorg-server mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout sddm hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects waybar ttf-twemoji swaync wl-clipboard kitty btop rofi gammastep grim slurp wf-recorder mpv atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git mousepad tumbler pipewire pipewire-pulse wireplumber alsa-utils pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin"
-PACKAGES-Y="network-manager-applet"
+PACKAGES-Y="bluez bluez-utils blueman"
 echo -e "${GREEN}Do you want to install documents? (y/n)${NC}"
 read -r answer
 
@@ -31,6 +31,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	xdg-mime default mpv.desktop video/webm
 
 	sudo systemctl enable --now NetworkManager
+	sudo systemctl enable --now bluetooth
 
 	sudo systemctl enable --now udisks2
 
