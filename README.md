@@ -26,6 +26,7 @@ Image Viewer: ristretto
 Color Picker: hyprpicker  
 File Manager: thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar  
 Network Manager: networkmanager network-manager-applet  
+Bluetooth: bluez bluez-utils blueman
 Download: wget git  
 Text Editor: mousepad vscodium  
 File Thumbnail Viewer: tumbler  
@@ -116,6 +117,7 @@ xdg-mime default mpv.desktop video/x-matroska
 xdg-mime default mpv.desktop video/webm  
 
 sudo systemctl enable --now NetworkManager  
+sudo systemctl enable --now bluetooth  
 
 sudo systemctl enable --now udisks2  
 
