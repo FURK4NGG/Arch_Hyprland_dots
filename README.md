@@ -91,6 +91,7 @@ sudo cp -r .config/ /home/$USER/
 sudo cp -r themes_bg/modest-dark/ /usr/share/icons/  
 
 sudo mkdir /etc/xdg/swaync/  
+mkdir -p ~/.local/bin  
 sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css  
 sudo cp ~/.config/scripts/gammastep-toggle ~/.local/bin/gammastep-toggle  
 sudo chmod +x ~/.config/scripts/*.sh  
