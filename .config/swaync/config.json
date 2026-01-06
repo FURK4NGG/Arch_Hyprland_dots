@@ -100,8 +100,8 @@
         },
         {
           "label": "",
-	  "type": "toggle",
-	  "active": false,
+     	  "type": "toggle",
+	      "active": false,
           "command": "~/.config/scripts/screenrec.sh"
         },
         {
@@ -111,12 +111,14 @@
         {
           "label": "󰤨",
           "type": "toggle",
-          "active": true,
-          "command": "~/.config/scripts/wifi.sh toggle"
+          "active": false,
+          "command": "~/.config/scripts/wifi-bt.sh wifi"
         },
         {
           "label": "󰂯",
-          "command": "blueman-manager &"
+          "type": "toggle",
+          "active": false,
+          "command": "~/.config/scripts/wifi-bt.sh bluetooth"
         },
         {
           "label": "󰀝",
