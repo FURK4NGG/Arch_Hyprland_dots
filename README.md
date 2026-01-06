@@ -91,7 +91,9 @@ sudo cp -r themes_bg/modest-dark/ /usr/share/icons/
 
 sudo mkdir /etc/xdg/swaync/  
 sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css  
+sudo cp ~/.config/scripts/gammastep-toggle ~/.local/bin/gammastep-toggle  
 sudo chmod +x ~/.config/scripts/*.sh  
+chmod +x ~/.local/bin/gammastep-toggle  
 
 sudo mkdir /home/$USER/Resimler/wallpapers/  
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png  
