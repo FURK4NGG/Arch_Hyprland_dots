@@ -82,13 +82,13 @@
           "label": "󰌾",
           "command": "hyprlock"
         },
-	{
+		{
         "label": "󰕾",
         "type": "toggle",
         "active": false,
         "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         },
-	{
+		{
         "label": "󰍬",
         "type": "toggle",
         "active": false,
