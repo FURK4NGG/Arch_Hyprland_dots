@@ -54,10 +54,10 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	cd ~/Arch_Hyprland_dots/
 
-	sudo cp -r .config/ /home/$USER/
+	sudo cp -ri .config/ /home/$USER/
  	hyprctl reload
 
-	sudo cp -r themes_bg/modest-dark/ /usr/share/icons/
+	sudo cp -ri themes_bg/modest-dark/ /usr/share/icons/
 
  	sudo mkdir /etc/xdg/swaync/  
 	mkdir -p ~/.local/bin
