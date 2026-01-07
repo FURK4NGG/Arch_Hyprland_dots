@@ -54,7 +54,15 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	cd ~/Arch_Hyprland_dots/
 
-	sudo cp -ri .config/ /home/$USER/
+	echo -e "${GREEN}Do you want to overwrite if you have the docs? (y/n)${NC}"
+	read -r answer
+
+	if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+		sudo cp -rf .config/ /home/$USER/
+
+	else
+		sudo cp -ri .config/ /home/$USER/
+	fi
  	hyprctl reload
 
 	sudo cp -ri themes_bg/modest-dark/ /usr/share/icons/
