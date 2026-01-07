@@ -59,13 +59,13 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo cp -rf .config/ /home/$USER/
+		sudo cp -rf themes_bg/modest-dark/ /usr/share/icons/
 
 	else
 		sudo cp -ri .config/ /home/$USER/
+		sudo cp -ri themes_bg/modest-dark/ /usr/share/icons/
 	fi
  	hyprctl reload
-
-	sudo cp -ri themes_bg/modest-dark/ /usr/share/icons/
 
  	sudo mkdir /etc/xdg/swaync/  
 	mkdir -p ~/.local/bin
