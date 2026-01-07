@@ -52,7 +52,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	# SDDM servisini enable + start (kurulum başarılı olduktan sonra)
         echo -e "${GREEN}Enabling services...${NC}"
 
-	cd ~/Arch_Hyprland_dots/
+	cd /Arch_Hyprland_dots/
 
 	echo -e "${GREEN}Do you want to overwrite if you have the docs? (y/n)${NC}"
 	read -r answer
