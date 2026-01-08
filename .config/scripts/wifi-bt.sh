@@ -5,11 +5,9 @@ case "$1" in
     WIFI_STATUS=$(nmcli radio wifi)
 
     if [ "$WIFI_STATUS" = "enabled" ]; then
-      # Wi-Fi KAPAT
       nmcli radio wifi off
       pkill nm-applet
     else
-      # Wi-Fi AÇ
       nmcli radio wifi on
       sleep 0.3
       nm-applet &
@@ -17,16 +15,12 @@ case "$1" in
     ;;
 
   bluetooth|bt)
-    BT_STATUS=$(bluetoothctl show | grep "Powered:" | awk '{pr>
+    BT_STATUS=$(bluetoothctl show | awk '/Powered:/ {print $2}')
 
     if [ "$BT_STATUS" = "yes" ]; then
-      # Bluetooth KAPAT
       bluetoothctl power off
-      pkill blueman-applet
     else
-      # Bluetooth AÇ
       bluetoothctl power on
-      blueman-manager &
     fi
     ;;
 esac
