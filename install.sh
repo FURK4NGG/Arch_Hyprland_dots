@@ -84,10 +84,10 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	sudo chmod +x ~/.config/waybar/scripts/weather.py  
 
- 	chmod 600 ~/.config/scripts/hyprshade-toggle-state
-	chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
+ 	sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
+	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
 	systemctl --user daemon-reload
-	systemctl --user enable --now hyprshade-refresh.timer
+	systemctl --user enable --now hyprshade-auto.timer
 
 	echo -e "${GREEN}Enabling services finished succesfully${NC}"
 else
