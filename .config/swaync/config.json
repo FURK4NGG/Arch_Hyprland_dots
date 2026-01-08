@@ -126,7 +126,7 @@
         },
         {
           "label": "󰃟 ",
-          "command": "~/.local/bin/gammastep-toggle"
+          "command": "~/.local/bin/hyprshade-auto.sh"
         }
       ]
     }
