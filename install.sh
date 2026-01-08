@@ -72,9 +72,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
  	sudo mkdir /etc/xdg/swaync/  
 	mkdir -p ~/.local/bin
 	sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css
-	sudo cp ~/.config/scripts/gammastep-toggle ~/.local/bin/gammastep-toggle
+	sudo cp ~/.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
 	sudo chmod +x ~/.config/scripts/*.sh
-	sudo chmod +x ~/.local/bin/gammastep-toggle
+	sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 
 	sudo mkdir /home/$USER/Resimler/wallpapers/
 	sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
@@ -83,9 +83,11 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	sudo cp boot/loader/loader.conf /boot/loader/loader.conf
 
 	sudo chmod +x ~/.config/waybar/scripts/weather.py  
- 
+
+ 	chmod 600 ~/.config/scripts/hyprshade-toggle-state
+	chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
 	systemctl --user daemon-reload
-	systemctl --user enable --now gammastep-refresh.timer
+	systemctl --user enable --now hyprshade-refresh.timer
 
 	echo -e "${GREEN}Enabling services finished succesfully${NC}"
 else
