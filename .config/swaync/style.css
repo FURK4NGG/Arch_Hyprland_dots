@@ -355,7 +355,7 @@
 
 .widget-buttons-grid>flowbox>flowboxchild>button:active {
   background: @noti-bg-hover;
-  color: cyan; /* tıklanırken yeşile dönsün */
+  color: cyan; /* tıklanırken maviye dönsün */
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button:checked {
