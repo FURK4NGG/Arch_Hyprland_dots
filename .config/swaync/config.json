@@ -118,7 +118,7 @@
           "label": "󰂯",
           "type": "toggle",
           "active": false,
-          "command": "~/.config/scripts/wifi-bt.sh bluetooth"
+          "command": "~/.config/scripts/wifi-bt.sh bt"
         },
         {
           "label": "󰀝",
