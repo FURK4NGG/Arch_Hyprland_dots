@@ -17,7 +17,7 @@ Clipboard: wl-clipboard
 Terminal: kitty  
 Resource Monitor: btop  
 App Launcher: rofi  
-Screen Brightness: gammastep  
+Screen Brightness: hyprshade  
 Print Screen: grim slurp  
 Screen Recorder: wf-recorder  
 Video Player: mpv  
