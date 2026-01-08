@@ -1,7 +1,7 @@
 {
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock","custom/weather"],
-    "modules-right": ["tray","custom/scratchpad-indicator","memory","cpu","pulseaudio","custom/power"],
+    "modules-right": ["tray","custom/scratchpad-indicator","bluetooth","memory","cpu","pulseaudio","custom/power"],
 
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -12,6 +12,14 @@
         "format-disconnected": "", 
         "max-length": 50,
         "on-click": "kitty -e 'nmtui'"
+    },
+    "bluetooth": {
+    "type": "internal/bluetooth",
+    "adapter": "hci0",
+    "format-on": "",
+    "format-off": "",
+    "on-click": "blueman-manager",
+    "interval": 5
     },
     "battery": {
         "interval": 10,
