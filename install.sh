@@ -14,10 +14,31 @@ read -r answer
 if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     echo -e "${GREEN}Installing packages: $PACKAGES ...${NC}"
     git clone https://aur.archlinux.org/yay.git
-     cd yay
+    cd yay
     makepkg -si
-    sudo pacman -Syu --noconfirm $PACKAGES
-    yay -S --noconfirm $PACKAGES-Y
+	echo -e "${GREEN}Do you want a quick setup?(downloads all packages) (y/n)${NC}"
+	read -r answer
+
+	if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+    	sudo pacman -Syu --noconfirm $PACKAGES
+    	yay -S --noconfirm $PACKAGES_YAY
+	else
+    	echo -e "${GREEN}Selective install mode${NC}"
+
+    	for pkg in $PACKAGES; do
+        	read -rp "Install $pkg? (y/n): " ans
+        	if [[ "$ans" =~ ^[Yy]$ ]]; then
+            	sudo pacman -S --needed "$pkg"
+        	fi
+    	done
+
+    	for pkg in $PACKAGES_YAY; do
+        	read -rp "Install $pkg (AUR)? (y/n): " ans
+        	if [[ "$ans" =~ ^[Yy]$ ]]; then
+            	yay -S --needed "$pkg"
+        	fi
+    	done
+	fi
 
     if [[ $? -eq 0 ]]; then
 	sudo systemctl enable sddm
