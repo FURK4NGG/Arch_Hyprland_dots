@@ -55,6 +55,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	sudo systemctl enable --now NetworkManager
 	sudo systemctl enable --now bluetooth
+	sudo usermod -aG bluetooth $USER
 
 	sudo systemctl enable --now udisks2
 
