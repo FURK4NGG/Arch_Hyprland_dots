@@ -12,6 +12,13 @@ fi
 
 STATE=$(cat "$STATE_FILE")
 
+if [ "$ARG" = "exec-start" ]; then
+    case "$STATE" in
+        0)STATE=2 ;;
+        1)STATE=0 ;;
+        2)STATE=1 ;;
+    esac
+fi
 
 case "$STATE" in
     0)
