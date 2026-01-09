@@ -16,10 +16,8 @@ STATE=$(cat "$STATE_FILE")
 case "$STATE" in
     0)
         # DEFAULT (AUTO)
-        sudo systemctl --user start hyprshade-auto.service
-        sudo systemctl --user enable hyprshade-auto.service
-        sudo systemctl --user start hyprshade-auto.timer
-        sudo systemctl --user enable hyprshade-auto.timer
+        systemctl --user daemon-reload
+        systemctl --user enable --now hyprshade-auto.timer
         if [ "$HOUR" -ge 19 ] || [ "$HOUR" -lt 7 ]; then
             hyprshade on "$SHADER"
         else
@@ -37,10 +35,10 @@ case "$STATE" in
         ;;
     1)
         # KAPALI
-        sudo systemctl --user stop hyprshade-auto.service
-        sudo systemctl --user disable hyprshade-auto.service
-        sudo systemctl --user stop hyprshade-auto.timer
-        sudo systemctl --user disable hyprshade-auto.timer
+        systemctl --user stop hyprshade-auto.service
+        systemctl --user disable hyprshade-auto.service
+        systemctl --user stop hyprshade-auto.timer
+        systemctl --user disable hyprshade-auto.timer
         hyprshade off
         echo "Kapalı mod"
         echo 2 > "$STATE_FILE"
@@ -48,10 +46,10 @@ case "$STATE" in
         ;;
     2)
         # HEP AÇIK
-        sudo systemctl --user stop hyprshade-auto.service
-        sudo systemctl --user disable hyprshade-auto.service
-        sudo systemctl --user stop hyprshade-auto.timer
-        sudo systemctl --user disable hyprshade-auto.timer
+        systemctl --user stop hyprshade-auto.service
+        systemctl --user disable hyprshade-auto.service
+        systemctl --user stop hyprshade-auto.timer
+        systemctl --user disable hyprshade-auto.timer
         hyprshade on "$SHADER"
         echo "Hep açık mod"
         echo 0 > "$STATE_FILE"
