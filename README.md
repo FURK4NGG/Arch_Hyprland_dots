@@ -93,9 +93,9 @@ sudo cp -r themes_bg/modest-dark/ /usr/share/icons/
 sudo mkdir /etc/xdg/swaync/  
 mkdir -p ~/.local/bin  
 sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css  
-sudo cp ~/.config/scripts/gammastep-toggle ~/.local/bin/gammastep-toggle  
+sudo cp ~/.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh  
 sudo chmod +x ~/.config/scripts/*.sh  
-chmod +x ~/.local/bin/gammastep-toggle  
+chmod +x ~/.local/bin/hyprshade-auto.sh  
 
 sudo mkdir /home/$USER/Resimler/wallpapers/  
 sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png  
@@ -118,17 +118,18 @@ xdg-mime default mpv.desktop video/x-matroska
 xdg-mime default mpv.desktop video/webm  
 
 sudo systemctl enable --now NetworkManager  
-sudo systemctl enable --now bluetooth  
+sudo rfkill unblock bluetooth
+sudo systemctl enable --now bluetooth
+sudo usermod -aG bluetooth $USER
 
 sudo systemctl enable --now udisks2  
 
 sudo chmod +x ~/.config/waybar/scripts/weather.py  
 
-//For automatic Eye Comfort Mode:open this file  .config/systemd/user/gammastep-refresh.service  
-1-Control your display_name --> WAYLAND_DISPLAY=wayland-1  
-2-Check the (latitude) and (longitude) data --> 41.0:29.0 --> (Istanbul)  
-systemctl --user daemon-reload  
-systemctl --user enable --now gammastep-refresh.timer  
+ sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
+	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
+	systemctl --user daemon-reload
+	systemctl --user enable --now hyprshade-auto.timer
 
 ---
 
