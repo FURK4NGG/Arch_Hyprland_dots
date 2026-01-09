@@ -113,7 +113,7 @@ systemctl --user enable --now pipewire
 systemctl --user enable --now pipewire-pulse  
 systemctl --user enable --now wireplumber  
 
-xdg-mime default mpv.desktop video/mp4 
+xdg-mime default mpv.desktop video/mp4  
 xdg-mime default mpv.desktop video/x-matroska  
 xdg-mime default mpv.desktop video/webm  
 
