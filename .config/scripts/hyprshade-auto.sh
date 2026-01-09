@@ -29,6 +29,7 @@ case "$STATE" in
         else
             echo "Default (auto) mod"
             echo 1 > "$STATE_FILE"
+            notify-send "night screen" "auto mode active"
         fi
         ;;
     1)
@@ -36,11 +37,13 @@ case "$STATE" in
         hyprshade off
         echo "Kapalı mod"
         echo 2 > "$STATE_FILE"
+        notify-send "night screen" "effect is deactive"
         ;;
     2)
         # HEP AÇIK
         hyprshade on "$SHADER"
         echo "Hep açık mod"
         echo 0 > "$STATE_FILE"
+        notify-send "night screen" "effect is active"
         ;;
 esac
