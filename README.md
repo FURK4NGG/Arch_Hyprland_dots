@@ -118,18 +118,18 @@ xdg-mime default mpv.desktop video/x-matroska
 xdg-mime default mpv.desktop video/webm  
 
 sudo systemctl enable --now NetworkManager  
-sudo rfkill unblock bluetooth
-sudo systemctl enable --now bluetooth
-sudo usermod -aG bluetooth $USER
+sudo rfkill unblock bluetooth  
+sudo systemctl enable --now bluetooth  
+sudo usermod -aG bluetooth $USER  
 
 sudo systemctl enable --now udisks2  
 
 sudo chmod +x ~/.config/waybar/scripts/weather.py  
 
- sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
-	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
-	systemctl --user daemon-reload
-	systemctl --user enable --now hyprshade-auto.timer
+sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state  
+sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state  
+systemctl --user daemon-reload  
+systemctl --user enable --now hyprshade-auto.timer  
 
 ---
 
