@@ -25,7 +25,6 @@ case "$STATE" in
         if [ "$ARG" = "time" ]; then
             echo "night_mode controlled"
             echo 0 > "$STATE_FILE"
-
         else
             echo "Default (auto) mod"
             echo 1 > "$STATE_FILE"
