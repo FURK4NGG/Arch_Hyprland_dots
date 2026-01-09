@@ -50,7 +50,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	sudo rfkill unblock bluetooth
 
-	xdg-mime default mpv.desktop video/mp4 xdg-mime default mpv.desktop video/x-matroska
+	xdg-mime default mpv.desktop video/mp4 
+	xdg-mime default mpv.desktop video/x-matroska
 	xdg-mime default mpv.desktop video/webm
 
 	sudo systemctl enable --now NetworkManager
