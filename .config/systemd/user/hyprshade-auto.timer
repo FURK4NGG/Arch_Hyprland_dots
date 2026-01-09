@@ -2,7 +2,6 @@
 Description=Run Hyprshade Auto Check Every 60 Minutes
 
 [Timer]
-OnBootSec=30
 OnUnitActiveSec=1h
 AccuracySec=1min
 
