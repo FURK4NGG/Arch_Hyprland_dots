@@ -15,14 +15,17 @@ STATE=$(cat "$STATE_FILE")
 
 case "$STATE" in
     0)
+        # DEFAULT (AUTO)
+        if [ "$HOUR" -ge 19 ] || [ "$HOUR" -lt 7 ]; then
+            hyprshade on "$SHADER"
+        else
+            hyprshade off
+        fi
+
         if [ "$ARG" = "time" ]; then
             echo "night_mode controlled"
-            # DEFAULT (AUTO)
-            if [ "$HOUR" -ge 19 ] || [ "$HOUR" -lt 7 ]; then
-                hyprshade on "$SHADER"
-            else
-                hyprshade off
-            fi
+            echo 0 > "$STATE_FILE"
+
         else
             echo "Default (auto) mod"
             echo 1 > "$STATE_FILE"
