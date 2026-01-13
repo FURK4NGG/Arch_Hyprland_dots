@@ -14,6 +14,7 @@ Wayland Compositor: hyprland wlroots xdg-desktop-portal-hyprland qt5-graphicalef
 Panel/Bar: waybar ttf-twemoji  
 System Notification: swaync  
 Clipboard: wl-clipboard  
+Non-Permanent Deletion Utility: trash-cli  
 Terminal: kitty  
 Resource Monitor: btop  
 App Launcher: rofi  
