@@ -15,21 +15,22 @@ window {
 
     /* properties for all widgets */
     enabled:                     true;
-    margin:                      300px 500px;
+    margin:                      0px 0px;
     padding:                     0px;
     border-color:                transparent;
-    border-radius:               15px;
+    border-radius:               0px;
     cursor:                      "default";
-    background-color:            transparent;
+    background-color:            @blur;
 }
 
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
     spacing:                     10px;
-    margin:                      0px;
+    margin:                      250px 420px;
     padding:                     30px;
     background-color:            transparent;
+    border-radius:               15px;
     children:                    [ "inputbar", "message", "listview"];
 }
 
@@ -39,8 +40,8 @@ inputbar {
     spacing:                     10px;
     margin:                      0px;
     padding:                     10px;
-    border-radius:               10px;
-    //background-color:            @background-alt;
+    border-radius:               0px;
+    //background-color:          @background-alt;
     text-color:                  @foreground;
     children:                    [ "textbox-prompt-colon", "entry" ];
 }
@@ -71,7 +72,8 @@ entry {
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     2;
+    padding:                     25px 0 0;
+    columns:                     3;
     lines:                       7;
     cycle:                       true;
     dynamic:                     true;
@@ -81,7 +83,7 @@ listview {
     fixed-height:                true;
     fixed-columns:               true;
     
-    spacing:                     5px;
+    spacing:                     12px;
     cursor:                      "default";
 }
 scrollbar {
@@ -94,10 +96,10 @@ scrollbar {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     13px;
     margin:                      0px;
-    padding:                     6px;
-    border-radius:               0px;
+    padding:                     6px 6px 6px 10px;
+    border-radius:               11px;
     text-color:                  @foreground;
     cursor:                      pointer;
 }
@@ -107,17 +109,22 @@ element alternate.normal {
 }
 element normal.urgent,
 element alternate.urgent,
-element selected.active {
-    //text-color:                  var(foreground);
+element selected.active,
+element normal.urgent element-text,
+element alternate.urgent element-text,
+element selected element-text,
+element selected.active element-text{
+    text-color:                  @purple;
 }
 
 element selected.normal {
-    background-color:            var(background);
+    background-color:            @purple;
+    text-color:                  #fff
 }
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
-    size:                        24px;
+    size:                        25px;
     cursor:                      inherit;
 }
 element-text {
@@ -150,7 +157,7 @@ textbox {
 }
 error-message {
     padding:                     30px;
-    background-color:            @background;
+    background-color:            @purple;
     text-color:                  @foreground;
 }
 /*@theme "/usr/share/rofi/themes/DarkBlue.rasi"*/
