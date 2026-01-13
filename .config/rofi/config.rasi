@@ -26,20 +26,19 @@ window {
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
-    spacing:                     10px;
-    margin:                      250px 420px;
-    padding:                     30px;
+    spacing:                     1ch;
+    margin:                      25ch 42ch;
+    padding:                     3ch;
     background-color:            transparent;
-    border-radius:               15px;
     children:                    [ "inputbar", "message", "listview"];
 }
 
 /*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     1ch;
     margin:                      0px;
-    padding:                     10px;
+    padding:                     1ch;
     border-radius:               0px;
     //background-color:          @background-alt;
     text-color:                  @foreground;
@@ -72,7 +71,7 @@ entry {
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    padding:                     25px 0 0;
+    padding:                     2.5ch 0 0;
     columns:                     3;
     lines:                       7;
     cycle:                       true;
@@ -83,23 +82,23 @@ listview {
     fixed-height:                true;
     fixed-columns:               true;
     
-    spacing:                     12px;
+    spacing:                     1.2ch;
     cursor:                      "default";
 }
 scrollbar {
-    handle-width:                5px ;
+    handle-width:                0.5ch;
     //handle-color:              trasnparent;
-    border-radius:               10px;
+    border-radius:               1ch;
     //background-color:          transparent;
 }
 
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     13px;
+    spacing:                     1.9ch;
     margin:                      0px;
-    padding:                     6px 6px 6px 10px;
-    border-radius:               11px;
+    padding:                     0.8ch 0.8ch 0.8ch 1.2ch;
+    border-radius:               1.3ch;
     text-color:                  @foreground;
     cursor:                      pointer;
 }
@@ -124,7 +123,7 @@ element selected.normal {
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
-    size:                        25px;
+    size:                        2.7ch;
     cursor:                      inherit;
 }
 element-text {
@@ -132,15 +131,15 @@ element-text {
     text-color:                  inherit;
     highlight:                   inherit;
     cursor:                      inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
+    vertical-align:              0.5ch;
+    horizontal-align:            0.0ch;
 }
 
 /*****----- Message -----*****/
 message {
     enabled:                     true;
     margin:                      0px;
-    padding:                     10px;
+    padding:                     1ch;
     border-radius:               0px;
     background-color:            @background-alt;
     text-color:                  @foreground;
@@ -148,15 +147,15 @@ message {
 textbox {
     background-color:            transparent;
     text-color:                  @foreground;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
+    vertical-align:              0.5ch;
+    horizontal-align:            0.0ch;
     highlight:                   none;
     placeholder-color:           @foreground;
     blink:                       true;
     markup:                      true;
 }
 error-message {
-    padding:                     30px;
+    padding:                     3ch;
     background-color:            @purple;
     text-color:                  @foreground;
 }
