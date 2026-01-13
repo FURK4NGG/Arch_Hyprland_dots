@@ -119,7 +119,7 @@ element selected.active element-text{
 
 element selected.normal {
     background-color:            @purple;
-    text-color:                  #fff
+    text-color:                  #fff;
 }
 element-icon {
     background-color:            transparent;
