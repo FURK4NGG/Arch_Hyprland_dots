@@ -1,7 +1,8 @@
 /* Colors */
 
 * {
-  background:    #1a1b26;
-  background-alt: #16161e;
+  background-alt:#16161e;
   foreground:    #f7ebe7;
+  purple:        #4A4870;
+  blur:          rgb(48, 49, 76, 0.80);
 }
