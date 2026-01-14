@@ -42,7 +42,7 @@ Show System Information: neofetch+fastfetch
 Delete Negligible Packages: bleachbit+contrib  
 Iso Image Creator: balena-etcher  
 Exif Cleaner: metadata-cleaner  
-Local File Transfer: localsend  
+Local File Transfer: localsend-bin  
 Image Converter: switcheroo  
 Windows App Runner on Linux: bottles  
 Driver and App Manager for Logitech Producs: piper  
