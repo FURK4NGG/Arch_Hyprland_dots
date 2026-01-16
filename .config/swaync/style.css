@@ -5,7 +5,7 @@
 @define-color cc-bg rgba(50, 50, 79, 0.5);
 
 @define-color border-color rgb(83, 86, 133);
-@define-color noti-border-color rgba(0, 0, 50, 0.6);
+@define-color noti-border-color rgba(74, 72, 112, 1);
 @define-color noti-bg rgba(0, 0, 48, 0.3);
 @define-color noti-bg-darker rgba(0, 0, 38, 0.4);
 @define-color noti-bg-hover rgba(0, 0, 56, 0.5);
@@ -92,7 +92,7 @@
   margin: 0;
   box-shadow: none;
   background: @noti-bg;
-  border: 1px solid @noti-border-color;
+  border: 1.5px solid @noti-border-color;
   color: @text-color;
   transition: all 0.15s ease-in-out;
 }
