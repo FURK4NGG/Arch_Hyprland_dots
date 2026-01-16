@@ -15,7 +15,7 @@ MODE=$(cat "$STATE" 2>/dev/null || echo 1)
 BRIGHTNESS="${MODES[$((MODE-1))]}"
 
 # Aktif monitör
-ACTIVE_MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true).>
+ACTIVE_MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true).name')
 
 if [ -z "$ACTIVE_MONITOR" ]; then
   notify-send "Brightness" "Aktif monitör bulunamadi"
