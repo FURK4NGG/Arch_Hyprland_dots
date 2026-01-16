@@ -42,10 +42,9 @@ case "$STATE" in
         fi
 
         if [ "$ARG" = "time" ]; then
-            echo "Night Screen called"
             echo 0 > "$STATE_FILE"
+            echo "Night Screen called"
         else
-            echo "Default (auto) mod"
             echo 1 > "$STATE_FILE"
             notify-send "Night Screen" "auto mode is active"
             echo "Night Screen auto mode is active"
@@ -58,7 +57,6 @@ case "$STATE" in
         systemctl --user stop hyprshade-auto.timer
         systemctl --user disable hyprshade-auto.timer
         hyprshade off
-        echo "Kapalı mod"
         echo 2 > "$STATE_FILE"
         notify-send "Night Screen" "effect is deactive"
         echo "Night Screen effect is deactive"
@@ -70,7 +68,6 @@ case "$STATE" in
         systemctl --user stop hyprshade-auto.timer
         systemctl --user disable hyprshade-auto.timer
         hyprshade on "$SHADER"
-        echo "Hep açık mod"
         echo 0 > "$STATE_FILE"
         notify-send "Night Screen" "effect is active"
         echo "Night Screen effect is active"
