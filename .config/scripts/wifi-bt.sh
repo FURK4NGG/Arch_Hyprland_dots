@@ -7,10 +7,12 @@ case "$1" in
     if [ "$WIFI_STATUS" = "enabled" ]; then
       nmcli radio wifi off
       pkill nm-applet
+      echo "Wifi Disabled"
     else
       nmcli radio wifi on
       sleep 0.3
       nm-applet &
+      echo "Wifi Enabled"
     fi
     ;;
 
@@ -19,8 +21,10 @@ case "$1" in
 
     if [ "$BT_STATUS" = "yes" ]; then
       bluetoothctl power off
+      echo "Bluetooth Disabled"
     else
       bluetoothctl power on
+      echo "Bluetooth Enabled"
     fi
     ;;
 
