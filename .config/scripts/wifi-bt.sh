@@ -25,7 +25,7 @@ case "$1" in
     ;;
 
   -h|help|-help|--help|""|*)
-    echo "Kullanim:"
+    echo "Kullanim/Usage:"
     echo "  $0 wifi        -> WiFi ac/kapat , open/close"
     echo "  $0 bluetooth   -> Bluetooth ac/kapat , open/close"
     echo "  $0 bt          -> Bluetooth ac/kapat , open/close"
