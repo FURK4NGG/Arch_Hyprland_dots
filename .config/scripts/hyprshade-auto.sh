@@ -12,11 +12,21 @@ fi
 
 STATE=$(cat "$STATE_FILE")
 
-if [ "$ARG" = "exec-start" ]; then
-    case "$STATE" in
-        0)STATE=2 ;;
-        1)STATE=0 ;;
-        2)STATE=1 ;;
+if [ -n "$ARG" ]; then
+    case "$ARG" in
+      exec-start)
+        case "$STATE" in
+            0)STATE=2 ;;
+            1)STATE=0 ;;
+            2)STATE=1 ;;
+        esac
+        ;;
+      -h|help|-help|--help|*)
+        echo "Kullanim/Usage:"
+        echo "  $0        -> Toggle Night Screen   (otomatik/kapali/hep acik) , (automatic/closed/always open)"
+        echo "  $0 time   -> Recall Auto Night Screen (execute once per hour)  !sadece otomatik moddayken calisir/works only in auto mode!"
+        exit 0
+        ;;
     esac
 fi
 
