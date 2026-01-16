@@ -32,12 +32,13 @@ case "$STATE" in
         fi
 
         if [ "$ARG" = "time" ]; then
-            echo "night_mode controlled"
+            echo "Night Screen called"
             echo 0 > "$STATE_FILE"
         else
             echo "Default (auto) mod"
             echo 1 > "$STATE_FILE"
-            notify-send "Night Screen" "auto mode active"
+            notify-send "Night Screen" "auto mode is active"
+            echo "Night Screen auto mode is active"
         fi
         ;;
     1)
@@ -50,6 +51,7 @@ case "$STATE" in
         echo "Kapalı mod"
         echo 2 > "$STATE_FILE"
         notify-send "Night Screen" "effect is deactive"
+        echo "Night Screen effect is deactive"
         ;;
     2)
         # HEP AÇIK
@@ -61,5 +63,6 @@ case "$STATE" in
         echo "Hep açık mod"
         echo 0 > "$STATE_FILE"
         notify-send "Night Screen" "effect is active"
+        echo "Night Screen effect is active"
         ;;
 esac
