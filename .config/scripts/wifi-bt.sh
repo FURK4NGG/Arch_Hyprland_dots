@@ -23,4 +23,11 @@ case "$1" in
       bluetoothctl power on
     fi
     ;;
+
+  -h|help|-help|--help|""|*)
+    echo "Kullanim:"
+    echo "  $0 wifi        -> WiFi ac/kapat , open/close"
+    echo "  $0 bluetooth   -> Bluetooth ac/kapat , open/close"
+    echo "  $0 bt          -> Bluetooth ac/kapat , open/close"
+    ;;
 esac
