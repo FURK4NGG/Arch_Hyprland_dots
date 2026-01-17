@@ -121,12 +121,12 @@
           "command": "~/.config/scripts/wifi-bt.sh bt"
         },
         {
-          "label": "󰀝",
-          "command": "~/.config/scripts/AirplaneMode.sh"
+          "label": "✨",
+          "command": "~/.local/bin/hyprshade-auto.sh"
         },
         {
-          "label": "󰃟 ",
-          "command": "~/.local/bin/hyprshade-auto.sh"
+         "label": "󰃟 ",
+          "command": "~/.local/bin/brightness_mode.sh"
         }
       ]
     }
