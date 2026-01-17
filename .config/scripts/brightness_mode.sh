@@ -1,6 +1,6 @@
 #!/bin/bash
 
-STATE="$HOME/.config/scripts/brightness_mode"
+STATE="$HOME/.config/scripts/brightness_mode_state"
 CACHE="$HOME/.config/scripts/ddc-map.conf"
 ARG="$1"
 
