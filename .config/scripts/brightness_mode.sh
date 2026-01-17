@@ -2,6 +2,7 @@
 
 STATE="$HOME/.config/scripts/brightness_mode"
 CACHE="$HOME/.config/scripts/ddc-map.conf"
+ARG="$1"
 
 MODES=(10 35 55 80 100)
 
@@ -30,11 +31,36 @@ if [ -z "$I2C" ]; then
   exit 1
 fi
 
+if [ -n "$ARG" ]; then
+    case "$ARG" in
+      *[0-9]* )
+        if [[ "$ARG" =~ ^[1-5]$ ]]; then
+          BRIGHTNESS="${MODES[$(($ARG-1))]}"
+          MODE=$ARG
+          echo $BRIGHTNESS
+        else
+          echo "Kullanim/Usage:"
+          echo "  $0            -> Toggle Screen Brightness Mode   (%10/%35/%55/%80/%100)"
+          echo "  $0 1,2,3,4,5  -> Screen Brightness Mode *Manuel* (%10/%35/%55/%80/%100)"
+          exit 0
+        fi
+        ;;
+      -h|help|-help|--help|*)
+        echo "Kullanim/Usage:"
+        echo "  $0            -> Toggle Screen Brightness Mode   (%10/%35/%55/%80/%100)"
+        echo "  $0 1,2,3,4,5  -> Screen Brightness Mode *Manuel* (%10/%35/%55/%80/%100)"
+        exit 0
+        ;;
+    esac
+
+fi
+
 # Parlaklık ayarla
 ddcutil setvcp 10 "$BRIGHTNESS" --bus="$I2C"
 
 notify-send "Brightness Mode" \
   "Mode $MODE / 5 → $BRIGHTNESS% ($ACTIVE_MONITOR)"
+
 
 # Sonraki moda geç
 NEXT=$((MODE + 1))
