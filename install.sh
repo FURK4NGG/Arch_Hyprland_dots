@@ -6,7 +6,7 @@ RED="\e[31m"
 NC="\e[0m" # reset
 
 # Kurulacak paket listesi
-PACKAGES="linux linux-zen hyprlock xorg-server mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout sddm trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects waybar ttf-twemoji swaync wl-clipboard kitty btop rofi grim slurp wf-recorder mpv atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git mousepad tumbler pipewire pipewire-pulse wireplumber alsa-utils pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin"
+PACKAGES="linux linux-zen hyprlock xorg-server mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout sddm trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects ddcutil i2c-tools jq waybar ttf-twemoji swaync wl-clipboard kitty btop rofi grim slurp wf-recorder mpv atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git mousepad tumbler pipewire pipewire-pulse wireplumber alsa-utils pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin"
 PACKAGES-Y="bluez bluez-utils blueman hyprshade"
 echo -e "${GREEN}Do you want to install documents? (y/n)${NC}"
 read -r answer
@@ -56,7 +56,11 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	sudo systemctl enable --now NetworkManager
 	sudo systemctl enable --now bluetooth
-	sudo usermod -aG bluetooth $USER
+	sudo usermod -aG bluetooth "$USER"
+
+	sudo modprobe i2c-dev
+	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
+    sudo usermod -aG i2c "$USER"
 
 	sudo systemctl enable --now udisks2
 
