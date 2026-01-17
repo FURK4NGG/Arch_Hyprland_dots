@@ -18,7 +18,7 @@ BRIGHTNESS="${MODES[$((MODE-1))]}"
 ACTIVE_MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true).name')
 
 if [ -z "$ACTIVE_MONITOR" ]; then
-  notify-send "Brightness" "Aktif monitör bulunamadi"
+  notify-send "Brightness" "Active monitor not found"
   exit 1
 fi
 
@@ -26,7 +26,7 @@ fi
 I2C=$(grep "^$ACTIVE_MONITOR=" "$CACHE" | cut -d= -f2)
 
 if [ -z "$I2C" ]; then
-  notify-send "Brightness" "I2C bulunamadi: $ACTIVE_MONITOR"
+  notify-send "Brightness" "I2C bus not found: $ACTIVE_MONITOR"
   exit 1
 fi
 
