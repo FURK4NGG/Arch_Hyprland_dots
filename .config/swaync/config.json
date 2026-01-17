@@ -126,7 +126,7 @@
         },
         {
          "label": "󰃟 ",
-          "command": "~/.local/bin/brightness_mode.sh"
+          "command": "~/.config/scripts/brightness_mode.sh"
         }
       ]
     }
