@@ -58,6 +58,8 @@ fi
 # Parlaklık ayarla
 ddcutil setvcp 10 "$BRIGHTNESS" --bus="$I2C"
 
+echo "Mode $MODE / 5 → $BRIGHTNESS% ($ACTIVE_MONITOR)"
+
 notify-send "Brightness Mode" \
   "Mode $MODE / 5 → $BRIGHTNESS% ($ACTIVE_MONITOR)"
 
