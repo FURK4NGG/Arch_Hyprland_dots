@@ -37,7 +37,6 @@ if [ -n "$ARG" ]; then
         if [[ "$ARG" =~ ^[1-5]$ ]]; then
           BRIGHTNESS="${MODES[$(($ARG-1))]}"
           MODE=$ARG
-          echo $BRIGHTNESS
         else
           echo "Kullanim/Usage:"
           echo "  $0            -> Toggle Screen Brightness Mode   (%10/%35/%55/%80/%100)"
