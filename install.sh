@@ -116,6 +116,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	systemctl --user daemon-reload
 	systemctl --user enable --now hyprshade-auto.timer
 
+	sudo chmod 600 ~/.config/scripts/brightness_mode_state
+	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
+
 	echo -e "${GREEN}Enabling services finished succesfully${NC}"
 else
 	echo -e "${RED}Skipping configs setup.${NC}"
