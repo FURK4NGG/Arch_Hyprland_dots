@@ -127,6 +127,10 @@
         {
          "label": "󰃟 ",
           "command": "~/.config/scripts/brightness_mode.sh"
+        },
+		{
+         "label": "󰒲 ",
+          "command": "~/.config/blacklayer/call-blacklayer.sh"
         }
       ]
     }
