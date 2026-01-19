@@ -129,6 +129,16 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	sudo chmod 600 ~/.config/scripts/brightness_mode_state
 	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
 
+	MONITORS=$(hyprctl -j monitors | jq -r '.[].name')
+	for MONITOR in $MONITORS; do
+	    echo "Your Monitors:"
+	    echo "$MONITOR"
+	done
+	echo "If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"	
+	echo "Run: ~/.config/scripts/brightness_mode_calib.sh"
+	echo "Open your hyprland.conf file to make the necessary changes."
+	echo "open your hyprpaper.conf file to make the necessary changes."
+
 	echo -e "${GREEN}Enabling services finished succesfully${NC}"
 else
 	echo -e "${RED}Skipping configs setup.${NC}"
