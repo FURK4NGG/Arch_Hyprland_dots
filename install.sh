@@ -111,6 +111,12 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	sudo chmod +x ~/.config/waybar/scripts/weather.py  
 
+	sudo chown -R bob:bob ~/.config/blacklayer/  
+	chmod 700 ~/.config/blacklayer  
+	chmod +x ~/.config/blacklayer/*.sh 2>/dev/null || true  
+	chmod 600 ~/.config/blacklayer/*.conf 2>/dev/null || true  
+	[ -f ~/.config/blacklayer/blacklayer ] && chmod +x ~/.config/blacklayer/blacklayer  
+
  	sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
 	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
 	systemctl --user daemon-reload
