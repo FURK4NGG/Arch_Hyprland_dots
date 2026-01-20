@@ -136,8 +136,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	done
 	echo "If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"	
 	echo "Run: ~/.config/scripts/brightness_mode_calib.sh"
-	echo "Open your hyprland.conf file to make the necessary changes."
-	echo "open your hyprpaper.conf file to make the necessary changes."
+	echo "Open your hyprland.conf file to make the necessary changes.(might be in ~/.config/hypr/)"
+	echo "open your hyprpaper.conf file to make the necessary changes.(might be in ~/.config/hypr/)"
 
 	echo -e "${GREEN}Enabling services finished succesfully${NC}"
 else
