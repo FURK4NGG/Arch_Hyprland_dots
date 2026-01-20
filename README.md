@@ -128,10 +128,23 @@ sudo systemctl enable --now udisks2
 
 sudo chmod +x ~/.config/waybar/scripts/weather.py  
 
+sudo chown -R bob:bob ~/.config/blacklayer/  
+chmod 700 ~/.config/blacklayer  
+chmod +x ~/.config/blacklayer/*.sh 2>/dev/null || true  
+chmod 600 ~/.config/blacklayer/*.conf 2>/dev/null || true  
+[ -f ~/.config/blacklayer/blacklayer ] && chmod +x ~/.config/blacklayer/blacklayer  
+sudo chown -R "$USER:$USER" ~/.config/waybar  
+chmod 700 ~/.config/waybar  
+cd ~/.config/blacklayer/  
+./generate-waybar-configs.sh  
+
 sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state  
 sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state  
 systemctl --user daemon-reload  
 systemctl --user enable --now hyprshade-auto.timer  
+
+sudo chmod 600 ~/.config/scripts/brightness_mode_state  
+sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state  
 
 ---
 
