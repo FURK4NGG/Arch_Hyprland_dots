@@ -38,7 +38,7 @@ Nvidia Drivers: nvidia nvidia-settings nvidia-utils+(lib32-nvidia-utils lib32-li
 
 # Extra Apps (Basic essential apps everyone needs on their PC)
 
-Blacklayer(screen saver): gtk3 gdk-pixbuf2 gtk-layer-shell jq  
+Blacklayer(Screen Saver): gtk3 gdk-pixbuf2 gtk-layer-shell jq  
 Show System Information: neofetch+fastfetch  
 Delete Negligible Packages: bleachbit+contrib  
 Iso Image Creator: balena-etcher  
