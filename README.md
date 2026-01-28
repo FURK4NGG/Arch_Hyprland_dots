@@ -38,7 +38,7 @@ Nvidia Drivers: nvidia nvidia-settings nvidia-utils+(lib32-nvidia-utils lib32-li
 
 # Extra Apps (Basic essential apps everyone needs on their PC)
 
-Blacklayer(Screen Saver): gtk3 gdk-pixbuf2 gtk-layer-shell jq  
+Blacklayer(Screen Saver): gtk3 gdk-pixbuf2 gtk-layer-shell jq hypridle  
 Show System Information: neofetch+fastfetch  
 Delete Negligible Packages: bleachbit+contrib  
 Iso Image Creator: balena-etcher  
@@ -133,6 +133,8 @@ chmod 700 ~/.config/blacklayer
 chmod +x ~/.config/blacklayer/*.sh 2>/dev/null || true  
 chmod 600 ~/.config/blacklayer/*.conf 2>/dev/null || true  
 [ -f ~/.config/blacklayer/blacklayer ] && chmod +x ~/.config/blacklayer/blacklayer  
+systemctl --user daemon-reload  
+systemctl --user enable hypridle.service  
 sudo chown -R "$USER:$USER" ~/.config/waybar  
 chmod 700 ~/.config/waybar  
 cd ~/.config/blacklayer/  
