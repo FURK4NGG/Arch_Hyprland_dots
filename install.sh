@@ -116,6 +116,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	chmod +x ~/.config/blacklayer/*.sh 2>/dev/null || true  
 	chmod 600 ~/.config/blacklayer/*.conf 2>/dev/null || true  
 	[ -f ~/.config/blacklayer/blacklayer ] && chmod +x ~/.config/blacklayer/blacklayer  
+	systemctl --user daemon-reload  
+    systemctl --user enable hypridle.service  
 	sudo chown -R "$USER:$USER" ~/.config/waybar  
 	chmod 700 ~/.config/waybar  
 	cd ~/.config/blacklayer/  
