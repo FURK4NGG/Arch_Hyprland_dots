@@ -130,11 +130,11 @@
         },
 		{
          "label": "󰒲 ",
-          "command": "~/.config/blacklayer/call-blacklayer.sh"
+         "command": "~/.config/blacklayer/call-blacklayer.sh"
         },
 		{
          "label": "󰊴",
-          "command": "~/.config/scripts/gamemode.sh"
+         "command": "~/.config/scripts/gamemode.sh"
         }
       ]
     }
