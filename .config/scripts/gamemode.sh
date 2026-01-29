@@ -12,6 +12,7 @@ if [ -f "$STATE_FILE" ]; then
     notify-send "Game Mode" "game mode is deactive"
     hyprctl dispatch submap reset
 else
+    # İlk basış
     touch "$STATE_FILE"
     hyprctl keyword decoration:blur:enabled false
     hyprctl keyword animations:enabled false
