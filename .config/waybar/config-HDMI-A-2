@@ -3,7 +3,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock","custom/weather"],
-    "modules-right": ["tray","custom/scratchpad-indicator","bluetooth","memory","cpu","pulseaudio","custom/power"],
+    "modules-right": ["tray","custom/scratchpad-indicator","bluetooth","custom/kblayout","memory","cpu","pulseaudio","custom/power"],
 
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -74,6 +74,10 @@
         "interval": 1800,
         "exec": "$HOME/.config/waybar/scripts/weather.py",
         "return-type": "json"
+    },
+    "custom/kblayout": {
+        "exec": "hyprctl -j devices | jq -r '.keyboards[] | select(.main == true) | .active_keymap | ascii_downcase | if test(\"turk\") then \"tr\" elif test(\"us|english\") then \"en\" else \"??\" end'",
+        "interval": 1
     },
     "memory": {
         "interval": 30,
