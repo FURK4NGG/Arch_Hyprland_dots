@@ -17,6 +17,7 @@ else
     hyprctl keyword animations:enabled false
     hyprctl keyword general:allow_tearing true
     hyprctl keyword decoration:drop_shadow false
+    notify-send "Game Mode" "ALT + G to stop gamemode"
     notify-send "Game Mode" "game mode is active"
     hyprctl dispatch submap gamemode
 fi
