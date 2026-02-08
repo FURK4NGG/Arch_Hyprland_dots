@@ -19,8 +19,8 @@ case "$ARG" in
         ;;
     -h|help|-help|--help|*)
         echo "Kullanim/Usage:"
-        echo "  $0           ->  Screenshot for all screens in one save"
-        echo "  $0 only-one  ->  Screenshot for selected screen"
+        echo "  $0           ->  Take screenshot for all screens in one save"
+        echo "  $0 only-one  ->  Take screenshot for selected screen"
         exit 0
         ;;
 esac
