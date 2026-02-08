@@ -106,7 +106,7 @@
         },
         {
           "label": "",
-          "command": "~/.config/scripts/screenprint.sh"
+          "command": "~/.config/scripts/screenprint.sh only-one"
         },
         {
           "label": "󰤨",
