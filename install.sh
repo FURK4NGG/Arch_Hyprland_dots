@@ -54,7 +54,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     	sudo pacman -Syu --noconfirm $PACKAGES
         yay -S --noconfirm $PACKAGES_YAY
 
-	sudo mkdir -p /boot/loader/
+		sudo mkdir -p /boot/loader/
         sudo cp boot/loader/loader.conf /boot/loader/loader.conf
 	
         sudo systemctl enable sddm
@@ -65,7 +65,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         systemctl --user enable --now wireplumber
 
         sudo rfkill unblock bluetooth
-	sudo systemctl enable --now bluetooth
+		sudo systemctl enable --now bluetooth
         sudo usermod -aG bluetooth "$USER"
 
         xdg-mime default mpv.desktop video/mp4
@@ -80,11 +80,11 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
         sudo systemctl enable --now udisks2
 	
-	#CONFIGS
-
-	cd /Arch_Hyprland_dots/
-
-	sudo mkdir -p /usr/share/icons/
+		#CONFIGS
+	
+		cd /Arch_Hyprland_dots/
+	
+		sudo mkdir -p /usr/share/icons/
         sudo cp -rf .config/ /home/$USER/
         sudo cp -rf themes_bg/modest-dark/ /usr/share/icons/
 
@@ -95,7 +95,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css
         sudo cp ~/.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
         sudo chmod +x ~/.config/scripts/*.sh
-	systemctl --user enable --now swaync
+		systemctl --user enable --now swaync
         sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 
         sudo mkdir -p /home/$USER/Resimler/wallpapers/
@@ -110,7 +110,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         [ -f ~/.config/blacklayer/blacklayer ] && chmod +x ~/.config/blacklayer/blacklayer
         sudo chown -R "$USER:$USER" ~/.config/waybar
         chmod 700 ~/.config/waybar  
-	cd ~/.config/blacklayer/
+		cd ~/.config/blacklayer/
         ./generate-waybar-configs.sh
 
         sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
@@ -121,8 +121,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo chmod 600 ~/.config/scripts/brightness_mode_state
         sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
 
-	hyprctl reload
-	echo -e "${GREEN}Download and installation completed successfully!${NC}"
+		hyprctl reload
+		echo -e "${GREEN}Download and installation completed successfully!${NC}"
 
         MONITORS=$(hyprctl -j monitors | jq -r '.[].name')
         for MONITOR in $MONITORS; do
@@ -134,138 +134,138 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "Open your hyprland.conf file to make the necessary changes."
         echo "open your hyprpaper.conf file to make the necessary changes."
 
-	;;
+		;;
 
-	2)
+		2)
 
     	echo -e "${GREEN}Selective install mode${NC}"
 
 
-	DOWNLOAD_PKGS=()
-	SELECTED_PKGS=()
-
-	for raw in "${M_PACKAGES[@]}"; do
-
-	    if [[ "$raw" == *"("* ]]; then
-
-	        main_pkg="${raw%%(*}"
-	        inside="${raw#*(}"
-	        inside="${inside%)}"
-
-	        msg=""
-	        deps=""
-
-	        # açıklama + dependency birlikte varsa
-	        if [[ "$inside" =~ ^\"([^\"]*)\"[[:space:]]*(.*)$ ]]; then
-	            msg="${BASH_REMATCH[1]}"
-	            deps="${BASH_REMATCH[2]}"
-
-	        #sadece dependency varsa
-	        else
-	            deps="$inside"
-	        fi
-
-	        deps="$(echo "$deps" | xargs)"
-
-	        # kullanıcıya göster
-	        if [[ -n "$msg" ]]; then
-
-		    if [[ -n "$deps" ]]; then
-		        read -rp "$(printf "Select %s\n%s\nPackages to be installed: %s(y/n): " \
-		        "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
-			echo
+		DOWNLOAD_PKGS=()
+		SELECTED_PKGS=()
+	
+		for raw in "${M_PACKAGES[@]}"; do
+	
+		    if [[ "$raw" == *"("* ]]; then
+	
+		        main_pkg="${raw%%(*}"
+		        inside="${raw#*(}"
+		        inside="${inside%)}"
+	
+		        msg=""
+		        deps=""
+	
+		        # açıklama + dependency birlikte varsa
+		        if [[ "$inside" =~ ^\"([^\"]*)\"[[:space:]]*(.*)$ ]]; then
+		            msg="${BASH_REMATCH[1]}"
+		            deps="${BASH_REMATCH[2]}"
+	
+		        #sadece dependency varsa
+		        else
+		            deps="$inside"
+		        fi
+	
+		        deps="$(echo "$deps" | xargs)"
+	
+		        # kullanıcıya göster
+		        if [[ -n "$msg" ]]; then
+	
+				    if [[ -n "$deps" ]]; then
+				        read -rp "$(printf "Select %s\n%s\nPackages to be installed: %s(y/n): " \
+				        "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
+					    echo
+				    else
+				        read -rp "$(printf "Select %s\n%s(y/n): " \
+				        "$main_pkg" "$(echo -e "$msg")")" ans
+					    echo
+				    fi
+		
+				else
+				    read -rp "Select $main_pkg ($deps)? (y/n): " ans
+				    echo
+				fi
+	
+	
+		        if [[ "$ans" =~ ^[Yy]$ ]]; then
+		            SELECTED_PKGS+=("$main_pkg")
+	
+		            if [[ -n "$deps" ]]; then
+		                read -ra dep_array <<< "$deps"
+		                for dep in "${dep_array[@]}"; do
+				    		DOWNLOAD_PKGS+=("$dep|$main_pkg")
+						done
+		            fi
+		        fi
+	
 		    else
-		        read -rp "$(printf "Select %s\n%s(y/n): " \
-		        "$main_pkg" "$(echo -e "$msg")")" ans
-			echo
+		        read -rp "Select $raw? (y/n): " ans
+		        [[ "$ans" =~ ^[Yy]$ ]] && DOWNLOAD_PKGS+=("$raw|")
 		    fi
-
-		else
-		    read -rp "Select $main_pkg ($deps)? (y/n): " ans
-		    echo
-		fi
-
-
-	        if [[ "$ans" =~ ^[Yy]$ ]]; then
-	            SELECTED_PKGS+=("$main_pkg")
-
-	            if [[ -n "$deps" ]]; then
-	                read -ra dep_array <<< "$deps"
-	                for dep in "${dep_array[@]}"; do
-			    DOWNLOAD_PKGS+=("$dep|$main_pkg")
-			done
-	            fi
-	        fi
-
-	    else
-	        read -rp "Select $raw? (y/n): " ans
-	        [[ "$ans" =~ ^[Yy]$ ]] && DOWNLOAD_PKGS+=("$raw|")
-	    fi
-
-	done 
+	
+		done 
 
 	
 
-	DOWNLOAD_PKGS_AUR=()
-	SELECTED_PKGS_AUR=()
-
-	for raw in "${M_PACKAGES_YAY[@]}"; do
-
-	    if [[ "$raw" == *"("* ]]; then
-
-	        main_pkg="${raw%%(*}"
-	        inside="${raw#*(}"
-	        inside="${inside%)}"
-
-	        msg=""
-	        deps=""
-
-	        # Açıklama + dependency varsa
-	        if [[ "$inside" =~ ^\"([^\"]*)\"[[:space:]]*(.*)$ ]]; then
-	            msg="${BASH_REMATCH[1]}"
-	            deps="${BASH_REMATCH[2]}"
-	        else
-	            deps="$inside"
-	        fi
-
-	        deps="$(echo "$deps" | xargs)"
-
-	        # Kullanıcıya göster
-	        if [[ -n "$msg" ]]; then
-
-		    if [[ -n "$deps" ]]; then
-		        read -rp "$(printf "Select %s (AUR)\n%s\nPackages to be installed: %s(y/n): " \
-		        "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
-			echo
-		    else
-		        read -rp "$(printf "Select %s (AUR)\n%s(y/n): " \
-		        "$main_pkg" "$(echo -e "$msg")")" ans
-			echo
-		    fi
-
-		else
-		    read -rp "Select $main_pkg ($deps) (AUR)? (y/n): " ans
-		    echo
-		fi
-
-
-	        if [[ "$ans" =~ ^[Yy]$ ]]; then
-	            SELECTED_PKGS_AUR+=("$main_pkg")
-
-	            if [[ -n "$deps" ]]; then
-	                read -ra dep_array <<< "$deps"
-	                for dep in "${dep_array[@]}"; do
-			    DOWNLOAD_PKGS_AUR+=("$dep|$main_pkg")
-			done
-	            fi
-	        fi
-
-	    else
-	        read -rp "Select $raw (AUR)? (y/n): " ans
-	        [[ "$ans" =~ ^[Yy]$ ]] && DOWNLOAD_PKGS_AUR+=("$raw|")
-	    fi
-
-	done
+		DOWNLOAD_PKGS_AUR=()
+		SELECTED_PKGS_AUR=()
+	
+		for raw in "${M_PACKAGES_YAY[@]}"; do
+	
+		    if [[ "$raw" == *"("* ]]; then
+	
+		        main_pkg="${raw%%(*}"
+		        inside="${raw#*(}"
+		        inside="${inside%)}"
+	
+		        msg=""
+		        deps=""
+	
+		        # Açıklama + dependency varsa
+		        if [[ "$inside" =~ ^\"([^\"]*)\"[[:space:]]*(.*)$ ]]; then
+		            msg="${BASH_REMATCH[1]}"
+		            deps="${BASH_REMATCH[2]}"
+		        else
+		            deps="$inside"
+		        fi
+	
+		        deps="$(echo "$deps" | xargs)"
+	
+		        # Kullanıcıya göster
+		        if [[ -n "$msg" ]]; then
+	
+				    if [[ -n "$deps" ]]; then
+				        read -rp "$(printf "Select %s (AUR)\n%s\nPackages to be installed: %s(y/n): " \
+				        "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
+						echo
+				    else
+				        read -rp "$(printf "Select %s (AUR)\n%s(y/n): " \
+				        "$main_pkg" "$(echo -e "$msg")")" ans
+						echo
+				    fi
+		
+				else
+				    read -rp "Select $main_pkg ($deps) (AUR)? (y/n): " ans
+				    echo
+				fi
+	
+	
+		        if [[ "$ans" =~ ^[Yy]$ ]]; then
+		            SELECTED_PKGS_AUR+=("$main_pkg")
+	
+		            if [[ -n "$deps" ]]; then
+		                read -ra dep_array <<< "$deps"
+		                for dep in "${dep_array[@]}"; do
+				    		DOWNLOAD_PKGS_AUR+=("$dep|$main_pkg")
+						done
+				    fi
+			    fi
+		
+			else
+			    read -rp "Select $raw (AUR)? (y/n): " ans
+			    [[ "$ans" =~ ^[Yy]$ ]] && DOWNLOAD_PKGS_AUR+=("$raw|")
+			fi
+		
+		done
 
 
 	
@@ -382,19 +382,19 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	# CONFIGS
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "sddm"
-        then
-            echo "sddm package selected, running extra configuration..."
+    then
+        echo "sddm package selected, running extra configuration..."
 	    sudo systemctl enable sddm
-            sudo systemctl start sddm
-        fi
+        sudo systemctl start sddm
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "audio-pkgs"
 	then
 	    echo "Audio package selected, running extra configuration..."
 	    systemctl --user enable --now pipewire
-            systemctl --user enable --now pipewire-pulse
-            systemctl --user enable --now wireplumber
+        systemctl --user enable --now pipewire-pulse
+        systemctl --user enable --now wireplumber
 	fi
 
 
@@ -403,7 +403,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	    echo "Bluetooth package selected, running extra configuration..."
 	    sudo rfkill unblock bluetooth
 	    sudo systemctl enable --now bluetooth
-            sudo usermod -aG bluetooth "$USER"
+        sudo usermod -aG bluetooth "$USER"
 	fi
 
 	
@@ -417,207 +417,207 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "networkmanager"
-        then
-            echo "networkmanager package selected, running extra configuration..."
-            sudo systemctl enable --now NetworkManager
+    then
+        echo "networkmanager package selected, running extra configuration..."
+        sudo systemctl enable --now NetworkManager
 	fi
 
 	
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "udisk"
-        then
-            echo "udisk package selected, running extra configuration..."
-            sudo systemctl enable --now udisks2
-        fi
+    then
+        echo "udisk package selected, running extra configuration..."
+        sudo systemctl enable --now udisks2
+    fi
 
 	#SPECIAL CONFIG DOCS
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "hyprland"
-        then
-            echo "hyprland package selected, running extra configuration..."
+    then
+        echo "hyprland package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-            sudo cp -f .config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
-      	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
-            HINTS+="Open your hyprland.conf file to make the necessary changes."$'\n'	
-        fi
+        sudo cp -f .config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
+      	HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
+        HINTS+="Open your hyprland.conf file to make the necessary changes."$'\n'	
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "hyprlock"
-        then
-            echo "hyprlock package selected, running extra configuration..."
+    then
+        echo "hyprlock package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-            sudo cp -f .config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
-        fi
+        sudo cp -f .config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "hyprpaper"
-        then
-            echo "hyprpaper package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/hypr
-            sudo cp -f .config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
+    then
+        echo "hyprpaper package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/hypr
+        sudo cp -f .config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
 	    sudo mkdir -p /home/$USER/Resimler/wallpapers/
-            sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
+        sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
 	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
-            HINTS+="open your hyprpaper.conf file to make the necessary changes."$'\n'
-        fi
+        HINTS+="open your hyprpaper.conf file to make the necessary changes."$'\n'
+    fi
 
 	
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "kitty"
-        then
-            echo "kitty package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/kitty
-            sudo cp -rf .config/kitty/* /home/$USER/.config/kitty
-        fi
+    then
+        echo "kitty package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/kitty
+        sudo cp -rf .config/kitty/* /home/$USER/.config/kitty
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "rofi"
-        then
-            echo "rofi package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/rofi
-            sudo cp -rf .config/rofi/* /home/$USER/.config/rofi
-        fi
+    then
+        echo "rofi package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/rofi
+        sudo cp -rf .config/rofi/* /home/$USER/.config/rofi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "swaync"
-        then
-            echo "swaync package selected, running extra configuration..."
-            sudo mkdir -p /etc/xdg/swaync/
-            sudo cp -f .config/swaync/style.css /etc/xdg/swaync/style.css
+    then
+        echo "swaync package selected, running extra configuration..."
+        sudo mkdir -p /etc/xdg/swaync/
+        sudo cp -f .config/swaync/style.css /etc/xdg/swaync/style.css
 	    sudo cp -f .config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
 	    sudo cp -f .config/swaync/config.json ~/.config/swaync/config.json
 	    sudo chmod +x ~/.config/scripts/*.sh
 	    systemctl --user enable --now swaync
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "waybar"
-        then
-            echo "waybar package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/waybar
-            sudo cp -rf .config/waybar/* /home/$USER/.config/waybar
+    then
+        echo "waybar package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/waybar
+        sudo cp -rf .config/waybar/* /home/$USER/.config/waybar
 	    sudo chmod +x ~/.config/waybar/scripts/weather.py
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "wlogout"
-        then
-            echo "wlogout package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/wlogout
-            sudo cp -rf .config/wlogout/* /home/$USER/.config/wlogout
-        fi
+    then
+        echo "wlogout package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/wlogout
+        sudo cp -rf .config/wlogout/* /home/$USER/.config/wlogout
+    fi
 
 
 	#/SCRIPTS
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bootloader"
-        then
-            echo "script-bootloader config file selected, running extra configuration..."
-            sudo mkdir -p /boot/loader/
-            sudo cp -f boot/loader/loader.conf /boot/loader/loader.conf
-        fi
+    then
+        echo "script-bootloader config file selected, running extra configuration..."
+        sudo mkdir -p /boot/loader/
+        sudo cp -f boot/loader/loader.conf /boot/loader/loader.conf
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-keyboard-language"
-        then
-            echo "script-keyboard-language config file selected, running extra configuration..."
-            sudo mkdir -p ~/.config/autostart/
-            sudo cp -f .config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
-        fi
+    then
+        echo "script-keyboard-language config file selected, running extra configuration..."
+        sudo mkdir -p ~/.config/autostart/
+        sudo cp -f .config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-brightness-control"
-        then
-            echo "script-brightness-control package selected, running extra configuration..."
+    then
+        echo "script-brightness-control package selected, running extra configuration..."
 	    sudo modprobe i2c-dev
-       	    echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
-            sudo usermod -aG i2c "$USER"
+       	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
+        sudo usermod -aG i2c "$USER"
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo cp -f .config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
 	    sudo cp -f .config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
 	    sudo cp -f .config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
 	    sudo cp -f .config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
 	    sudo chmod 600 ~/.config/scripts/brightness_mode_state
-      	    sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
-       	    sudo chmod +x ~/.config/scripts/*.sh
+      	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
+       	sudo chmod +x ~/.config/scripts/*.sh
 	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
-            HINTS+="Run: ~/.config/scripts/brightness_mode_calib.sh"$'\n'
-        fi
+        HINTS+="Run: ~/.config/scripts/brightness_mode_calib.sh"$'\n'
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-hyprshade"
-        then
-            echo "script-hyprshade config file selected, running extra configuration..."
-            mkdir -p ~/.local/bin
+    then
+        echo "script-hyprshade config file selected, running extra configuration..."
+        mkdir -p ~/.local/bin
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo cp -f .config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
 	    sudo cp -f .config/scripts/hyprshade-toggle-state ~/.config/scripts/hyprshade-toggle-state
 	    sudo cp -f .config/scripts/night_screen.frag ~/.config/scripts/night_screen.frag
 	    sudo chmod +x ~/.config/scripts/*.sh
-       	    sudo chmod +x ~/.local/bin/hyprshade-auto.sh
+       	sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 	    sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
-       	    sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
+       	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
 
 	    systemctl --user daemon-reload
  	    systemctl --user enable --now hyprshade-auto.timer
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-screenrec"
-        then
-            echo "script-screenrec config file selected, running extra configuration..."
+    then
+        echo "script-screenrec config file selected, running extra configuration..."
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo mkdir -p ~/Resimler/
-            sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
+        sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
 	    sudo chmod +x ~/.config/scripts/*.sh
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-screenprint"
-        then
-            echo "script-screenprint config file selected, running extra configuration..."
-            sudo mkdir -p ~/.config/scripts/
+    then
+        echo "script-screenprint config file selected, running extra configuration..."
+        sudo mkdir -p ~/.config/scripts/
 	    sudo mkdir -p ~/Resimler/
-            sudo cp -f .config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+        sudo cp -f .config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-wifi"
-        then
-            echo "script-wifi config file selected, running extra configuration..."
+    then
+        echo "script-wifi config file selected, running extra configuration..."
 	    sudo systemctl enable --now NetworkManager
-            sudo mkdir -p ~/.config/scripts/
-            sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bt"
-        then
-            echo "script-bt config file selected, running extra configuration..."
+    then
+        echo "script-bt config file selected, running extra configuration..."
 	    sudo rfkill unblock bluetooth
-            sudo systemctl enable --now bluetooth
-            sudo usermod -aG bluetooth "$USER"
-            sudo mkdir -p ~/.config/scripts/
-            sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+        sudo systemctl enable --now bluetooth
+        sudo usermod -aG bluetooth "$USER"
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-gamemode"
-        then
-            echo "script-gamemode config file selected, running extra configuration..."
-            sudo mkdir -p ~/.config/scripts/
-            sudo cp -f .config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+    then
+        echo "script-gamemode config file selected, running extra configuration..."
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "themes-and-icons"
-        then
-            echo "themes-and-icons config file selected, running extra configuration..."
+    then
+        echo "themes-and-icons config file selected, running extra configuration..."
 	    sudo mkdir -p /usr/share/icons/
-            sudo cp -rf themes_bg/modest-dark/ /usr/share/icons/
-        fi
+        sudo cp -rf themes_bg/modest-dark/ /usr/share/icons/
+    fi
 
 	hyprctl reload
 	echo -e "${GREEN}Download and installation completed successfully!${NC}"
@@ -663,20 +663,20 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	        # kullanıcıya göster
 	        if [[ -n "$msg" ]]; then
 
-		    if [[ -n "$deps" ]]; then
-		        read -rp "$(printf "Select %s\n%s\nPackages to be installed: %s(y/n): " \
-		        "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
-			echo
-		    else
-		        read -rp "$(printf "Select %s\n%s(y/n): " \
-		        "$main_pkg" "$(echo -e "$msg")")" ans
-			echo
-		    fi
-
-		else
-		    read -rp "Select $main_pkg ($deps)? (y/n): " ans
-		    echo
-		fi
+			    if [[ -n "$deps" ]]; then
+			        read -rp "$(printf "Select %s\n%s\nPackages to be installed: %s(y/n): " \
+			        "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
+					echo
+			    else
+			        read -rp "$(printf "Select %s\n%s(y/n): " \
+			        "$main_pkg" "$(echo -e "$msg")")" ans
+					echo
+			    fi
+	
+			else
+			    read -rp "Select $main_pkg ($deps)? (y/n): " ans
+			    echo
+			fi
 
 
 	        if [[ "$ans" =~ ^[Yy]$ ]]; then
@@ -724,14 +724,17 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	        # kullanıcıya göster
 	        if [[ -n "$msg" ]]; then
 	            if [[ -n "$deps" ]]; then
-	                read -rp "$(printf "Select %s (AUR)\n%s\nPackages to be installed: %s\n(y/n): " \
-	                    "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
+	                read -rp "$(printf "Select %s (AUR)\n%s\nPackages to be installed: %s(y/n): " \
+	                "$main_pkg" "$(echo -e "$msg")" "$deps")" ans
+					echo
 	            else
-	                read -rp "$(printf "Select %s (AUR)\n%s\n(y/n): " \
-	                    "$main_pkg" "$(echo -e "$msg")")" ans
+	                read -rp "$(printf "Select %s (AUR)\n%s(y/n): " \
+	                "$main_pkg" "$(echo -e "$msg")")" ans
+					echo
 	            fi
 	        else
 	            read -rp "Select $main_pkg (AUR) ($deps)? (y/n): " ans
+				echo
 	        fi
 
 	        if [[ "$ans" =~ ^[Yy]$ ]]; then
@@ -754,19 +757,19 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	#CONFIGS
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "sddm"
-        then
-            echo "sddm package selected, running extra configuration..."
+    then
+        echo "sddm package selected, running extra configuration..."
 	    sudo systemctl enable sddm
-            sudo systemctl start sddm
-        fi
+        sudo systemctl start sddm
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "audio-pkgs"
 	then
 	    echo "Audio package selected, running extra configuration..."
 	    systemctl --user enable --now pipewire
-            systemctl --user enable --now pipewire-pulse
-            systemctl --user enable --now wireplumber
+        systemctl --user enable --now pipewire-pulse
+        systemctl --user enable --now wireplumber
 	fi
 
 
@@ -775,221 +778,221 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	    echo "Bluetooth package selected, running extra configuration..."
 	    sudo rfkill unblock bluetooth
 	    sudo systemctl enable --now bluetooth
-            sudo usermod -aG bluetooth "$USER"
+        sudo usermod -aG bluetooth "$USER"
 	fi
 
 	
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "media-player-pkgs"
-        then
-            echo "Media-player package selected, running extra configuration..."
-            xdg-mime default mpv.desktop video/mp4
-            xdg-mime default mpv.desktop video/x-matroska
-            xdg-mime default mpv.desktop video/webm
-        fi
+    then
+        echo "Media-player package selected, running extra configuration..."
+        xdg-mime default mpv.desktop video/mp4
+        xdg-mime default mpv.desktop video/x-matroska
+        xdg-mime default mpv.desktop video/webm
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "networkmanager"
-        then
-            echo "networkmanager package selected, running extra configuration..."
-            sudo systemctl enable --now NetworkManager
+    then
+        echo "networkmanager package selected, running extra configuration..."
+        sudo systemctl enable --now NetworkManager
 	fi
 
 	
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "udisk"
-        then
-            echo "udisk package selected, running extra configuration..."
-            sudo systemctl enable --now udisks2
-        fi
+    then
+        echo "udisk package selected, running extra configuration..."
+        sudo systemctl enable --now udisks2
+    fi
 
 	#SPECIAL CONFIG DOCS
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "hyprland"
-        then
-            echo "hyprland package selected, running extra configuration..."
+    then
+        echo "hyprland package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-            sudo cp -f .config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
-      	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
-            HINTS+="Open your hyprland.conf file to make the necessary changes."$'\n'	
-        fi
+        sudo cp -f .config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
+      	HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
+        HINTS+="Open your hyprland.conf file to make the necessary changes."$'\n'	
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "hyprlock"
-        then
-            echo "hyprlock package selected, running extra configuration..."
+    then
+        echo "hyprlock package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-            sudo cp -f .config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
-        fi
+        sudo cp -f .config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "hyprpaper"
-        then
-            echo "hyprpaper package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/hypr
-            sudo cp -f .config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
+    then
+        echo "hyprpaper package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/hypr
+        sudo cp -f .config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
 	    sudo mkdir -p /home/$USER/Resimler/wallpapers/
-            sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
+        sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
 	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
-            HINTS+="open your hyprpaper.conf file to make the necessary changes."$'\n'
-        fi
+        HINTS+="open your hyprpaper.conf file to make the necessary changes."$'\n'
+    fi
 
 	
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "kitty"
-        then
-            echo "kitty package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/kitty
-            sudo cp -rf .config/kitty/* /home/$USER/.config/kitty
-        fi
+    then
+        echo "kitty package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/kitty
+        sudo cp -rf .config/kitty/* /home/$USER/.config/kitty
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "rofi"
-        then
-            echo "rofi package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/rofi
-            sudo cp -rf .config/rofi/* /home/$USER/.config/rofi
-        fi
+    then
+        echo "rofi package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/rofi
+        sudo cp -rf .config/rofi/* /home/$USER/.config/rofi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "swaync"
-        then
-            echo "swaync package selected, running extra configuration..."
-            sudo mkdir -p /etc/xdg/swaync/
-            sudo cp -f .config/swaync/style.css /etc/xdg/swaync/style.css
+    then
+        echo "swaync package selected, running extra configuration..."
+        sudo mkdir -p /etc/xdg/swaync/
+        sudo cp -f .config/swaync/style.css /etc/xdg/swaync/style.css
 	    sudo cp -f .config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
 	    sudo cp -f .config/swaync/config.json ~/.config/swaync/config.json
 	    sudo chmod +x ~/.config/scripts/*.sh
 	    systemctl --user enable --now swaync
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "waybar"
-        then
-            echo "waybar package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/waybar
-            sudo cp -rf .config/waybar/* /home/$USER/.config/waybar
+    then
+        echo "waybar package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/waybar
+        sudo cp -rf .config/waybar/* /home/$USER/.config/waybar
 	    sudo chmod +x ~/.config/waybar/scripts/weather.py
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "wlogout"
-        then
-            echo "wlogout package selected, running extra configuration..."
-            sudo mkdir -p /home/$USER/.config/wlogout
-            sudo cp -rf .config/wlogout/* /home/$USER/.config/wlogout
-        fi
+    then
+        echo "wlogout package selected, running extra configuration..."
+        sudo mkdir -p /home/$USER/.config/wlogout
+        sudo cp -rf .config/wlogout/* /home/$USER/.config/wlogout
+    fi
 
 
 	#/SCRIPTS
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bootloader"
-        then
-            echo "script-bootloader config file selected, running extra configuration..."
-            sudo mkdir -p /boot/loader/
-            sudo cp -f boot/loader/loader.conf /boot/loader/loader.conf
-        fi
+    then
+        echo "script-bootloader config file selected, running extra configuration..."
+        sudo mkdir -p /boot/loader/
+        sudo cp -f boot/loader/loader.conf /boot/loader/loader.conf
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-keyboard-language"
-        then
-            echo "script-keyboard-language config file selected, running extra configuration..."
-            sudo mkdir -p ~/.config/autostart/
-            sudo cp -f .config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
-        fi
+    then
+        echo "script-keyboard-language config file selected, running extra configuration..."
+        sudo mkdir -p ~/.config/autostart/
+        sudo cp -f .config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-brightness-control"
-        then
-            echo "script-brightness-control package selected, running extra configuration..."
+    then
+        echo "script-brightness-control package selected, running extra configuration..."
 	    sudo modprobe i2c-dev
-       	    echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
-            sudo usermod -aG i2c "$USER"
+       	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
+        sudo usermod -aG i2c "$USER"
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo cp -f .config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
 	    sudo cp -f .config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
 	    sudo cp -f .config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
 	    sudo cp -f .config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
 	    sudo chmod 600 ~/.config/scripts/brightness_mode_state
-      	    sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
-       	    sudo chmod +x ~/.config/scripts/*.sh
+      	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
+       	sudo chmod +x ~/.config/scripts/*.sh
 	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
-            HINTS+="Run: ~/.config/scripts/brightness_mode_calib.sh"$'\n'
-        fi
+        HINTS+="Run: ~/.config/scripts/brightness_mode_calib.sh"$'\n'
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-hyprshade"
-        then
-            echo "script-hyprshade config file selected, running extra configuration..."
-            mkdir -p ~/.local/bin
+    then
+        echo "script-hyprshade config file selected, running extra configuration..."
+        mkdir -p ~/.local/bin
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo cp -f .config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
 	    sudo cp -f .config/scripts/hyprshade-toggle-state ~/.config/scripts/hyprshade-toggle-state
 	    sudo cp -f .config/scripts/night_screen.frag ~/.config/scripts/night_screen.frag
 	    sudo chmod +x ~/.config/scripts/*.sh
-       	    sudo chmod +x ~/.local/bin/hyprshade-auto.sh
+       	sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 	    sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
-       	    sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
+       	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
 
 	    systemctl --user daemon-reload
  	    systemctl --user enable --now hyprshade-auto.timer
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-screenrec"
-        then
-            echo "script-screenrec config file selected, running extra configuration..."
+    then
+        echo "script-screenrec config file selected, running extra configuration..."
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo mkdir -p ~/Resimler/
-            sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
+        sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
 	    sudo chmod +x ~/.config/scripts/*.sh
-        fi
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-screenprint"
-        then
-            echo "script-screenprint config file selected, running extra configuration..."
-            sudo mkdir -p ~/.config/scripts/
+    then
+        echo "script-screenprint config file selected, running extra configuration..."
+        sudo mkdir -p ~/.config/scripts/
 	    sudo mkdir -p ~/Resimler/
-            sudo cp -f .config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+        sudo cp -f .config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-wifi"
-        then
-            echo "script-wifi config file selected, running extra configuration..."
+    then
+        echo "script-wifi config file selected, running extra configuration..."
 	    sudo systemctl enable --now NetworkManager
-            sudo mkdir -p ~/.config/scripts/
-            sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bt"
-        then
-            echo "script-bt config file selected, running extra configuration..."
+    then
+        echo "script-bt config file selected, running extra configuration..."
 	    sudo rfkill unblock bluetooth
-            sudo systemctl enable --now bluetooth
-            sudo usermod -aG bluetooth "$USER"
-            sudo mkdir -p ~/.config/scripts/
-            sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+        sudo systemctl enable --now bluetooth
+        sudo usermod -aG bluetooth "$USER"
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-gamemode"
-        then
-            echo "script-gamemode config file selected, running extra configuration..."
-            sudo mkdir -p ~/.config/scripts/
-            sudo cp -f .config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
-            sudo chmod +x ~/.config/scripts/*.sh
-        fi
+    then
+        echo "script-gamemode config file selected, running extra configuration..."
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "themes-and-icons"
-        then
-            echo "themes-and-icons config file selected, running extra configuration..."
+    then
+        echo "themes-and-icons config file selected, running extra configuration..."
 	    sudo mkdir -p /usr/share/icons/
-            sudo cp -rf themes_bg/modest-dark/ /usr/share/icons/
-        fi
+        sudo cp -rf themes_bg/modest-dark/ /usr/share/icons/
+    fi
 
 	hyprctl reload
 	echo -e "${GREEN}Download and installation completed successfully!${NC}"
@@ -1002,8 +1005,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	4)
 	# Exit application
-        break
-        ;;
+    break
+    ;;
 
 
 	5)
