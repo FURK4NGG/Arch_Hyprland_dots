@@ -408,12 +408,12 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "media-player-pkgs"
-        then
-            echo "Media-player package selected, running extra configuration..."
-            xdg-mime default mpv.desktop video/mp4
-            xdg-mime default mpv.desktop video/x-matroska
-            xdg-mime default mpv.desktop video/webm
-        fi
+    then
+        echo "Media-player package selected, running extra configuration..."
+        xdg-mime default mpv.desktop video/mp4
+        xdg-mime default mpv.desktop video/x-matroska
+        xdg-mime default mpv.desktop video/webm
+    fi
 
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "networkmanager"
