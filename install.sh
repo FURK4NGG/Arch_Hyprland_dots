@@ -857,6 +857,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "swaync package selected, running extra configuration..."
         sudo mkdir -p /etc/xdg/swaync/
+		sudo mkdir -p /home/$USER/.config/swaync
         sudo cp -f .config/swaync/style.css /etc/xdg/swaync/style.css
 	    sudo cp -f .config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
 	    sudo cp -f .config/swaync/config.json ~/.config/swaync/config.json
