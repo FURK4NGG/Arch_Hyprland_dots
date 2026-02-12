@@ -47,8 +47,10 @@ window#waybar {
 
 #clock,
 #battery,
-#cpu,
+#custom-recording,
+#custom-kblayout,
 #memory,
+#cpu,
 #temperature,
 #network,
 #pulseaudio,
@@ -64,6 +66,13 @@ window#waybar {
 #mode {
     color: #cc3436;
     font-weight: bold;
+}
+#custom-recording {
+    color: red;
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
 }
 #memory{
 font-weight: 300;
