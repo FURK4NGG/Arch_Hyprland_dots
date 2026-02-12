@@ -478,6 +478,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo cp -f .config/nvim/init.lua /home/$USER/.config/nvim/init.lua
 		sudo npm install -g typescript typescript-language-server
 		sudo npm install -g vscode-langservers-extracted
+		echo 'export EDITOR=nvim' >> ~/.bashrc && source ~/.bashrc
     fi
 
 
@@ -863,6 +864,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo cp -f .config/nvim/init.lua /home/$USER/.config/nvim/init.lua
 		sudo npm install -g typescript typescript-language-server
 		sudo npm install -g vscode-langservers-extracted
+		echo 'export EDITOR=nvim' >> ~/.bashrc && source ~/.bashrc
     fi
 
 
