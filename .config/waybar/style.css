@@ -69,6 +69,7 @@ window#waybar {
 }
 #custom-recording {
     color: red;
+	font-weight: bold;
     animation: blink 1s infinite;
 }
 @keyframes blink {
