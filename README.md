@@ -163,6 +163,7 @@ Virt --> sudo usermod -aG libvirt $USER
 sudo systemctl enable --now flatpak-system-helper  
 
 # Fast Installation  
+archinstall  
 sudo pacman -Syu git  
 git clone https://github.com/furk4ngg/Arch_Hyprland_dots.git  
 cd Arch_Hyprland_dots  
