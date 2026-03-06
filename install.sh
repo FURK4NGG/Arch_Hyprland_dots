@@ -13,7 +13,7 @@ PACKAGES_YAY="bluez bluez-utils blueman hyprshade"
 
 
 M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout sddm trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects jq hypridle gtk3 gdk-pixbuf2 gtk-layer-shell waybar ttf-twemoji swaync wl-clipboard kitty btop rofi atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git mousepad tumbler pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils
-'neovim(nodejs npm clang pyright)'
+'neovim(neovim nodejs npm clang pyright)'
 'xfce-desktop("Easy setup for XFCE Desktop" sddm thunar thunar-volman thunar-archive-plugin xarchiver mesa xorg-server xorg-xinput xorg-xinit xorg-xrandr xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin libinput libxkbcommon gtk3 gdk-pixbuf2 tumbler gvfs networkmanager network-manager-applet)'
 'gaming-stack(mesa vulkan-radeon libva libva-utils nvidia nvidia-settings nvidia-utils wine winetricks lutris steam gamemode mangohud)'
 'script-bootloader("Set your boot time to 8 second")'
