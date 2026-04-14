@@ -1,3 +1,4 @@
+<!-- diger uygulamalarini sun ve paket olarak sor -->
 # Arch_Hyprland_dots 
 ![Image](https://github.com/user-attachments/assets/b0f8cb38-2818-483d-a036-86c0aa992017)  
  
