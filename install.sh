@@ -1,4 +1,3 @@
-<!-- diger uygulamalarini sun ve paket olarak sor -->
 #!/bin/bash
 
 # Renkli yazılar için
