@@ -1,6 +1,6 @@
 <!-- diger uygulamalarini sun ve paket olarak sor (portmaster,waydroid falan)-->
 # Arch_Hyprland_dots 
-![Image](https://github.com/user-attachments/assets/b0f8cb38-2818-483d-a036-86c0aa992017)  
+![Arch_Hyprland_dots Demo GIF](https://github.com/user-attachments/assets/b0f8cb38-2818-483d-a036-86c0aa992017)  
  
 # Basic Apps and Packets (Download Section)
 
