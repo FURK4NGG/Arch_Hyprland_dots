@@ -2,7 +2,7 @@
 # Arch_Hyprland_dots 
 ![Arch_Hyprland_dots Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/desktop.gif)  
 
-Login Manager
+<h1 align="center">Login Manager</h1>  
 ![Arch_Hyprland_dots Login Manager Demo Image](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/%7B%7D/login_manager.webp)  
 
 # Basic Apps and Packets (Download Section)
