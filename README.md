@@ -13,7 +13,7 @@
 
 Linux Kernel: linux+linux-zen  
 Lock Screen: hyprlock wlogout  
-Greeter: sddm  
+Greeter: greetd greetd-tuigreet  
 Background Manager: hyprpaper  
 Wayland Compositor: hyprland wlroots xdg-desktop-portal-hyprland qt5-graphicaleffects  
 Panel/Bar: waybar ttf-twemoji  
