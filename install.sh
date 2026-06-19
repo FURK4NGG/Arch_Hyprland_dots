@@ -905,21 +905,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "login-manager"
     then
         echo "login-manager package selected, running extra configuration..."
+		sudo mkdir -p /etc/greetd
+		sudo cp -f /etc/greetd/config.toml /etc/greetd/config.toml
 		sudo systemctl enable greetd
-		
-	    sudo modprobe i2c-dev
-       	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
-        sudo usermod -aG i2c "$USER"
-	    sudo mkdir -p ~/.config/scripts/
-	    sudo cp -f .config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
-	    sudo cp -f .config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
-	    sudo cp -f .config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
-	    sudo cp -f .config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
-	    sudo chmod 600 ~/.config/scripts/brightness_mode_state
-      	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
-       	sudo chmod +x ~/.config/scripts/*.sh
-	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
-        HINTS+="Run: ~/.config/scripts/brightness_mode_calib.sh"$'\n'
     fi
 
 
