@@ -8,13 +8,14 @@ NC="\e[0m" # reset
 HINTS=""
 
 # Kurulacak paket listesi
-PACKAGES="linux linux-zen hyprlock xorg-server xorg-xinput xorg-xinit xorg-xrandr mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout sddm trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects ddcutil i2c-tools jq hypridle gtk3 gdk-pixbuf2 gtk-layer-shell waybar ttf-twemoji swaync wl-clipboard kitty btop rofi grim slurp wf-recorder mpv atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git neovim nodejs npm clang pyright tumbler pipewire pipewire-pulse wireplumber alsa-utils pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin"
+PACKAGES="linux linux-zen hyprlock xorg-server xorg-xinput xorg-xinit xorg-xrandr mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout greetd greetd-tuigreet trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects ddcutil i2c-tools jq hypridle gtk3 gdk-pixbuf2 gtk-layer-shell waybar ttf-twemoji swaync wl-clipboard kitty btop rofi grim slurp wf-recorder mpv atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git neovim nodejs npm clang pyright tumbler pipewire pipewire-pulse wireplumber alsa-utils pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin"
 PACKAGES_YAY="bluez bluez-utils blueman hyprshade"
 
 
-M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout sddm trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects jq hypridle gtk3 gdk-pixbuf2 gtk-layer-shell waybar ttf-twemoji swaync wl-clipboard kitty btop rofi atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git mousepad tumbler pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils
+M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects jq hypridle gtk3 gdk-pixbuf2 gtk-layer-shell waybar ttf-twemoji swaync wl-clipboard kitty btop rofi atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git mousepad tumbler pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils
+'login-manager(greetd greetd-tuigreet)'
 'neovim(neovim nodejs npm clang pyright)'
-'xfce-desktop("Easy setup for XFCE Desktop" sddm thunar thunar-volman thunar-archive-plugin xarchiver mesa xorg-server xorg-xinput xorg-xinit xorg-xrandr xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin libinput libxkbcommon gtk3 gdk-pixbuf2 tumbler gvfs networkmanager network-manager-applet)'
+'xfce-desktop("Easy setup for XFCE Desktop" greetd greetd-tuigreet thunar thunar-volman thunar-archive-plugin xarchiver mesa xorg-server xorg-xinput xorg-xinit xorg-xrandr xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin libinput libxkbcommon gtk3 gdk-pixbuf2 tumbler gvfs networkmanager network-manager-applet)'
 'gaming-stack(mesa vulkan-radeon libva libva-utils nvidia nvidia-settings nvidia-utils wine winetricks lutris steam gamemode mangohud)'
 'script-bootloader("Set your boot time to 8 second")'
 'script-keyboard-language("A program that switches between the keyboard layouts(US:TR) using the Alt + Shift keys\nRecommended for XFCE desktop environments")'
@@ -58,8 +59,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo mkdir -p /boot/loader/
         sudo cp boot/loader/loader.conf /boot/loader/loader.conf
 	
-        sudo systemctl enable sddm
-        sudo systemctl start sddm
+        sudo systemctl enable greetd
 
         systemctl --user enable --now pipewire
         systemctl --user enable --now pipewire-pulse
@@ -382,13 +382,6 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	# CONFIGS
 
-	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "sddm"
-    then
-        echo "sddm package selected, running extra configuration..."
-	    sudo systemctl enable sddm
-        sudo systemctl start sddm
-    fi
-
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "audio-pkgs"
 	then
@@ -520,6 +513,27 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 
 	#/SCRIPTS
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "login-manager"
+    then
+        echo "login-manager package selected, running extra configuration..."
+		sudo systemctl enable greetd
+		
+	    sudo modprobe i2c-dev
+       	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
+        sudo usermod -aG i2c "$USER"
+	    sudo mkdir -p ~/.config/scripts/
+	    sudo cp -f .config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
+	    sudo cp -f .config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
+	    sudo cp -f .config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
+	    sudo cp -f .config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
+	    sudo chmod 600 ~/.config/scripts/brightness_mode_state
+      	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
+       	sudo chmod +x ~/.config/scripts/*.sh
+	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
+        HINTS+="Run: ~/.config/scripts/brightness_mode_calib.sh"$'\n'
+    fi
+
+
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bootloader"
     then
         echo "script-bootloader config file selected, running extra configuration..."
@@ -768,13 +782,6 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 	#CONFIGS
 
-	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "sddm"
-    then
-        echo "sddm package selected, running extra configuration..."
-	    sudo systemctl enable sddm
-        sudo systemctl start sddm
-    fi
-
 
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "audio-pkgs"
 	then
@@ -907,6 +914,27 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 
 	#/SCRIPTS
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "login-manager"
+    then
+        echo "login-manager package selected, running extra configuration..."
+		sudo systemctl enable greetd
+		
+	    sudo modprobe i2c-dev
+       	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
+        sudo usermod -aG i2c "$USER"
+	    sudo mkdir -p ~/.config/scripts/
+	    sudo cp -f .config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
+	    sudo cp -f .config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
+	    sudo cp -f .config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
+	    sudo cp -f .config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
+	    sudo chmod 600 ~/.config/scripts/brightness_mode_state
+      	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
+       	sudo chmod +x ~/.config/scripts/*.sh
+	    HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
+        HINTS+="Run: ~/.config/scripts/brightness_mode_calib.sh"$'\n'
+    fi
+
+
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bootloader"
     then
         echo "script-bootloader config file selected, running extra configuration..."
