@@ -1,7 +1,10 @@
 <!-- diger uygulamalarini sun ve paket olarak sor (portmaster,waydroid falan)-->
 # Arch_Hyprland_dots 
 ![Arch_Hyprland_dots Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/desktop.gif)  
- 
+
+Login Manager
+![Arch_Hyprland_dots Login Manager Demo Image]()  
+
 # Basic Apps and Packets (Download Section)
 
 ! You can install these packages using at least pacman and yay.  
