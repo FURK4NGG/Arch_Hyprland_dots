@@ -82,7 +82,7 @@ xorg
 xorg-server  
 xorg-xinit  
 xorg-xinput  
-xorg-xrandr
+xorg-xrandr  
 
 and
 
