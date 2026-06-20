@@ -76,13 +76,17 @@ xfdesktop
 xfconf  
 xfwm4  
 xfce4-notifyd  
-xfce4-clipman-plugin   
+xfce4-notify-plugin  
+xfce4-clipman-plugin  
 xorg  
 xorg-server  
 xorg-xinit  
 xorg-xinput  
 xorg-xrandr
 
+and
+
+thunar thunar-volman thunar-archive-plugin xarchiver mesa libinput libxkbcommon gtk3 gdk-pixbuf2 tumbler gvfs networkmanager network-manager-applet
 
 ---
 
