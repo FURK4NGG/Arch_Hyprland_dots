@@ -23,6 +23,7 @@ M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils waylan
 'script-screenrec("This package for recording the screen\nDesigned for Sway, but can also be controlled through the terminal." wf-recorder)'
 'script-screenprint("This package for take screenshot of the screen\nDesigned for Sway, but can also be controlled through the terminal." grim slurp)'
 'script-wifi("Wifi control with sway\nDesigned for Sway, but can also be controlled through the terminal." networkmanager network-manager-applet)'
+'script-vpn("For connect the vpn server, you can follow the instructions in https://github.com/FURK4NGG/Server-Setup or https://git.furk4ngg.me/furk4ngg/Server-Setup" networkmanager wireguard-tools)'
 'script-gamemode("Improves performance by temporarily disabling unused system features while gaming")'
 'audio-pkgs(pipewire pipewire-pulse wireplumber alsa-utils)'
 'media-player-pkgs(mpv xdg-utils)'
