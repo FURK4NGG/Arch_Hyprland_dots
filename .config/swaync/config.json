@@ -120,6 +120,12 @@
           "active": false,
           "command": "~/.config/scripts/wifi-bt.sh bt"
         },
+		{
+          "label": "🛡️",
+          "type": "toggle",
+          "active": false,
+          "command": "~/.config/scripts/vpn.sh"
+        },
         {
           "label": "✨",
           "command": "~/.local/bin/hyprshade-auto.sh"
