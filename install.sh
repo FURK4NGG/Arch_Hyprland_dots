@@ -608,6 +608,31 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     fi
 
 
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-vpn"
+    then
+        echo "script-vpn config file selected, running extra configuration..."
+	    sudo systemctl enable --now NetworkManager
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/vpn.sh ~/.config/scripts/vpn.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+
+		echo "Checking NetworkManager..."
+	    systemctl is-active --quiet NetworkManager.service \
+	        && echo "NetworkManager is running." \
+	        || echo "NetworkManager failed to start."
+	
+	    echo "Checking WireGuard tools..."
+	    command -v nmcli >/dev/null \
+	        && echo "nmcli is installed."
+	
+	    command -v wg >/dev/null \
+	        && echo "wg is installed."
+	
+	    command -v wg-quick >/dev/null \
+	        && echo "wg-quick is installed."
+    fi
+
+
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bt"
     then
         echo "script-bt config file selected, running extra configuration..."
@@ -994,6 +1019,31 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo mkdir -p ~/.config/scripts/
         sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
         sudo chmod +x ~/.config/scripts/*.sh
+    fi
+
+
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-vpn"
+    then
+        echo "script-vpn config file selected, running extra configuration..."
+	    sudo systemctl enable --now NetworkManager
+        sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/vpn.sh ~/.config/scripts/vpn.sh
+        sudo chmod +x ~/.config/scripts/*.sh
+
+		echo "Checking NetworkManager..."
+	    systemctl is-active --quiet NetworkManager.service \
+	        && echo "NetworkManager is running." \
+	        || echo "NetworkManager failed to start."
+	
+	    echo "Checking WireGuard tools..."
+	    command -v nmcli >/dev/null \
+	        && echo "nmcli is installed."
+	
+	    command -v wg >/dev/null \
+	        && echo "wg is installed."
+	
+	    command -v wg-quick >/dev/null \
+	        && echo "wg-quick is installed."
     fi
 
 
