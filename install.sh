@@ -8,7 +8,7 @@ NC="\e[0m" # reset
 HINTS=""
 
 # Kurulacak paket listesi
-PACKAGES="linux linux-zen hyprlock xorg-server xorg-xinput xorg-xinit xorg-xrandr mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout greetd greetd-tuigreet trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects ddcutil i2c-tools jq hypridle gtk3 gdk-pixbuf2 gtk-layer-shell waybar ttf-twemoji swaync wl-clipboard kitty btop rofi grim slurp wf-recorder mpv atril ristretto hyprpicker thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git neovim nodejs npm clang pyright tumbler pipewire pipewire-pulse wireplumber alsa-utils pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin"
+PACKAGES="linux linux-zen hyprlock xorg-server xorg-xinput xorg-xinit xorg-xrandr mesa vulkan-radeon libva libva-utils wayland wayland-protocols mesa vulkan-radeon base-devel wlogout greetd greetd-tuigreet trash-cli hyprpaper hyprland xdg-desktop-portal xdg-desktop-portal-hyprland libinput libxkbcommon qt5-graphicaleffects ddcutil i2c-tools jq hypridle gtk3 gdk-pixbuf2 gtk-layer-shell waybar ttf-twemoji swaync wl-clipboard kitty btop rofi grim slurp wf-recorder mpv atril ristretto hyprpicker python-evdev ydotool thunar thunar-archive-plugin thunar-volman xarchiver gparted gvfs udisk2 baobab zip unzip unrar p7zip tar networkmanager network-manager-applet wget git neovim nodejs npm clang pyright tumbler pipewire pipewire-pulse wireplumber alsa-utils pavucontrol pacman yay flatpak nvidia nvidia-settings nvidia-utils xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfce4-terminal xfce4-notify-plugin xfce4-clipman-plugin"
 PACKAGES_YAY="bluez bluez-utils blueman hyprshade"
 
 
@@ -24,6 +24,7 @@ M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils waylan
 'script-screenprint("This package for take screenshot of the screen\nDesigned for Sway, but can also be controlled through the terminal." grim slurp)'
 'script-wifi("Wifi control with sway\nDesigned for Sway, but can also be controlled through the terminal." networkmanager network-manager-applet)'
 'script-vpn("For connect the vpn server, you can follow the instructions in https://github.com/FURK4NGG/Server-Setup or https://git.furk4ngg.me/furk4ngg/Server-Setup" networkmanager wireguard-tools)'
+'script-keyboard-mouse("This package allows you to control the mouse entirely with the keyboard, eliminating the need for a physical mouse." python-evdev ydotool)'
 'script-gamemode("Improves performance by temporarily disabling unused system features while gaming")'
 'audio-pkgs(pipewire pipewire-pulse wireplumber alsa-utils)'
 'media-player-pkgs(mpv xdg-utils)'
@@ -96,16 +97,23 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
         sudo mkdir -p /etc/xdg/swaync/
         mkdir -p ~/.local/bin
-        sudo cp ~/.config/swaync/style.css /etc/xdg/swaync/style.css
-        sudo cp ~/.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
+        sudo cp -f ~/.config/swaync/style.css /etc/xdg/swaync/style.css
+        sudo cp -f ~/.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
         sudo chmod +x ~/.config/scripts/*.sh
 		systemctl --user enable --now swaync
         sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 
         sudo mkdir -p /home/$USER/Resimler/wallpapers/
-        sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
+        sudo cp -f themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
         sudo chmod +x ~/.config/waybar/scripts/weather.py
+
+		systemctl --user enable --now ydotool.service
+		sudo usermod -aG input "$USER"
+		sudo cp -f .config/scripts/keyboard-mouse.sh ~/.config/scripts/keyboard-mouse.sh
+		sudo cp -f .config/scripts/keyboard-mouse-daemon.py ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
 
         sudo chown -R bob:bob ~/.config/blacklayer/
         chmod 700 ~/.config/blacklayer  
@@ -126,6 +134,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
 
 		hyprctl reload
+		hyprctl configerrors
 		echo -e "${GREEN}Download and installation completed successfully!${NC}"
 
         MONITORS=$(hyprctl -j monitors | jq -r '.[].name')
@@ -633,6 +642,22 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     fi
 
 
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-keyboard-mouse"
+    then
+        echo "script-keyboard-mouse config file selected, running extra configuration..."
+	    systemctl --user enable --now ydotool.service
+		sudo usermod -aG input "$USER"
+		sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/keyboard-mouse.sh ~/.config/scripts/keyboard-mouse.sh
+		sudo cp -f .config/scripts/keyboard-mouse-daemon.py ~/.config/scripts/keyboard-mouse-daemon.py
+        sudo chmod +x ~/.config/scripts/*.sh
+		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
+		hyprctl reload
+		hyprctl configerrors
+    fi
+
+
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bt"
     then
         echo "script-bt config file selected, running extra configuration..."
@@ -1044,6 +1069,22 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	
 	    command -v wg-quick >/dev/null \
 	        && echo "wg-quick is installed."
+    fi
+
+
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-keyboard-mouse"
+    then
+        echo "script-keyboard-mouse config file selected, running extra configuration..."
+	    systemctl --user enable --now ydotool.service
+		sudo usermod -aG input "$USER"
+		sudo mkdir -p ~/.config/scripts/
+        sudo cp -f .config/scripts/keyboard-mouse.sh ~/.config/scripts/keyboard-mouse.sh
+		sudo cp -f .config/scripts/keyboard-mouse-daemon.py ~/.config/scripts/keyboard-mouse-daemon.py
+        sudo chmod +x ~/.config/scripts/*.sh
+		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
+		hyprctl reload
+		hyprctl configerrors
     fi
 
 
