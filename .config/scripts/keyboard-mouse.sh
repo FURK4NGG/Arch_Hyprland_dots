@@ -14,6 +14,13 @@ case "${1:-}" in
         notify-send \
             -a "Keyboard Mouse" \
             -r 9876 \
+            -t 4500 \
+            "Keyboard Mouse" \
+            "ESC or mainMod+END to stop mouse mode"
+
+        notify-send \
+            -a "Keyboard Mouse" \
+            -r 9876 \
             -t 1500 \
             "Keyboard Mouse" \
             "Mouse mode enabled"
