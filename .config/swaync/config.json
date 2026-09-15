@@ -141,6 +141,10 @@
 		{
          "label": "󰊴",
          "command": "~/.config/scripts/gamemode.sh"
+        },
+		{
+         "label": "🖱️",
+         "command": "~/.config/scripts/keyboard-mouse.sh start"
         }
       ]
     }
