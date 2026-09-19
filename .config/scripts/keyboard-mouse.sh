@@ -6,6 +6,7 @@ ACTIVE_FILE="$STATE_DIR/active"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DAEMON="$SCRIPT_DIR/keyboard-mouse-daemon.py"
 UI="$SCRIPT_DIR/keyboard-mouse-ui.py"
+CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/keyboard-mouse/config.json"
 PID_FILE="$STATE_DIR/daemon.pid"
 
 mkdir -p "$STATE_DIR"
@@ -44,6 +45,99 @@ stop_daemon() {
     sleep 0.15
 }
 
+format_keys() {
+    local which="$1"
+
+    python3 - "$CONFIG_FILE" "$which" <<'PY'
+import json
+import sys
+
+config_file = sys.argv[1]
+which = sys.argv[2]
+
+pretty = {
+    "KEY_LEFT": "←", "KEY_RIGHT": "→", "KEY_UP": "↑", "KEY_DOWN": "↓",
+    "KEY_LEFTCTRL": "Left Ctrl", "KEY_RIGHTCTRL": "Right Ctrl",
+    "KEY_LEFTSHIFT": "Left Shift", "KEY_RIGHTSHIFT": "Right Shift",
+    "KEY_LEFTALT": "Left Alt", "KEY_RIGHTALT": "Right Alt",
+    "KEY_LEFTMETA": "Left Super", "KEY_RIGHTMETA": "Right Super",
+    "KEY_ESC": "Esc", "KEY_END": "End", "KEY_ENTER": "Enter",
+    "KEY_SPACE": "Space", "KEY_TAB": "Tab", "KEY_BACKSPACE": "Backspace",
+    "KEY_HOME": "Home", "KEY_PAGEUP": "Page Up", "KEY_PAGEDOWN": "Page Down",
+    "KEY_INSERT": "Insert", "KEY_DELETE": "Delete", "KEY_CAPSLOCK": "Caps Lock",
+}
+
+def pretty_key(k):
+    k = str(k).upper()
+    return pretty.get(k, k[4:] if k.startswith("KEY_") else k)
+
+try:
+    with open(config_file, encoding="utf-8") as f:
+        c = json.load(f)
+
+    # IMPORTANT: UI/daemon config uses mode.open / mode.close.
+    groups = c.get("mode", {}).get(which, [])
+    result = []
+
+    for group in groups:
+        if isinstance(group, list):
+            keys = [pretty_key(k) for k in group]
+            if keys:
+                result.append(" + ".join(keys))
+
+    print(" / ".join(result) if result else "Tanımsız")
+except Exception:
+    print("Tanımsız")
+PY
+}
+
+notify_mode() {
+    local mode="$1"
+    local open_keys close_keys language title message
+
+    if ! command -v notify-send >/dev/null 2>&1; then
+        return 0
+    fi
+
+    open_keys="$(format_keys open)"
+    close_keys="$(format_keys close)"
+
+    # UI dilini kullan: ~/.config/keyboard-mouse/ui-language.json
+    language="English"
+    if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/keyboard-mouse/ui-language.json" ]]; then
+        language="$(python3 - "${XDG_CONFIG_HOME:-$HOME/.config}/keyboard-mouse/ui-language.json" <<'PY'
+import json
+import sys
+try:
+    with open(sys.argv[1], encoding="utf-8") as f:
+        d = json.load(f)
+    print(d.get("language", "English"))
+except Exception:
+    print("English")
+PY
+)"
+    fi
+
+    title="Keyboard Mouse"
+
+    if [[ "$mode" == "open" ]]; then
+        if [[ "$language" == "Türkçe" ]]; then
+            message="Mouse modu etkin — $close_keys ile mouse modunu kapat"
+        else
+            message="Mouse mode enabled — $close_keys to stop mouse mode"
+        fi
+    else
+        if [[ "$language" == "Türkçe" ]]; then
+            message="Mouse modu devre dışı — $open_keys ile mouse modunu başlat"
+        else
+            message="Mouse mode disabled — $open_keys to start mouse mode"
+        fi
+    fi
+
+    # Tek bildirim gönder.
+    notify-send         -a "Keyboard Mouse"         -t 4500         "$title"         "$message"
+}
+
 case "${1:-}" in
     daemon)
         start_daemon
@@ -51,13 +145,21 @@ case "${1:-}" in
     start)
         start_daemon || exit 1
         touch "$ACTIVE_FILE"
-
-        # Bildirimi daemon verir:
-        # - Mod açıldıysa sadece CLOSE kombinasyonunu gösterir.
-        # - Mod kapandıysa sadece OPEN kombinasyonunu gösterir.
+        notify_mode open
         ;;
     stop)
         rm -f "$ACTIVE_FILE"
+        notify_mode close
+        ;;
+    toggle)
+        if [[ -f "$ACTIVE_FILE" ]]; then
+            rm -f "$ACTIVE_FILE"
+            notify_mode close
+        else
+            start_daemon || exit 1
+            touch "$ACTIVE_FILE"
+            notify_mode open
+        fi
         ;;
     settings|config)
         exec python3 "$UI"
@@ -70,7 +172,7 @@ case "${1:-}" in
         start_daemon
         ;;
     *)
-        echo "Usage: $0 {daemon|start|stop|settings|left-click|middle-click|right-click|restart-daemon}"
+        echo "Usage: $0 {daemon|start|stop|toggle|settings|left-click|middle-click|right-click|restart-daemon}"
         exit 1
         ;;
 esac

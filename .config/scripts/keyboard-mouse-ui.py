@@ -13,7 +13,7 @@ CONFIG_FILE = CONFIG_DIR / "config.json"
 LANG_FILE = CONFIG_DIR / "ui-language.json"
 
 LANGUAGES = ["English", "Türkçe"]
-TEXT = {"English":{"window_title":"Keyboard Mouse Settings","app_title":"Keyboard Mouse","movement":"Movement","left":"Move left","right":"Move right","up":"Move up","down":"Move down","speed_keys":"Speed","fast":"Speed up","slow":"Slow down","mouse":"Mouse","mouse_left":"Left click","mouse_middle":"Middle click","mouse_right":"Right click","scroll_up":"Scroll up","scroll_down":"Scroll down","mode":"Mouse mode","open":"Open mode","close":"Close mode","toggle":"Toggle mouse mode","speed":"Speed","hint":"Click a key slot, then press a keyboard key, mouse button, or mouse wheel.","key_test":"Key Test","key_test_on":"Key Test active — press a key","detected":"Detected key: ","save":"Save","default":"Default","select_key":"Select key","capture":"Press a key / mouse button / wheel…","and_tip":"Add a key to this combination (AND)","or_tip":"Add an independent alternative (OR)"},"Türkçe":{"window_title":"Keyboard Mouse Ayarları","app_title":"Keyboard Mouse","movement":"Hareket","left":"Sola git","right":"Sağa git","up":"Yukarı git","down":"Aşağı git","speed_keys":"Hız","fast":"Hızlandır","slow":"Yavaşlat","mouse":"Mouse","mouse_left":"Sol tık","mouse_middle":"Orta tık","mouse_right":"Sağ tık","scroll_up":"Yukarı kaydır","scroll_down":"Aşağı kaydır","mode":"Mouse modu","open":"Modu aç","close":"Modu kapat","toggle":"Mouse modunu aç/kapat","speed":"Hız","hint":"Tuş yerinde klavye tuşuna, mouse butonuna veya mouse tekerleğine basabilirsin.","key_test":"Tuş Testi","key_test_on":"Tuş Testi aktif — bir tuşa bas","detected":"Algılanan tuş: ","save":"Kaydet","default":"Varsayılan","select_key":"Tuş seç","capture":"Bir tuşa / mouse'a basın…","and_tip":"Bu kombinasyona bir tuş ekle (AND)","or_tip":"Bağımsız yeni alternatif ekle (OR)"}}
+TEXT = {"English":{"window_title":"Keyboard Mouse Settings","app_title":"Keyboard Mouse","movement":"Movement","left":"Move left","right":"Move right","up":"Move up","down":"Move down","speed_keys":"Speed","fast":"Speed up","slow":"Slow down","mouse":"Mouse","mouse_left":"Left click","mouse_middle":"Middle click","mouse_right":"Right click","scroll_up":"Scroll up","scroll_down":"Scroll down","mode":"Mouse mode","open":"Open mode","close":"Close mode","toggle":"Toggle mouse mode","speed":"Speed","hint":"Click a key slot, then press a keyboard key, mouse button, or mouse wheel.","key_test":"Key Test","key_test_on":"Key Test active — press a key","detected":"Detected key: ","save":"Save","default":"Default","select_key":"Select key","capture":"Press a key / mouse button / wheel…","and_tip":"Add a key to this combination (AND)","or_tip":"Add an independent alternative (OR)","toggle":"Toggle mouse mode"},"Türkçe":{"window_title":"Keyboard Mouse Ayarları","app_title":"Keyboard Mouse","movement":"Hareket","left":"Sola git","right":"Sağa git","up":"Yukarı git","down":"Aşağı git","speed_keys":"Hız","fast":"Hızlandır","slow":"Yavaşlat","mouse":"Mouse","mouse_left":"Sol tık","mouse_middle":"Orta tık","mouse_right":"Sağ tık","scroll_up":"Yukarı kaydır","scroll_down":"Aşağı kaydır","mode":"Mouse modu","open":"Modu aç","close":"Modu kapat","toggle":"Mouse modunu aç/kapat","speed":"Hız","hint":"Tuş yerinde klavye tuşuna, mouse butonuna veya mouse tekerleğine basabilirsin.","key_test":"Tuş Testi","key_test_on":"Tuş Testi aktif — bir tuşa bas","detected":"Algılanan tuş: ","save":"Kaydet","default":"Varsayılan","select_key":"Tuş seç","capture":"Bir tuşa / mouse'a basın…","and_tip":"Bu kombinasyona bir tuş ekle (AND)","or_tip":"Bağımsız yeni alternatif ekle (OR)","toggle":"Mouse modunu aç/kapat"}}
 def tr(k): return TEXT.get(CURRENT_LANGUAGE,TEXT["English"]).get(k,k)
 def load_language():
     try:
@@ -406,7 +406,7 @@ class SettingsWindow(Gtk.ApplicationWindow):
         self.content.append(button_row)
 
         # Toggle mouse mode directly from the UI.
-        toggle = Gtk.Button(label="Toggle Mouse Mode / Mouse Modunu Aç-Kapat")
+        toggle = Gtk.Button(label=tr("toggle"))
         toggle.set_margin_top(8)
         toggle.connect("clicked", self.toggle_mouse_mode)
         self.content.append(toggle)
@@ -469,46 +469,8 @@ class SettingsWindow(Gtk.ApplicationWindow):
                 else:
                     active_file.unlink(missing_ok=True)
 
-            # The shell start/stop commands only change the active file.
-            # Therefore the UI sends the state-change notification itself.
-            env = os.environ.copy()
-            env.setdefault("XDG_RUNTIME_DIR", str(runtime_dir))
-            if "DBUS_SESSION_BUS_ADDRESS" not in env:
-                env["DBUS_SESSION_BUS_ADDRESS"] = f"unix:path={runtime_dir}/bus"
-
-            # Bildirim, klavye ile açıp/kapatırken daemonun verdiği bildirimle
-            # aynı mantıkta dinamik olarak config'teki Open/Close tuşlarını gösterir.
-            def format_mode_keys(groups):
-                alternatives = []
-                for group in groups if isinstance(groups, list) else []:
-                    if not isinstance(group, list):
-                        continue
-                    values = [
-                        pretty(normalize(x)) if isinstance(x, str) and x.strip() else ""
-                        for x in group
-                    ]
-                    values = [v for v in values if v]
-                    if values:
-                        alternatives.append(" + ".join(values))
-                return " / ".join(alternatives) if alternatives else "atanmamış"
-
-            if command == "start":
-                close_keys = format_mode_keys(
-                    self.config.get("mode", {}).get("close", [])
-                )
-                message = f"Mouse mode enabled — {close_keys} to disable mouse mode"
-            else:
-                open_keys = format_mode_keys(
-                    self.config.get("mode", {}).get("open", [])
-                )
-                message = f"Mouse mode disabled — {open_keys} to start mouse mode"
-
-            subprocess.run(
-                ["notify-send", "-a", "Keyboard Mouse", "-u", "normal",
-                 "Keyboard Mouse", message],
-                env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                check=False,
-            )
+            # Bildirimi shell script verir. UI burada tekrar notify-send
+            # çağırmaz; böylece toggle ile çift bildirim oluşmaz.
         except Exception:
             pass
 
