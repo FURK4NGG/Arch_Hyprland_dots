@@ -103,7 +103,8 @@ Virt --> sudo usermod -aG libvirt $USER
 sudo systemctl enable --now flatpak-system-helper  
 
 <details>
-<summary>keyboard-mouse</summary>
+<summary>keyboard-mouse</summary> 
+
 Open UI: ./keyboard-mouse.sh settings  
 Check daemon tasks: pgrep -af keyboard-mouse-daemon.py  
 Run daemon: ./keyboard-mouse.sh daemon  
