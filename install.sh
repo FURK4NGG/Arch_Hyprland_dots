@@ -650,10 +650,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo mkdir -p ~/.config/scripts/
         sudo cp -f .config/scripts/keyboard-mouse.sh ~/.config/scripts/keyboard-mouse.sh
 		sudo cp -f .config/scripts/keyboard-mouse-daemon.py ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chown "$USER:$USER" ~/.config/scripts/keyboard-mouse.sh
+		sudo chown "$USER:$USER" ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chown "$USER:$USER" ~/.config/scripts/keyboard-mouse-ui.py
         sudo chmod +x ~/.config/scripts/*.sh
 		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
 		sudo chmod +x ~/.config/scripts/keyboard-mouse-ui.py
 		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
+		~/.config/scripts/keyboard-mouse.sh daemon
 		hyprctl reload
 		hyprctl configerrors
     fi
@@ -1081,10 +1085,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo mkdir -p ~/.config/scripts/
         sudo cp -f .config/scripts/keyboard-mouse.sh ~/.config/scripts/keyboard-mouse.sh
 		sudo cp -f .config/scripts/keyboard-mouse-daemon.py ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chown "$USER:$USER" ~/.config/scripts/keyboard-mouse.sh
+		sudo chown "$USER:$USER" ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chown "$USER:$USER" ~/.config/scripts/keyboard-mouse-ui.py
         sudo chmod +x ~/.config/scripts/*.sh
 		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
 		sudo chmod +x ~/.config/scripts/keyboard-mouse-ui.py
 		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
+		~/.config/scripts/keyboard-mouse.sh daemon
 		hyprctl reload
 		hyprctl configerrors
     fi
