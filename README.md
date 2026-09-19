@@ -120,6 +120,7 @@ Toggle keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh toggle
 
 <details>
 <summary>screenrec</summary>
+  
 Open UI: ~/.config/scripts/screenrec-ui.py  
 Run screenrec manually: ~/.config/scripts/screenrec.sh  
 </details>
