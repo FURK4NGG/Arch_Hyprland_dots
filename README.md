@@ -105,7 +105,7 @@ sudo systemctl enable --now flatpak-system-helper
 <details>
 <summary>keyboard-mouse</summary> 
 
-Open UI: ./keyboard-mouse.sh settings  
+Open UI: ./keyboard-mouse.sh settings
 Check daemon tasks: pgrep -af keyboard-mouse-daemon.py  
 Run daemon: ./keyboard-mouse.sh daemon  
 Kill all keyboard-mouse daemons: sudo pkill -9 -f 'keyboard-mouse-daemon.py' 2>/dev/null || true  
