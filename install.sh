@@ -652,6 +652,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo cp -f .config/scripts/keyboard-mouse-daemon.py ~/.config/scripts/keyboard-mouse-daemon.py
         sudo chmod +x ~/.config/scripts/*.sh
 		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chmod +x ~/.config/scripts/keyboard-mouse-ui.py
 		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
 		hyprctl reload
 		hyprctl configerrors
@@ -1082,6 +1083,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo cp -f .config/scripts/keyboard-mouse-daemon.py ~/.config/scripts/keyboard-mouse-daemon.py
         sudo chmod +x ~/.config/scripts/*.sh
 		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
+		sudo chmod +x ~/.config/scripts/keyboard-mouse-ui.py
 		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
 		hyprctl reload
 		hyprctl configerrors
