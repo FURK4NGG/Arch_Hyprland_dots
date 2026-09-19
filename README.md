@@ -6,6 +6,10 @@
 
 ![Arch_Hyprland_dots Login Manager Demo Image](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/%7B%7D/login_manager.webp)  
 
+<h1 align="center">keyboard-mouse(special app)</h1>  
+
+![keyboard-mouse Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/keyboard-mouse.gif)  
+
 # Basic Apps and Packets (Download Section)
 
 ! You can install these packages using at least pacman and yay.  
