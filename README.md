@@ -102,6 +102,17 @@ Virt --> sudo usermod -aG libvirt $USER
 //If you use Flatpak  
 sudo systemctl enable --now flatpak-system-helper  
 
+<details>
+<summary>keyboard-mouse</summary>
+Open UI: ./keyboard-mouse.sh settings
+Check daemon tasks: pgrep -af keyboard-mouse-daemon.py
+Run daemon: ./keyboard-mouse.sh daemon
+Kill all keyboard-mouse daemons: sudo pkill -9 -f 'keyboard-mouse-daemon.py' 2>/dev/null || true
+Run keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh start
+Stop keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh stop
+Toggle keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh toggle
+</details>
+
 # Fast Installation  
 archinstall  
 sudo pacman -Syu git  
