@@ -12,7 +12,7 @@
 
 <h1 align="center">screenrec(special app)</h1>  
 
-![screenrec Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/screenrec.mp4)  
+![screenrec Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/screenrec.gif)  
 
 # Basic Apps and Packets (Download Section)
 
