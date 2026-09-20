@@ -10,6 +10,10 @@
 
 ![keyboard-mouse Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/keyboard-mouse.gif)  
 
+<h1 align="center">screenrec(special app)</h1>  
+
+![screenrec Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/screenrec.mp4)  
+
 # Basic Apps and Packets (Download Section)
 
 ! You can install these packages using at least pacman and yay.  
