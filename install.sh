@@ -19,13 +19,13 @@ M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils waylan
 'gaming-stack(mesa vulkan-radeon libva libva-utils nvidia nvidia-settings nvidia-utils wine winetricks lutris steam gamemode mangohud)'
 'script-bootloader("Set your boot time to 8 second")'
 'script-keyboard-language("A program that switches between the keyboard layouts(US:TR) using the Alt + Shift keys\nRecommended for XFCE desktop environments")'
-'script-brightness-control("This package allows you to control your screen brightness using five different modes\nDesigned for Sway, but can also be controlled through the terminal." ddcutil i2c-tools)'
-'script-screenrec("This package for recording the screen\nDesigned for Sway, but can also be controlled through the terminal." wf-recorder)'
-'script-screenprint("This package for take screenshot of the screen\nDesigned for Sway, but can also be controlled through the terminal." grim slurp)'
+'script-brightness-control("This package allows you to control your screen brightness using five different modes\nDesigned for Sway, but can also be controlled through the terminal." ddcutil i2c-tools libnotify)'
+'script-screenrec("This package for recording the screen\nDesigned for Sway, but can also be controlled through the terminal." wf-recorder slurp libnotify python python-evdev)'
+'script-screenprint("This package for take screenshot of the screen\nDesigned for Sway, but can also be controlled through the terminal." grim slurp libnotify)'
 'script-wifi("Wifi control with sway\nDesigned for Sway, but can also be controlled through the terminal." networkmanager network-manager-applet)'
-'script-vpn("For connect the vpn server, you can follow the instructions in https://github.com/FURK4NGG/Server-Setup or https://git.furk4ngg.me/furk4ngg/Server-Setup" networkmanager wireguard-tools)'
-'script-keyboard-mouse("This package allows you to control the mouse entirely with the keyboard, eliminating the need for a physical mouse." python-evdev ydotool)'
-'script-gamemode("Improves performance by temporarily disabling unused system features while gaming")'
+'script-vpn("For connect the vpn server, you can follow the instructions in https://github.com/FURK4NGG/Server-Setup or https://git.furk4ngg.me/furk4ngg/Server-Setup" networkmanager wireguard-tools libnotify)'
+'script-keyboard-mouse("This package allows you to control the mouse entirely with the keyboard, eliminating the need for a physical mouse." python-evdev ydotool libnotify)'
+'script-gamemode("Improves performance by temporarily disabling unused system features while gaming" libnotify)'
 'audio-pkgs(pipewire pipewire-pulse wireplumber alsa-utils)'
 'media-player-pkgs(mpv xdg-utils)'
 'themes-and-icons("Themes and icons")')
@@ -594,6 +594,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	    sudo mkdir -p ~/Resimler/
         sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
 	    sudo chmod +x ~/.config/scripts/*.sh
+		sudo chmod +x ~/.config/scripts/screenrec-ui.py
     fi
 
 
@@ -1029,6 +1030,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	    sudo mkdir -p ~/Resimler/
         sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
 	    sudo chmod +x ~/.config/scripts/*.sh
+		sudo chmod +x ~/.config/scripts/screenrec-ui.py
     fi
 
 
