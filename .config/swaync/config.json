@@ -100,9 +100,7 @@
         },
         {
           "label": "",
-     	  "type": "toggle",
-	      "active": false,
-          "command": "~/.config/scripts/screenrec.sh"
+          "command": "~/.config/scripts/screenrec-ui.py"
         },
         {
           "label": "",
