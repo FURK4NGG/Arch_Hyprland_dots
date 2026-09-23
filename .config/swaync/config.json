@@ -134,7 +134,7 @@
         },
 		{
          "label": "󰒲 ",
-         "command": "~/.config/blacklayer/call-blacklayer.sh"
+         "command": "~/.config/blacklayer/blacklayer-ui.py"
         },
 		{
          "label": "󰊴",
