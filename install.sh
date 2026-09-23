@@ -115,11 +115,13 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo chmod +x ~/.config/scripts/keyboard-mouse-daemon.py
 		sudo chmod +x ~/.config/scripts/keyboard-mouse.sh
 
-        sudo chown -R bob:bob ~/.config/blacklayer/
+        sudo chown -R "$USER:$USER" ~/.config/blacklayer/
         chmod 700 ~/.config/blacklayer  
         chmod +x ~/.config/blacklayer/*.sh 2>/dev/null || true
         chmod 600 ~/.config/blacklayer/*.conf 2>/dev/null || true
-        [ -f ~/.config/blacklayer/blacklayer ] && chmod +x ~/.config/blacklayer/blacklayer
+        if [ -f ~/.config/blacklayer/blacklayer ]; then
+    		chmod +x ~/.config/blacklayer/blacklayer
+		fi
         sudo chown -R "$USER:$USER" ~/.config/waybar
         chmod 700 ~/.config/waybar  
 		cd ~/.config/blacklayer/
