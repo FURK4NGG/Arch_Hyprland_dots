@@ -1,82 +1,917 @@
 #!/usr/bin/env bash
 
-BASE_DIR="$HOME/.config/blacklayer"
-CONF_FILE="$BASE_DIR/blacklayer.conf"
-[ -f "$CONF_FILE" ] && source "$CONF_FILE"
+set -u
 
-# -------------------------
-# .conf dan gelen degerler/Default değerler
-# -------------------------
-LOOP_INTERVAL="${LOOP_INTERVAL:-60}"
-COUNT_THRESHOLD="${COUNT_THRESHOLD:-5}"
-WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}"
-EVENT_POLL_INTERVAL="${EVENT_POLL_INTERVAL:-3}"
-EVENT_DRIVEN="${EVENT_DRIVEN:-$HOME/.config/blacklayer/event-driven.sh}"
+BASE_DIR="$HOME/.config/blacklayer"
+CONFIG="$BASE_DIR/blacklayer.conf"
 
 BLACKLAYER_BIN="$BASE_DIR/blacklayer"
-COUNT_FILE="$BASE_DIR/.blacklayer_count"
+INPUT_ACTIVITY="$BASE_DIR/input-activity.py"
+
 STATE_DIR="$BASE_DIR/.blacklayer_state"
-WAYBAR_BIN="/usr/bin/waybar"
-WAYBAR_CONFIG_DIR="$HOME/.config/waybar"
+PID_DIR="$STATE_DIR/pids"
+SOURCE_PID_DIR="$STATE_DIR/source_pids"
+
+GLOBAL_ACTIVITY="$BASE_DIR/.input_activity"
+
+WORKER_PID_FILE="$BASE_DIR/blacklayer_worker.pid"
+WORKER_LOCK_FILE="$BASE_DIR/.blacklayer_worker.lock"
 
 
-# -------------------------
-# Sonsuz döngü
-# -------------------------
-while true; do
-    export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-    [ -z "$HYPRLAND_INSTANCE_SIGNATURE" ] && \
-        export HYPRLAND_INSTANCE_SIGNATURE="$(ls "$XDG_RUNTIME_DIR/hypr/" 2>/dev/null | head -n1)"
-    export WAYLAND_DISPLAY
+mkdir -p "$STATE_DIR"
+mkdir -p "$PID_DIR"
+mkdir -p "$SOURCE_PID_DIR"
+
+[ -f "$CONFIG" ] || exit 1
+
+# shellcheck disable=SC1090
+source "$CONFIG"
 
 
-    mkdir -p "$STATE_DIR"
-    [ ! -f "$COUNT_FILE" ] && echo "0" > "$COUNT_FILE"
-    chmod 600 "$STATE_DIR"/* 2>/dev/null || true
+BLACKLAYER_DELAY="${BLACKLAYER_DELAY:-30}"
+LOCK_DELAY="${LOCK_DELAY:-50}"
+SLEEP_DELAY="${SLEEP_DELAY:-60}"
 
-    JSON="$(hyprctl -j monitors 2>/dev/null)"
-    echo "$JSON" | jq empty >/dev/null 2>&1 || { sleep "$LOOP_INTERVAL"; continue; }
+USE_INPUT_ACTIVITY="${USE_INPUT_ACTIVITY:-true}"
 
-    # -------------------------
-    # Focused kontrol ve state update
-    # -------------------------
-    echo "$JSON" | jq -r '.[] | .name + " " + (.focused|tostring)' | while read -r MONITOR_NAME FOCUSED; do
-        STATE_FILE="$STATE_DIR/$MONITOR_NAME"
-        [ ! -f "$STATE_FILE" ] && echo "false" > "$STATE_FILE"
-        ISWORKING=$(<"$STATE_FILE")
-        [ "$FOCUSED" = "true" ] && echo "true" > "$STATE_FILE"
-    done
+run_blacklayer="${run_blacklayer:-true}"
+source="${source:-}"
+run_lock="${run_lock:-true}"
+run_sleep="${run_sleep:-false}"
 
-    # -------------------------
-    # Count artır
-    # -------------------------
-    COUNT=$(<"$COUNT_FILE")
-    COUNT=$((COUNT + 1))
-    echo "$COUNT" > "$COUNT_FILE"
+LOCK_COMMAND="${LOCK_COMMAND:-none}"
+SLEEP_COMMAND="${SLEEP_COMMAND:-none}"
 
-    # -------------------------
-    # 5. çağrıda blacklayer açma
-    # -------------------------
-    if [ "$COUNT" -ge "$COUNT_THRESHOLD" ]; then
-        echo "$JSON" | jq -r '.[] | .name' | while read -r MONITOR_NAME; do
-            STATE_FILE="$STATE_DIR/$MONITOR_NAME"
-            ISWORKING=$(<"$STATE_FILE")
+export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}"
 
-            if [ "$ISWORKING" = "false" ] && ! pgrep -f "$BLACKLAYER_BIN $MONITOR_NAME" >/dev/null 2>&1; then
-                pkill -f "waybar.*$MONITOR_NAME" 2>/dev/null
-            
-                "$BLACKLAYER_BIN" "$MONITOR_NAME" &
-                nohup bash -c "$EVENT_DRIVEN $MONITOR_NAME $EVENT_POLL_INTERVAL" >/dev/null 2>&1 &
-                echo "true" > "$STATE_FILE"
-            fi
-        done
 
-        # 5. okumadan sonra tüm state ve count sıfırlama
-        echo "0" > "$COUNT_FILE"
-        for STATE in "$STATE_DIR"/*; do
-            echo "false" > "$STATE"
-        done
+# =========================================================
+# SINGLE WORKER
+# =========================================================
+
+exec 9>"$WORKER_LOCK_FILE"
+
+if ! flock -n 9 2>/dev/null; then
+    exit 0
+fi
+
+echo "$$" > "$WORKER_PID_FILE"
+
+
+# =========================================================
+# TIME
+# =========================================================
+
+now() {
+    date +%s
+}
+
+
+# =========================================================
+# SAFE NAME
+# =========================================================
+
+safe_name() {
+    printf '%s' "$1" |
+        tr '/: ' '___'
+}
+
+
+# =========================================================
+# ACTIVITY FILE
+# =========================================================
+
+activity_file() {
+    printf '%s/.input_activity_%s\n' \
+        "$BASE_DIR" \
+        "$(safe_name "$1")"
+}
+
+
+# =========================================================
+# PID FILE
+# =========================================================
+
+pid_file() {
+    printf '%s/%s.pid\n' \
+        "$PID_DIR" \
+        "$(safe_name "$1")"
+}
+
+
+# =========================================================
+# HYPRLAND MONITORS
+# =========================================================
+
+get_monitors() {
+    hyprctl -j monitors 2>/dev/null |
+        jq -r '.[].name' 2>/dev/null
+}
+
+
+monitor_count() {
+    get_monitors |
+        grep -c . ||
+        true
+}
+
+
+focused_monitor() {
+    hyprctl -j monitors 2>/dev/null |
+        jq -r '.[] | select(.focused == true) | .name' 2>/dev/null |
+        head -n1
+}
+
+
+# =========================================================
+# WAYBAR
+# =========================================================
+
+waybar_running_for_monitor() {
+
+    local monitor="$1"
+    local config="$HOME/.config/waybar/config-$monitor"
+
+    [ -f "$config" ] ||
+        return 1
+
+    local pid
+    local cmdline
+
+    while read -r pid; do
+
+        [ -n "$pid" ] ||
+            continue
+
+        [ -r "/proc/$pid/cmdline" ] ||
+            continue
+
+        cmdline="$(
+            tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null ||
+            true
+        )"
+
+        case "$cmdline" in
+
+            *"$config"*)
+                return 0
+                ;;
+
+        esac
+
+    done < <(
+        pgrep -x waybar 2>/dev/null ||
+        true
+    )
+
+    return 1
+}
+
+
+stop_waybar() {
+
+    local monitor="$1"
+    local config="$HOME/.config/waybar/config-$monitor"
+
+    [ -f "$config" ] ||
+        return 0
+
+    local pid
+    local cmdline
+
+    while read -r pid; do
+
+        [ -n "$pid" ] ||
+            continue
+
+        [ -r "/proc/$pid/cmdline" ] ||
+            continue
+
+        cmdline="$(
+            tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null ||
+            true
+        )"
+
+        case "$cmdline" in
+
+            *"$config"*)
+
+                kill "$pid" 2>/dev/null ||
+                    true
+
+                ;;
+
+        esac
+
+    done < <(
+        pgrep -x waybar 2>/dev/null ||
+        true
+    )
+}
+
+
+restore_waybar() {
+
+    local monitor="$1"
+    local config="$HOME/.config/waybar/config-$monitor"
+
+    [ -f "$config" ] ||
+        return 0
+
+    command -v waybar >/dev/null 2>&1 ||
+        return 0
+
+    if waybar_running_for_monitor "$monitor"; then
+        return 0
     fi
 
-    sleep "$LOOP_INTERVAL"
+    waybar \
+        -c "$config" \
+        >/dev/null 2>&1 &
+}
+
+
+# =========================================================
+# BLACKLAYER RUNNING CHECK
+# =========================================================
+
+blacklayer_running() {
+
+    local monitor="$1"
+
+    local target
+    target="$(
+        realpath "$BLACKLAYER_BIN" 2>/dev/null ||
+        true
+    )"
+
+    [ -n "$target" ] ||
+        return 1
+
+
+    # -----------------------------------------------------
+    # PID FILE
+    # -----------------------------------------------------
+
+    local file
+    file="$(pid_file "$monitor")"
+
+    if [ -f "$file" ]; then
+
+        local pid
+        pid="$(
+            sed -n '1p' "$file" 2>/dev/null ||
+            true
+        )"
+
+        if [[ "$pid" =~ ^[0-9]+$ ]] &&
+           kill -0 "$pid" 2>/dev/null; then
+
+            local exe
+            exe="$(
+                realpath "/proc/$pid/exe" 2>/dev/null ||
+                true
+            )"
+
+            if [ "$exe" = "$target" ]; then
+                return 0
+            fi
+
+        fi
+
+    fi
+
+
+    # -----------------------------------------------------
+    # PROCESS SCAN
+    # -----------------------------------------------------
+
+    local pid
+    local exe
+    local cmdline
+
+    while read -r pid; do
+
+        [ -n "$pid" ] ||
+            continue
+
+        [ -r "/proc/$pid/exe" ] ||
+            continue
+
+        exe="$(
+            realpath "/proc/$pid/exe" 2>/dev/null ||
+            true
+        )"
+
+        [ "$exe" = "$target" ] ||
+            continue
+
+        [ -r "/proc/$pid/cmdline" ] ||
+            continue
+
+        cmdline="$(
+            tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null ||
+            true
+        )"
+
+        case " $cmdline " in
+
+            *" $monitor "*)
+                return 0
+                ;;
+
+        esac
+
+    done < <(
+        pgrep -f "$BLACKLAYER_BIN" 2>/dev/null ||
+        true
+    )
+
+    return 1
+}
+
+
+# =========================================================
+# SELECTED SOURCE
+# =========================================================
+
+source_pid_file() {
+    printf '%s/%s.pid\n' \
+        "$SOURCE_PID_DIR" \
+        "$(safe_name "$1")"
+}
+
+source_running() {
+    local monitor="$1"
+    local file pid
+    file="$(source_pid_file "$monitor")"
+    [ -f "$file" ] || return 1
+    pid="$(head -n1 "$file" 2>/dev/null || true)"
+    [[ "$pid" =~ ^[0-9]+$ ]] || return 1
+    kill -0 "$pid" 2>/dev/null
+}
+
+source_command() {
+    local path="$1"
+    local first interp
+
+    [ -f "$path" ] || return 1
+
+    IFS= read -r first < "$path" || true
+
+    if [[ "$first" == '#!'* ]]; then
+        first="${first#!}"
+        read -r -a parts <<< "$first"
+        [ "${#parts[@]}" -gt 0 ] || return 1
+
+        if [ "$(basename "${parts[0]}")" = "env" ]; then
+            parts=("${parts[@]:1}")
+            while [ "${#parts[@]}" -gt 0 ] && [[ "${parts[0]}" == -* ]]; do
+                parts=("${parts[@]:1}")
+            done
+        fi
+
+        [ "${#parts[@]}" -gt 0 ] || return 1
+        printf '%q ' "${parts[@]}"
+        printf '%q\n' "$path"
+        return 0
+    fi
+
+    case "${path##*.}" in
+        py) printf '%q %q\n' python3 "$path"; return 0 ;;
+        sh) printf '%q %q\n' bash "$path"; return 0 ;;
+        bash) printf '%q %q\n' bash "$path"; return 0 ;;
+        zsh) printf '%q %q\n' zsh "$path"; return 0 ;;
+        fish) printf '%q %q\n' fish "$path"; return 0 ;;
+        js|mjs|cjs) printf '%q %q\n' node "$path"; return 0 ;;
+        rb) printf '%q %q\n' ruby "$path"; return 0 ;;
+        lua) printf '%q %q\n' lua "$path"; return 0 ;;
+        pl) printf '%q %q\n' perl "$path"; return 0 ;;
+        php) printf '%q %q\n' php "$path"; return 0 ;;
+    esac
+
+    if [ -x "$path" ]; then
+        printf '%q\n' "$path"
+        return 0
+    fi
+
+    return 1
+}
+
+start_selected_source() {
+    local monitor="$1"
+    local path="${source:-}"
+    local file pid
+    local cmdline
+
+    [ -n "$path" ] || return 1
+    [ -f "$path" ] || return 1
+
+    if source_running "$monitor"; then
+        return 0
+    fi
+
+    file="$(source_pid_file "$monitor")"
+    rm -f "$file"
+
+    cmdline="$(source_command "$path")" || return 1
+    [ -n "$cmdline" ] || return 1
+
+    # Use a new process group so input-activity and Stop can terminate
+    # the widget and any children it creates together.
+    # Tell the source which monitor triggered its inactivity timer.
+    # This does not alter the source command-line arguments.
+    BLACKLAYER_MONITOR="$monitor" setsid bash -c "exec $cmdline" >/dev/null 2>&1 &
+    pid=$!
+
+    {
+        echo "$pid"
+        echo "$monitor"
+    } > "$file"
+
+    return 0
+}
+
+stop_selected_source() {
+    local monitor="$1"
+    local file pid
+    file="$(source_pid_file "$monitor")"
+    [ -f "$file" ] || return 0
+    pid="$(head -n1 "$file" 2>/dev/null || true)"
+    if [[ "$pid" =~ ^[0-9]+$ ]]; then
+        kill -TERM -- "-$pid" 2>/dev/null || kill -TERM "$pid" 2>/dev/null || true
+    fi
+    rm -f "$file"
+}
+
+
+# =========================================================
+# START BLACKLAYER
+# =========================================================
+
+start_blacklayer() {
+
+    local monitor="$1"
+
+    [ "$run_blacklayer" = "true" ] ||
+        return 0
+
+    # A selected source is the Blacklayer target. Do not start the native
+    # image overlay as well, otherwise it covers the widget with its surface.
+    [ -n "$source" ] &&
+        return 0
+
+    [ -x "$BLACKLAYER_BIN" ] ||
+        return 1
+
+    [ -n "$monitor" ] ||
+        return 0
+
+
+    # Aynı monitörde zaten açıksa
+    # kesinlikle tekrar açma.
+    if blacklayer_running "$monitor"; then
+        return 0
+    fi
+
+
+    rm -f "$(pid_file "$monitor")"
+
+
+    # Sadece hedef monitorun Waybar'ını kapat.
+    stop_waybar "$monitor"
+
+
+    "$BLACKLAYER_BIN" "$monitor" \
+        >/dev/null 2>&1 &
+
+    local pid=$!
+
+
+    {
+        echo "$pid"
+        echo "$monitor"
+    } > "$(pid_file "$monitor")"
+}
+
+
+# =========================================================
+# LOCK
+# =========================================================
+
+run_lock() {
+
+    [ "$run_lock" = "true" ] ||
+        return 0
+
+    [ "$LOCK_COMMAND" != "none" ] ||
+        return 0
+
+    [ -n "$LOCK_COMMAND" ] ||
+        return 0
+
+    bash -c "$LOCK_COMMAND" \
+        >/dev/null 2>&1 &
+}
+
+
+# =========================================================
+# SLEEP
+# =========================================================
+
+run_sleep() {
+
+    [ "$run_sleep" = "true" ] ||
+        return 0
+
+    [ "$SLEEP_COMMAND" != "none" ] ||
+        return 0
+
+    [ -n "$SLEEP_COMMAND" ] ||
+        return 0
+
+    case "$SLEEP_COMMAND" in
+
+        "systemctl suspend")
+
+            systemctl suspend
+
+            ;;
+
+        "loginctl suspend")
+
+            loginctl suspend
+
+            ;;
+
+        *)
+
+            bash -c "$SLEEP_COMMAND"
+
+            ;;
+
+    esac
+}
+
+
+# =========================================================
+# INPUT ACTIVITY
+# =========================================================
+
+INPUT_PID=""
+
+
+start_input_activity() {
+
+    [ -f "$INPUT_ACTIVITY" ] ||
+        return 0
+
+
+    # Eski input watcher'ı kapat.
+    while read -r pid; do
+
+        [ -n "$pid" ] ||
+            continue
+
+        [ "$pid" = "$$" ] &&
+            continue
+
+        kill "$pid" 2>/dev/null ||
+            true
+
+    done < <(
+        pgrep -f "python3.*input-activity\.py" 2>/dev/null ||
+        true
+    )
+
+
+    if [ "$USE_INPUT_ACTIVITY" = "true" ]; then
+
+        # TRUE:
+        # Yalnızca TARGET_MONITOR.
+        python3 "$INPUT_ACTIVITY" "$TARGET_MONITOR" \
+            >/dev/null 2>&1 &
+
+    else
+
+        # FALSE:
+        # Tüm monitorler bağımsız.
+        python3 "$INPUT_ACTIVITY" \
+            >/dev/null 2>&1 &
+
+    fi
+
+    INPUT_PID=$!
+}
+
+
+# =========================================================
+# CLEANUP
+# =========================================================
+
+cleanup() {
+
+    if [ -n "${INPUT_PID:-}" ]; then
+
+        kill "$INPUT_PID" 2>/dev/null ||
+            true
+
+    fi
+
+    rm -f "$WORKER_PID_FILE"
+}
+
+trap cleanup EXIT INT TERM
+
+
+# =========================================================
+# NEW RUN SESSION
+# =========================================================
+
+START_TIME="$(now)"
+
+
+# Eski session activity'lerini temizle.
+rm -f "$BASE_DIR"/.input_activity* 2>/dev/null ||
+    true
+
+
+# Global başlangıç.
+echo "$START_TIME" > "$GLOBAL_ACTIVITY"
+
+
+MONITORS="$(get_monitors)"
+
+MONITOR_COUNT="$(
+    printf '%s\n' "$MONITORS" |
+    grep -c . ||
+    true
+)"
+
+
+# =========================================================
+# MODE
+# =========================================================
+
+# Tek monitor varsa Input Activity zorunlu.
+if [ "$MONITOR_COUNT" -le 1 ]; then
+
+    USE_INPUT_ACTIVITY=true
+
+fi
+
+
+TARGET_MONITOR=""
+
+
+if [ "$USE_INPUT_ACTIVITY" = "true" ]; then
+
+    # =====================================================
+    # TRUE
+    #
+    # Run'a basıldığı andaki focused monitor
+    # tek hedef monitor olur.
+    # =====================================================
+
+    TARGET_MONITOR="$(focused_monitor)"
+
+
+    if [ -z "$TARGET_MONITOR" ]; then
+
+        TARGET_MONITOR="$(
+            printf '%s\n' "$MONITORS" |
+            head -n1
+        )"
+
+    fi
+
+
+    [ -n "$TARGET_MONITOR" ] ||
+        exit 0
+
+
+    # Yalnızca bu monitor için başlangıç zamanı.
+    echo "$START_TIME" > \
+        "$(activity_file "$TARGET_MONITOR")"
+
+
+else
+
+    # =====================================================
+    # FALSE
+    #
+    # Her monitor kendi timer'ına sahip.
+    # =====================================================
+
+    while read -r monitor; do
+
+        [ -n "$monitor" ] ||
+            continue
+
+        echo "$START_TIME" > \
+            "$(activity_file "$monitor")"
+
+    done <<EOF
+$MONITORS
+EOF
+
+fi
+
+
+# =========================================================
+# LOCK / SLEEP STATE
+# =========================================================
+
+LAST_GLOBAL_ACTIVITY="$START_TIME"
+
+LOCK_DONE=0
+SLEEP_DONE=0
+
+
+# =========================================================
+# START INPUT WATCHER
+# =========================================================
+
+start_input_activity
+
+
+# =========================================================
+# MAIN LOOP
+# =========================================================
+
+while :; do
+
+    CURRENT="$(now)"
+
+
+    # =====================================================
+    # INPUT ACTIVITY = TRUE
+    #
+    # SADECE TEK MONITOR
+    # =====================================================
+
+    if [ "$USE_INPUT_ACTIVITY" = "true" ]; then
+
+        monitor="$TARGET_MONITOR"
+
+        FILE="$(activity_file "$monitor")"
+
+
+        if [ ! -f "$FILE" ]; then
+
+            echo "$CURRENT" > "$FILE"
+
+        fi
+
+
+        ACTIVITY="$(
+            awk '{print int($1)}' "$FILE" \
+            2>/dev/null ||
+            echo "$CURRENT"
+        )"
+
+
+        if ! [[ "$ACTIVITY" =~ ^[0-9]+$ ]]; then
+
+            ACTIVITY="$CURRENT"
+
+        fi
+
+
+        IDLE=$((CURRENT - ACTIVITY))
+
+
+        if [ "$IDLE" -ge "$BLACKLAYER_DELAY" ]; then
+            if [ -n "$source" ]; then
+                start_selected_source "$monitor"
+            elif [ "$run_blacklayer" = "true" ]; then
+                start_blacklayer "$monitor"
+            fi
+        fi
+
+
+    else
+
+        # =================================================
+        # INPUT ACTIVITY = FALSE
+        #
+        # HER MONITOR BAĞIMSIZ
+        # =================================================
+
+        while read -r monitor; do
+
+            [ -n "$monitor" ] ||
+                continue
+
+
+            FILE="$(activity_file "$monitor")"
+
+
+            if [ ! -f "$FILE" ]; then
+
+                echo "$CURRENT" > "$FILE"
+
+            fi
+
+
+            ACTIVITY="$(
+                awk '{print int($1)}' "$FILE" \
+                2>/dev/null ||
+                echo "$CURRENT"
+            )"
+
+
+            if ! [[ "$ACTIVITY" =~ ^[0-9]+$ ]]; then
+
+                ACTIVITY="$CURRENT"
+
+            fi
+
+
+            IDLE=$((CURRENT - ACTIVITY))
+
+
+            if [ "$IDLE" -ge "$BLACKLAYER_DELAY" ]; then
+                if [ -n "$source" ]; then
+                    start_selected_source "$monitor"
+                elif [ "$run_blacklayer" = "true" ]; then
+                    start_blacklayer "$monitor"
+                fi
+            fi
+
+        done < <(
+            get_monitors
+        )
+
+    fi
+
+
+    # =====================================================
+    # GLOBAL ACTIVITY
+    #
+    # Lock / sleep.
+    # =====================================================
+
+    GLOBAL_TIME="$(
+        awk '{print int($1)}' "$GLOBAL_ACTIVITY" \
+        2>/dev/null ||
+        echo "$START_TIME"
+    )"
+
+
+    if ! [[ "$GLOBAL_TIME" =~ ^[0-9]+$ ]]; then
+
+        GLOBAL_TIME="$START_TIME"
+
+    fi
+
+
+    # Yeni keyboard/mouse input geldi.
+    if [ "$GLOBAL_TIME" -ne "$LAST_GLOBAL_ACTIVITY" ]; then
+
+        LOCK_DONE=0
+        SLEEP_DONE=0
+
+        LAST_GLOBAL_ACTIVITY="$GLOBAL_TIME"
+
+    fi
+
+
+    GLOBAL_IDLE=$((CURRENT - GLOBAL_TIME))
+
+
+    # =====================================================
+    # LOCK
+    # =====================================================
+
+    if [ "$run_lock" = "true" ] &&
+       [ "$LOCK_COMMAND" != "none" ] &&
+       [ "$LOCK_DONE" -eq 0 ] &&
+       [ "$GLOBAL_IDLE" -ge "$LOCK_DELAY" ]; then
+
+        run_lock
+
+        LOCK_DONE=1
+
+    fi
+
+
+    # =====================================================
+    # SLEEP
+    # =====================================================
+
+    if [ "$run_sleep" = "true" ] &&
+       [ "$SLEEP_COMMAND" != "none" ] &&
+       [ "$SLEEP_DONE" -eq 0 ] &&
+       [ "$GLOBAL_IDLE" -ge "$SLEEP_DELAY" ]; then
+
+        run_sleep
+
+        SLEEP_DONE=1
+
+    fi
+
+
+    sleep 1
+
 done
