@@ -10,9 +10,36 @@
 
 ![keyboard-mouse Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/keyboard-mouse.gif)  
 
+<details>
+<summary>keyboard-mouse</summary>
+
+Open UI: ./keyboard-mouse.sh settings  
+Check daemon tasks: pgrep -af keyboard-mouse-daemon.py  
+Run daemon: ./keyboard-mouse.sh daemon  
+Kill all keyboard-mouse daemons: sudo pkill -9 -f 'keyboard-mouse-daemon.py' 2>/dev/null || true  
+Run keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh start  
+Stop keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh stop  
+Toggle keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh toggle  
+
+Fast Installation
+
+sudo pacman -Syu git
+git clone https://github.com/FURK4NGG/keyboard-mouse.git
+cd keyboard-mouse
+chmod +x install.sh
+./install.sh
+</details>
+
 <h1 align="center">screenrec(special app)</h1>  
 
 ![screenrec Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/screenrec.gif)  
+
+<details>
+<summary>screenrec</summary>
+  
+Open UI: ~/.config/scripts/screenrec-ui.py  
+Run screenrec manually: ~/.config/scripts/screenrec.sh  
+</details>
 
 # Basic Apps and Packets (Download Section)
 
@@ -110,24 +137,6 @@ Virt --> sudo usermod -aG libvirt $USER
 //If you use Flatpak  
 sudo systemctl enable --now flatpak-system-helper  
 
-<details>
-<summary>keyboard-mouse</summary>
-
-Open UI: ./keyboard-mouse.sh settings  
-Check daemon tasks: pgrep -af keyboard-mouse-daemon.py  
-Run daemon: ./keyboard-mouse.sh daemon  
-Kill all keyboard-mouse daemons: sudo pkill -9 -f 'keyboard-mouse-daemon.py' 2>/dev/null || true  
-Run keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh start  
-Stop keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh stop  
-Toggle keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh toggle  
-</details>
-
-<details>
-<summary>screenrec</summary>
-  
-Open UI: ~/.config/scripts/screenrec-ui.py  
-Run screenrec manually: ~/.config/scripts/screenrec.sh  
-</details>
 
 # Fast Installation  
 archinstall  
