@@ -21,13 +21,15 @@ Run keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh start
 Stop keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh stop  
 Toggle keyboard-mouse manually: ~/.config/scripts/keyboard-mouse.sh toggle  
 
-Fast Installation
-
+Fast Installation  
+```
 sudo pacman -Syu git
 git clone https://github.com/FURK4NGG/keyboard-mouse.git
 cd keyboard-mouse
 chmod +x install.sh
 ./install.sh
+```
+
 </details>
 
 <h1 align="center">screenrec(special app)</h1>  
