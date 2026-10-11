@@ -41,6 +41,15 @@ chmod +x install.sh
   
 Open UI: ~/.config/scripts/screenrec-ui.py  
 Run screenrec manually: ~/.config/scripts/screenrec.sh  
+
+Fast Installation  
+```
+sudo pacman -Syu git
+git clone https://github.com/FURK4NGG/screenrec.git
+cd screenrec
+chmod +x install.sh
+./install.sh
+```
 </details>
 
 # Basic Apps and Packets (Download Section)
