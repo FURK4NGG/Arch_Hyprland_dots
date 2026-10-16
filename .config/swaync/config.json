@@ -142,7 +142,7 @@
         },
 		{
          "label": "🖱️",
-         "command": "~/.config/scripts/keyboard-mouse.sh settings"
+         "command": "~/.config/keyboard-mouse/keyboard-mouse.sh settings"
         }
       ]
     }
