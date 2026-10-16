@@ -113,9 +113,13 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
+		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse.sh
+		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
+		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-ui.py
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse-ui.py
+		~/.config/keyboard-mouse/keyboard-mouse.sh daemon
 
         sudo chown -R "$USER:$USER" ~/.config/blacklayer/
         chmod 700 ~/.config/blacklayer  
@@ -652,14 +656,12 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-keyboard-mouse config file selected, running extra configuration..."
 	    systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
-		sudo mkdir -p ~/.config/scripts/
         sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-ui.py
-        sudo chmod +x ~/.config/scripts/*.sh
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse-ui.py
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse.sh
@@ -1089,14 +1091,12 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-keyboard-mouse config file selected, running extra configuration..."
 	    systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
-		sudo mkdir -p ~/.config/scripts/
         sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-ui.py
-        sudo chmod +x ~/.config/scripts/*.sh
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse-ui.py
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse.sh
