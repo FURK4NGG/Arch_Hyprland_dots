@@ -25,6 +25,7 @@ M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils waylan
 'script-wifi("Wifi control with sway\nDesigned for Sway, but can also be controlled through the terminal." networkmanager network-manager-applet)'
 'script-vpn("For connect the vpn server, you can follow the instructions in https://github.com/FURK4NGG/Server-Setup or https://git.furk4ngg.me/furk4ngg/Server-Setup" networkmanager wireguard-tools libnotify)'
 'script-keyboard-mouse("This package allows you to control the mouse entirely with the keyboard, eliminating the need for a physical mouse." python-evdev ydotool libnotify)'
+'blacklayer("A lightweight desktop inactivity tool featuring customizable backgrounds, automatic logout or screen shutdown, and support for custom Python widgets, animations, and per-monitor inactivity monitoring." gtk3 gdk-pixbuf2 gtk-layer-shell jq python python-gobject python-evdev libadwaita)'
 'script-gamemode("Improves performance by temporarily disabling unused system features while gaming" libnotify)'
 'audio-pkgs(pipewire pipewire-pulse wireplumber alsa-utils)'
 'media-player-pkgs(mpv xdg-utils)'
@@ -671,6 +672,46 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     fi
 
 
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "blacklayer"
+    then
+		echo "blacklayer config file selected, running extra configuration..."
+		mkdir -p ~/.config/blacklayer
+		cp blacklayer \
+		   blacklayer.c \
+		   blacklayer.conf \
+		   blacklayer-worker.sh \
+		   clock-widget.py \
+		   input-activity.py \
+		   blacklayer-ui.py \
+		   start-waybars.sh \
+		   generate-waybar-configs.sh \
+		   ~/.config/blacklayer/
+        
+		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
+		chmod 700 ~/.config/blacklayer
+		chmod +x \
+		    ~/.config/blacklayer/blacklayer \
+		    ~/.config/blacklayer/blacklayer-worker.sh \
+		    ~/.config/blacklayer/clock-widget.py \
+		    ~/.config/blacklayer/input-activity.py \
+		    ~/.config/blacklayer/blacklayer-ui.py \
+		    ~/.config/blacklayer/start-waybars.sh \
+		    ~/.config/blacklayer/generate-waybar-configs.sh
+		
+		chmod 600 ~/.config/blacklayer/blacklayer.conf
+		mkdir -p ~/.config/blacklayer/.blacklayer_state/pids
+		mkdir -p ~/.config/blacklayer/.blacklayer_state/waybar
+		chmod 700 ~/.config/blacklayer/.blacklayer_state
+		chmod 700 ~/.config/blacklayer/.blacklayer_state/pids
+		chmod 700 ~/.config/blacklayer/.blacklayer_state/waybar
+
+		sudo chown -R "$USER:$USER" ~/.config/waybar  
+		chmod 700 ~/.config/waybar  
+		cd ~/.config/blacklayer/  
+		./generate-waybar-configs.sh  
+    fi
+
+
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bt"
     then
         echo "script-bt config file selected, running extra configuration..."
@@ -1103,6 +1144,46 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		~/.config/keyboard-mouse/keyboard-mouse.sh daemon
 		hyprctl reload
 		hyprctl configerrors
+    fi
+
+
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "blacklayer"
+    then
+		echo "blacklayer config file selected, running extra configuration..."
+		mkdir -p ~/.config/blacklayer
+		cp blacklayer \
+		   blacklayer.c \
+		   blacklayer.conf \
+		   blacklayer-worker.sh \
+		   clock-widget.py \
+		   input-activity.py \
+		   blacklayer-ui.py \
+		   start-waybars.sh \
+		   generate-waybar-configs.sh \
+		   ~/.config/blacklayer/
+        
+		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
+		chmod 700 ~/.config/blacklayer
+		chmod +x \
+		    ~/.config/blacklayer/blacklayer \
+		    ~/.config/blacklayer/blacklayer-worker.sh \
+		    ~/.config/blacklayer/clock-widget.py \
+		    ~/.config/blacklayer/input-activity.py \
+		    ~/.config/blacklayer/blacklayer-ui.py \
+		    ~/.config/blacklayer/start-waybars.sh \
+		    ~/.config/blacklayer/generate-waybar-configs.sh
+		
+		chmod 600 ~/.config/blacklayer/blacklayer.conf
+		mkdir -p ~/.config/blacklayer/.blacklayer_state/pids
+		mkdir -p ~/.config/blacklayer/.blacklayer_state/waybar
+		chmod 700 ~/.config/blacklayer/.blacklayer_state
+		chmod 700 ~/.config/blacklayer/.blacklayer_state/pids
+		chmod 700 ~/.config/blacklayer/.blacklayer_state/waybar
+
+		sudo chown -R "$USER:$USER" ~/.config/waybar  
+		chmod 700 ~/.config/waybar  
+		cd ~/.config/blacklayer/  
+		./generate-waybar-configs.sh  
     fi
 
 
