@@ -122,17 +122,44 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo chmod +x ~/.config/keyboard-mouse/keyboard-mouse-ui.py
 		~/.config/keyboard-mouse/keyboard-mouse.sh daemon
 
-        sudo chown -R "$USER:$USER" ~/.config/blacklayer/
-        chmod 700 ~/.config/blacklayer  
-        chmod +x ~/.config/blacklayer/*.sh 2>/dev/null || true
-        chmod 600 ~/.config/blacklayer/*.conf 2>/dev/null || true
-        if [ -f ~/.config/blacklayer/blacklayer ]; then
-    		chmod +x ~/.config/blacklayer/blacklayer
-		fi
-        sudo chown -R "$USER:$USER" ~/.config/waybar
-        chmod 700 ~/.config/waybar  
-		cd ~/.config/blacklayer/
-        ./generate-waybar-configs.sh
+
+        mkdir -p ~/.config/blacklayer
+		cd /blacklayer/
+		cp blacklayer \
+		   blacklayer.c \
+		   blacklayer.conf \
+		   blacklayer-worker.sh \
+		   clock-widget.py \
+		   input-activity.py \
+		   blacklayer-ui.py \
+		   start-waybars.sh \
+		   generate-waybar-configs.sh \
+		   ~/.config/blacklayer/
+        
+		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
+		chmod 700 ~/.config/blacklayer
+		chmod +x \
+		    ~/.config/blacklayer/blacklayer \
+		    ~/.config/blacklayer/blacklayer-worker.sh \
+		    ~/.config/blacklayer/clock-widget.py \
+		    ~/.config/blacklayer/input-activity.py \
+		    ~/.config/blacklayer/blacklayer-ui.py \
+		    ~/.config/blacklayer/start-waybars.sh \
+		    ~/.config/blacklayer/generate-waybar-configs.sh
+		
+		chmod 600 ~/.config/blacklayer/blacklayer.conf
+		mkdir -p ~/.config/blacklayer/.blacklayer_state/pids
+		mkdir -p ~/.config/blacklayer/.blacklayer_state/waybar
+		chmod 700 ~/.config/blacklayer/.blacklayer_state
+		chmod 700 ~/.config/blacklayer/.blacklayer_state/pids
+		chmod 700 ~/.config/blacklayer/.blacklayer_state/waybar
+
+		HINTS+="If you want to disappear waybar(for use 100% of screen) when blacklayer is active follow these steps:"$'\n'
+        HINTS+="Run: sudo chown -R "$USER:$USER" ~/.config/waybar"$'\n'
+		HINTS+="Run: chmod 700 ~/.config/waybar"$'\n'
+		HINTS+="Run: cd ~/.config/blacklayer/"$'\n'
+		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
+
 
         sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
         sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
@@ -676,6 +703,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		mkdir -p ~/.config/blacklayer
+		cd /blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
@@ -705,10 +733,11 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		chmod 700 ~/.config/blacklayer/.blacklayer_state/pids
 		chmod 700 ~/.config/blacklayer/.blacklayer_state/waybar
 
-		sudo chown -R "$USER:$USER" ~/.config/waybar  
-		chmod 700 ~/.config/waybar  
-		cd ~/.config/blacklayer/  
-		./generate-waybar-configs.sh  
+		HINTS+="If you want to disappear waybar(for use 100% of screen) when blacklayer is active follow these steps:"$'\n'
+        HINTS+="Run: sudo chown -R "$USER:$USER" ~/.config/waybar"$'\n'
+		HINTS+="Run: chmod 700 ~/.config/waybar"$'\n'
+		HINTS+="Run: cd ~/.config/blacklayer/"$'\n'
+		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
     fi
 
 
@@ -1151,6 +1180,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		mkdir -p ~/.config/blacklayer
+		cd /blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
@@ -1180,10 +1210,11 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		chmod 700 ~/.config/blacklayer/.blacklayer_state/pids
 		chmod 700 ~/.config/blacklayer/.blacklayer_state/waybar
 
-		sudo chown -R "$USER:$USER" ~/.config/waybar  
-		chmod 700 ~/.config/waybar  
-		cd ~/.config/blacklayer/  
-		./generate-waybar-configs.sh  
+		HINTS+="If you want to disappear waybar(for use 100% of screen) when blacklayer is active follow these steps:"$'\n'
+        HINTS+="Run: sudo chown -R "$USER:$USER" ~/.config/waybar"$'\n'
+		HINTS+="Run: chmod 700 ~/.config/waybar"$'\n'
+		HINTS+="Run: cd ~/.config/blacklayer/"$'\n'
+		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
     fi
 
 
