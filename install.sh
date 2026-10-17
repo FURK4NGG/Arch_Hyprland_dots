@@ -124,7 +124,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 
         mkdir -p ~/.config/blacklayer
-		cd /blacklayer/
+		cd ./.config/blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
@@ -703,7 +703,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		mkdir -p ~/.config/blacklayer
-		cd /blacklayer/
+		cd ./.config/blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
@@ -1180,7 +1180,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		mkdir -p ~/.config/blacklayer
-		cd /blacklayer/
+		cd ./.config/blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
