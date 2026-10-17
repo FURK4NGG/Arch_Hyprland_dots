@@ -89,7 +89,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	
 		#CONFIGS
 	
-		cd ./Arch_Hyprland_dots/
+		 ./Arch_Hyprland_dots/
 	
 		sudo mkdir -p /usr/share/icons/
         sudo cp -rf .config/ /home/$USER/
@@ -125,7 +125,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 
         mkdir -p ~/.config/blacklayer
-		cd ./.config/blacklayer/
+		 ./.config/blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
@@ -158,12 +158,12 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		HINTS+="If you want to disappear waybar(for use 100% of screen) when blacklayer is active follow these steps:"$'\n'
         HINTS+="Run: sudo chown -R "$USER:$USER" ~/.config/waybar"$'\n'
 		HINTS+="Run: chmod 700 ~/.config/waybar"$'\n'
-		HINTS+="Run: cd ~/.config/blacklayer/"$'\n'
+		HINTS+="Run:  ~/.config/blacklayer/"$'\n'
 		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
 
 
 		mkdir -p ~/.config/usage-tracker
-		cd usage-tracker
+		 ./.config/usage-tracker/
 		cp usage-tracker.py \
 		   usage-tracker.service \
 		   usage-widget.py \
@@ -719,7 +719,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		mkdir -p ~/.config/blacklayer
-		cd ./.config/blacklayer/
+		 ./.config/blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
@@ -752,7 +752,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		HINTS+="If you want to disappear waybar(for use 100% of screen) when blacklayer is active follow these steps:"$'\n'
         HINTS+="Run: sudo chown -R "$USER:$USER" ~/.config/waybar"$'\n'
 		HINTS+="Run: chmod 700 ~/.config/waybar"$'\n'
-		HINTS+="Run: cd ~/.config/blacklayer/"$'\n'
+		HINTS+="Run:  ~/.config/blacklayer/"$'\n'
 		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
     fi
 
@@ -761,7 +761,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "usage-tracker config file selected, running extra configuration..."
 	    mkdir -p ~/.config/usage-tracker
-		cd usage-tracker
+		 ./.config/usage-tracker/
 		cp usage-tracker.py \
 		   usage-tracker.service \
 		   usage-widget.py \
@@ -1215,7 +1215,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		mkdir -p ~/.config/blacklayer
-		cd ./.config/blacklayer/
+		 ./.config/blacklayer/
 		cp blacklayer \
 		   blacklayer.c \
 		   blacklayer.conf \
@@ -1248,7 +1248,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		HINTS+="If you want to disappear waybar(for use 100% of screen) when blacklayer is active follow these steps:"$'\n'
         HINTS+="Run: sudo chown -R "$USER:$USER" ~/.config/waybar"$'\n'
 		HINTS+="Run: chmod 700 ~/.config/waybar"$'\n'
-		HINTS+="Run: cd ~/.config/blacklayer/"$'\n'
+		HINTS+="Run:  ~/.config/blacklayer/"$'\n'
 		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
     fi
 
@@ -1257,7 +1257,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "usage-tracker config file selected, running extra configuration..."
 	    mkdir -p ~/.config/usage-tracker
-		cd usage-tracker
+		 ./.config/usage-tracker/
 		cp usage-tracker.py \
 		   usage-tracker.service \
 		   usage-widget.py \
