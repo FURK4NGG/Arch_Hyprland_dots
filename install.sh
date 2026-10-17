@@ -88,7 +88,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	
 		#CONFIGS
 	
-		cd /Arch_Hyprland_dots/
+		cd ./Arch_Hyprland_dots/
 	
 		sudo mkdir -p /usr/share/icons/
         sudo cp -rf .config/ /home/$USER/
