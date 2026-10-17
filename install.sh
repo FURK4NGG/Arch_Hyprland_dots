@@ -26,6 +26,7 @@ M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils waylan
 'script-vpn("For connect the vpn server, you can follow the instructions in https://github.com/FURK4NGG/Server-Setup or https://git.furk4ngg.me/furk4ngg/Server-Setup" networkmanager wireguard-tools libnotify)'
 'script-keyboard-mouse("This package allows you to control the mouse entirely with the keyboard, eliminating the need for a physical mouse." python-evdev ydotool libnotify)'
 'blacklayer("A lightweight desktop inactivity tool featuring customizable backgrounds, automatic logout or screen shutdown, and support for custom Python widgets, animations, and per-monitor inactivity monitoring." gtk3 gdk-pixbuf2 gtk-layer-shell jq python python-gobject python-evdev libadwaita)'
+'usage-tracker("A lightweight application usage tracker for Linux that monitors active application usage and displays daily usage statistics through a GTK4-based widget." python-gobject gtk4 gtk4-layer-shell jq libnotify)'
 'script-gamemode("Improves performance by temporarily disabling unused system features while gaming" libnotify)'
 'audio-pkgs(pipewire pipewire-pulse wireplumber alsa-utils)'
 'media-player-pkgs(mpv xdg-utils)'
@@ -161,7 +162,22 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
 
 
-        sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
+		mkdir -p ~/.config/usage-tracker
+		cd usage-tracker
+		cp usage-tracker.py \
+		   usage-tracker.service \
+		   usage-widget.py \
+		   ~/.config/usage-tracker/
+		
+		chmod +x ~/.config/usage-tracker/usage-widget.py  
+		chmod +x ~/.config/usage-tracker/usage-tracker.py  
+		chmod +x ~/.config/usage-tracker/usage-tracker.service  
+		chmod +x ~/.config/usage-tracker/install.sh  
+		systemctl --user daemon-reload  
+		systemctl --user enable --now usage-tracker.service  
+		
+		
+		sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
         sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
         systemctl --user daemon-reload
         systemctl --user enable --now hyprshade-auto.timer
@@ -741,6 +757,25 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     fi
 
 
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "usage-tracker"
+    then
+        echo "usage-tracker config file selected, running extra configuration..."
+	    mkdir -p ~/.config/usage-tracker
+		cd usage-tracker
+		cp usage-tracker.py \
+		   usage-tracker.service \
+		   usage-widget.py \
+		   ~/.config/usage-tracker/
+		
+		chmod +x ~/.config/usage-tracker/usage-widget.py  
+		chmod +x ~/.config/usage-tracker/usage-tracker.py  
+		chmod +x ~/.config/usage-tracker/usage-tracker.service  
+		chmod +x ~/.config/usage-tracker/install.sh  
+		systemctl --user daemon-reload  
+		systemctl --user enable --now usage-tracker.service  
+    fi
+
+
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-bt"
     then
         echo "script-bt config file selected, running extra configuration..."
@@ -1215,6 +1250,25 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		HINTS+="Run: chmod 700 ~/.config/waybar"$'\n'
 		HINTS+="Run: cd ~/.config/blacklayer/"$'\n'
 		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
+    fi
+
+
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "usage-tracker"
+    then
+        echo "usage-tracker config file selected, running extra configuration..."
+	    mkdir -p ~/.config/usage-tracker
+		cd usage-tracker
+		cp usage-tracker.py \
+		   usage-tracker.service \
+		   usage-widget.py \
+		   ~/.config/usage-tracker/
+		
+		chmod +x ~/.config/usage-tracker/usage-widget.py  
+		chmod +x ~/.config/usage-tracker/usage-tracker.py  
+		chmod +x ~/.config/usage-tracker/usage-tracker.service  
+		chmod +x ~/.config/usage-tracker/install.sh  
+		systemctl --user daemon-reload  
+		systemctl --user enable --now usage-tracker.service  
     fi
 
 
