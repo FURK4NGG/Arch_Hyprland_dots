@@ -64,7 +64,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo cp boot/loader/loader.conf /boot/loader/loader.conf
 	
         sudo mkdir -p /etc/greetd/
-		sudo cp -f /etc/greetd/config.toml /etc/greetd/config.toml
+		sudo cp -f ./etc/greetd/config.toml /etc/greetd/config.toml
 		sudo systemctl enable greetd
 
         systemctl --user enable --now pipewire
@@ -592,7 +592,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "login-manager package selected, running extra configuration..."
 		sudo mkdir -p /etc/greetd/
-		sudo cp -f /etc/greetd/config.toml /etc/greetd/config.toml
+		sudo cp -f ./etc/greetd/config.toml /etc/greetd/config.toml
 		sudo systemctl enable greetd
     fi
 
@@ -1084,7 +1084,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "login-manager package selected, running extra configuration..."
 		sudo mkdir -p /etc/greetd/
-		sudo cp -f /etc/greetd/config.toml /etc/greetd/config.toml
+		sudo cp -f ./etc/greetd/config.toml /etc/greetd/config.toml
 		sudo systemctl enable greetd
     fi
 
