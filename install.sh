@@ -92,18 +92,19 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		cd ./Arch_Hyprland_dots/
 	
 		sudo mkdir -p /usr/share/icons/
-        sudo cp -rf .config/ /home/$USER/
-        sudo cp -rf themes_bg/modest-dark/ /usr/share/icons/
+        sudo cp -rf ./.config/ /home/$USER/
+        sudo cp -rf ./themes_bg/modest-dark/ /usr/share/icons/
 
         hyprctl reload
+		mkdir -p ~/.local/bin
 
-        sudo mkdir -p /etc/xdg/swaync/
-        mkdir -p ~/.local/bin
-        sudo cp -f ~/.config/swaync/style.css /etc/xdg/swaync/style.css
-        sudo cp -f ~/.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
-        sudo chmod +x ~/.config/scripts/*.sh
-		systemctl --user enable --now swaync
-        sudo chmod +x ~/.local/bin/hyprshade-auto.sh
+		sudo mkdir -p /etc/xdg/swaync/
+		sudo mkdir -p /home/$USER/.config/swaync
+        sudo cp -f ./.config/swaync/style.css /etc/xdg/swaync/style.css
+	    sudo cp -f ./.config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
+	    sudo cp -f ./.config/swaync/config.json ~/.config/swaync/config.json
+	    sudo chmod +x ~/.config/scripts/*.sh
+	    systemctl --user enable --now swaync
 
         sudo mkdir -p /home/$USER/Resimler/wallpapers/
         sudo cp -f themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
@@ -113,8 +114,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		
 		sudo mkdir -p ~/.config/screenrec/
 		sudo mkdir -p ~/Resimler/
-		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
-		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
+		sudo cp -f ./.config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
+		sudo cp -f ./.config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
 	    
 		chmod +x ~/.config/screenrec/screenrec-ui.py  
 		chmod +x ~/.config/screenrec/screenrec.sh  
@@ -124,9 +125,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo mkdir -p ~/.config/keyboard-mouse/
 		systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
-		sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
-		sudo cp -f .config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
-		sudo cp -f .config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
+		sudo cp -f ./.config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
+		sudo cp -f ./.config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
+		sudo cp -f ./.config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-ui.py
@@ -137,15 +138,15 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 
         sudo mkdir -p ~/.config/blacklayer/
-		sudo cp -f .config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
-		sudo cp -f .config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
-		sudo cp -f .config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
-		sudo cp -f .config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
-		sudo cp -f .config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
-		sudo cp -f .config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
-		sudo cp -f .config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
-		sudo cp -f .config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
-		sudo cp -f .config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
+		sudo cp -f ./.config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
+		sudo cp -f ./.config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
+		sudo cp -f ./.config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
+		sudo cp -f ./.config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
+		sudo cp -f ./.config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
+		sudo cp -f ./.config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
+		sudo cp -f ./.config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
+		sudo cp -f ./.config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
+		sudo cp -f ./.config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
         
 		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
 		chmod 700 ~/.config/blacklayer
@@ -173,9 +174,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 
 		mkdir -p ~/.config/usage-tracker/
-		sudo cp -f .config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
-		sudo cp -f .config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
-		sudo cp -f .config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
+		sudo cp -f ./.config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
+		sudo cp -f ./.config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
+		sudo cp -f ./.config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
 		
 		chmod +x ~/.config/usage-tracker/usage-widget.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.py  
@@ -184,10 +185,12 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		systemctl --user enable --now usage-tracker.service  
 		
 		
+		sudo cp -f ./.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
+		sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 		sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
-        sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
-        systemctl --user daemon-reload
-        systemctl --user enable --now hyprshade-auto.timer
+		sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
+		systemctl --user daemon-reload
+		systemctl --user enable --now hyprshade-auto.timer
 
         sudo chmod 600 ~/.config/scripts/brightness_mode_state
         sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
@@ -500,7 +503,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "hyprland package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-        sudo cp -f .config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
+        sudo cp -f ./.config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
       	HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
         HINTS+="Open your hyprland.conf file to make the necessary changes."$'\n'	
     fi
@@ -510,7 +513,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "hyprlock package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-        sudo cp -f .config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
+        sudo cp -f ./.config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
     fi
 
 
@@ -518,7 +521,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "hyprpaper package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/hypr
-        sudo cp -f .config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
+        sudo cp -f ./.config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
 	    sudo mkdir -p /home/$USER/Resimler/wallpapers/
         sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
@@ -531,7 +534,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "kitty package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/kitty
-        sudo cp -rf .config/kitty/* /home/$USER/.config/kitty
+        sudo cp -rf ./.config/kitty/* /home/$USER/.config/kitty
     fi
 
 
@@ -539,7 +542,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "neovim package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/nvim/
-        sudo cp -f .config/nvim/init.lua /home/$USER/.config/nvim/init.lua
+        sudo cp -f ./.config/nvim/init.lua /home/$USER/.config/nvim/init.lua
 		sudo npm install -g typescript typescript-language-server
 		sudo npm install -g vscode-langservers-extracted
 		echo 'export EDITOR=nvim' >> ~/.bashrc && source ~/.bashrc
@@ -550,7 +553,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "rofi package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/rofi
-        sudo cp -rf .config/rofi/* /home/$USER/.config/rofi
+        sudo cp -rf ./.config/rofi/* /home/$USER/.config/rofi
     fi
 
 
@@ -558,9 +561,10 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "swaync package selected, running extra configuration..."
         sudo mkdir -p /etc/xdg/swaync/
-        sudo cp -f .config/swaync/style.css /etc/xdg/swaync/style.css
-	    sudo cp -f .config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
-	    sudo cp -f .config/swaync/config.json ~/.config/swaync/config.json
+		sudo mkdir -p /home/$USER/.config/swaync
+        sudo cp -f ./.config/swaync/style.css /etc/xdg/swaync/style.css
+	    sudo cp -f ./.config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
+	    sudo cp -f ./.config/swaync/config.json ~/.config/swaync/config.json
 	    sudo chmod +x ~/.config/scripts/*.sh
 	    systemctl --user enable --now swaync
     fi
@@ -570,7 +574,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "waybar package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/waybar
-        sudo cp -rf .config/waybar/* /home/$USER/.config/waybar
+        sudo cp -rf ./.config/waybar/* /home/$USER/.config/waybar
 	    sudo chmod +x ~/.config/waybar/scripts/weather.py
     fi
 
@@ -579,7 +583,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "wlogout package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/wlogout
-        sudo cp -rf .config/wlogout/* /home/$USER/.config/wlogout
+        sudo cp -rf ./.config/wlogout/* /home/$USER/.config/wlogout
     fi
 
 
@@ -605,7 +609,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "script-keyboard-language config file selected, running extra configuration..."
         sudo mkdir -p ~/.config/autostart/
-        sudo cp -f .config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
+        sudo cp -f ./.config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
     fi
 
 
@@ -616,10 +620,10 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
        	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
         sudo usermod -aG i2c "$USER"
 	    sudo mkdir -p ~/.config/scripts/
-	    sudo cp -f .config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
-	    sudo cp -f .config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
-	    sudo cp -f .config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
-	    sudo cp -f .config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
+	    sudo cp -f ./.config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
+	    sudo cp -f ./.config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
+	    sudo cp -f ./.config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
+	    sudo cp -f ./.config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
 	    sudo chmod 600 ~/.config/scripts/brightness_mode_state
       	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
        	sudo chmod +x ~/.config/scripts/*.sh
@@ -633,16 +637,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-hyprshade config file selected, running extra configuration..."
         mkdir -p ~/.local/bin
 	    sudo mkdir -p ~/.config/scripts/
-	    sudo cp -f .config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
-	    sudo cp -f .config/scripts/hyprshade-toggle-state ~/.config/scripts/hyprshade-toggle-state
-	    sudo cp -f .config/scripts/night_screen.frag ~/.config/scripts/night_screen.frag
 	    sudo chmod +x ~/.config/scripts/*.sh
-       	sudo chmod +x ~/.local/bin/hyprshade-auto.sh
-	    sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
-       	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
-
-	    systemctl --user daemon-reload
- 	    systemctl --user enable --now hyprshade-auto.timer
+       	
+		sudo cp -f ./.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
+		sudo chmod +x ~/.local/bin/hyprshade-auto.sh
+		sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
+		sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
+		systemctl --user daemon-reload
+		systemctl --user enable --now hyprshade-auto.timer
     fi
 
 
@@ -651,8 +653,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "screenrec config file selected, running extra configuration..."
 		sudo mkdir -p ~/.config/screenrec/
 		sudo mkdir -p ~/Resimler/
-		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
-		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
+		sudo cp -f ./.config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
+		sudo cp -f ./.config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
 	    
 		chmod +x ~/.config/screenrec/screenrec-ui.py  
 		chmod +x ~/.config/screenrec/screenrec.sh  
@@ -665,7 +667,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-screenprint config file selected, running extra configuration..."
         sudo mkdir -p ~/.config/scripts/
 	    sudo mkdir -p ~/Resimler/
-        sudo cp -f .config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
+        sudo cp -f ./.config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
@@ -675,7 +677,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-wifi config file selected, running extra configuration..."
 	    sudo systemctl enable --now NetworkManager
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo cp -f ./.config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
@@ -685,7 +687,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-vpn config file selected, running extra configuration..."
 	    sudo systemctl enable --now NetworkManager
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/vpn.sh ~/.config/scripts/vpn.sh
+        sudo cp -f ./.config/scripts/vpn.sh ~/.config/scripts/vpn.sh
         sudo chmod +x ~/.config/scripts/*.sh
 
 		echo "Checking NetworkManager..."
@@ -711,9 +713,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo mkdir -p ~/.config/keyboard-mouse/
 	    systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
-        sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
-		sudo cp -f .config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
-		sudo cp -f .config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
+        sudo cp -f ./.config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
+		sudo cp -f ./.config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
+		sudo cp -f ./.config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-ui.py
@@ -730,15 +732,15 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		sudo mkdir -p ~/.config/blacklayer/
-		sudo cp -f .config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
-		sudo cp -f .config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
-		sudo cp -f .config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
-		sudo cp -f .config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
-		sudo cp -f .config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
-		sudo cp -f .config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
-		sudo cp -f .config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
-		sudo cp -f .config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
-		sudo cp -f .config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
+		sudo cp -f ./.config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
+		sudo cp -f ./.config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
+		sudo cp -f ./.config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
+		sudo cp -f ./.config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
+		sudo cp -f ./.config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
+		sudo cp -f ./.config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
+		sudo cp -f ./.config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
+		sudo cp -f ./.config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
+		sudo cp -f ./.config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
         
 		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
 		chmod 700 ~/.config/blacklayer
@@ -770,9 +772,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "usage-tracker config file selected, running extra configuration..."
 	    mkdir -p ~/.config/usage-tracker/
-		sudo cp -f .config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
-		sudo cp -f .config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
-		sudo cp -f .config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
+		sudo cp -f ./.config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
+		sudo cp -f ./.config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
+		sudo cp -f ./.config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
 		
 		chmod +x ~/.config/usage-tracker/usage-widget.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.py  
@@ -789,7 +791,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo systemctl enable --now bluetooth
         sudo usermod -aG bluetooth "$USER"
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo cp -f ./.config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
@@ -798,7 +800,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "script-gamemode config file selected, running extra configuration..."
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
+        sudo cp -f ./.config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
@@ -994,7 +996,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "hyprland package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-        sudo cp -f .config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
+        sudo cp -f ./.config/hypr/hyprland.conf /home/$USER/.config/hypr/hyprland.conf
       	HINTS+="If your monitors are not named HDMI-A-2 and DP-2, or if you have more than two monitors, follow these steps:"$'\n'
         HINTS+="Open your hyprland.conf file to make the necessary changes."$'\n'	
     fi
@@ -1004,7 +1006,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "hyprlock package selected, running extra configuration..."
 	    sudo mkdir -p /home/$USER/.config/hypr
-        sudo cp -f .config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
+        sudo cp -f ./.config/hypr/hyprlock.conf /home/$USER/.config/hypr/hyprlock.conf
     fi
 
 
@@ -1012,7 +1014,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "hyprpaper package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/hypr
-        sudo cp -f .config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
+        sudo cp -f ./.config/hypr/hyprpaper.conf /home/$USER/.config/hypr/hyprpaper.conf
 	    sudo mkdir -p /home/$USER/Resimler/wallpapers/
         sudo cp themes_bg/wallpaper-2.png /home/$USER/Resimler/wallpapers/wallpaper-2.png
 
@@ -1025,7 +1027,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "kitty package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/kitty
-        sudo cp -rf .config/kitty/* /home/$USER/.config/kitty
+        sudo cp -rf ./.config/kitty/* /home/$USER/.config/kitty
     fi
 
 
@@ -1033,7 +1035,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "neovim package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/nvim/
-        sudo cp -f .config/nvim/init.lua /home/$USER/.config/nvim/init.lua
+        sudo cp -f ./.config/nvim/init.lua /home/$USER/.config/nvim/init.lua
 		sudo npm install -g typescript typescript-language-server
 		sudo npm install -g vscode-langservers-extracted
 		echo 'export EDITOR=nvim' >> ~/.bashrc && source ~/.bashrc
@@ -1044,7 +1046,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "rofi package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/rofi
-        sudo cp -rf .config/rofi/* /home/$USER/.config/rofi
+        sudo cp -rf ./.config/rofi/* /home/$USER/.config/rofi
     fi
 
 
@@ -1053,9 +1055,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "swaync package selected, running extra configuration..."
         sudo mkdir -p /etc/xdg/swaync/
 		sudo mkdir -p /home/$USER/.config/swaync
-        sudo cp -f .config/swaync/style.css /etc/xdg/swaync/style.css
-	    sudo cp -f .config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
-	    sudo cp -f .config/swaync/config.json ~/.config/swaync/config.json
+        sudo cp -f ./.config/swaync/style.css /etc/xdg/swaync/style.css
+	    sudo cp -f ./.config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
+	    sudo cp -f ./.config/swaync/config.json ~/.config/swaync/config.json
 	    sudo chmod +x ~/.config/scripts/*.sh
 	    systemctl --user enable --now swaync
     fi
@@ -1065,7 +1067,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "waybar package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/waybar
-        sudo cp -rf .config/waybar/* /home/$USER/.config/waybar
+        sudo cp -rf ./.config/waybar/* /home/$USER/.config/waybar
 	    sudo chmod +x ~/.config/waybar/scripts/weather.py
     fi
 
@@ -1074,7 +1076,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "wlogout package selected, running extra configuration..."
         sudo mkdir -p /home/$USER/.config/wlogout
-        sudo cp -rf .config/wlogout/* /home/$USER/.config/wlogout
+        sudo cp -rf ./.config/wlogout/* /home/$USER/.config/wlogout
     fi
 
 
@@ -1100,7 +1102,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "script-keyboard-language config file selected, running extra configuration..."
         sudo mkdir -p ~/.config/autostart/
-        sudo cp -f .config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
+        sudo cp -f ./.config/autostart/klavye_degistirme.desktop ~/.config/autostart/klavye_degistirme.desktop
     fi
 
 
@@ -1111,10 +1113,10 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
        	echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf
         sudo usermod -aG i2c "$USER"
 	    sudo mkdir -p ~/.config/scripts/
-	    sudo cp -f .config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
-	    sudo cp -f .config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
-	    sudo cp -f .config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
-	    sudo cp -f .config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
+	    sudo cp -f ./.config/scripts/brightness_mode.sh ~/.config/scripts/brightness_mode.sh
+	    sudo cp -f ./.config/scripts/brightness_mode_calib.sh ~/.config/scripts/brightness_mode_calib.sh
+	    sudo cp -f ./.config/scripts/brightness_mode_state ~/.config/scripts/brightness_mode_state
+	    sudo cp -f ./.config/scripts/ddc-map.conf ~/.config/scripts/ddc-map.conf
 	    sudo chmod 600 ~/.config/scripts/brightness_mode_state
       	sudo chown $USER:$USER ~/.config/scripts/brightness_mode_state
        	sudo chmod +x ~/.config/scripts/*.sh
@@ -1128,16 +1130,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-hyprshade config file selected, running extra configuration..."
         mkdir -p ~/.local/bin
 	    sudo mkdir -p ~/.config/scripts/
-	    sudo cp -f .config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
-	    sudo cp -f .config/scripts/hyprshade-toggle-state ~/.config/scripts/hyprshade-toggle-state
-	    sudo cp -f .config/scripts/night_screen.frag ~/.config/scripts/night_screen.frag
 	    sudo chmod +x ~/.config/scripts/*.sh
-       	sudo chmod +x ~/.local/bin/hyprshade-auto.sh
-	    sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
-       	sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
-
-	    systemctl --user daemon-reload
- 	    systemctl --user enable --now hyprshade-auto.timer
+       	
+		sudo cp -f ./.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
+		sudo chmod +x ~/.local/bin/hyprshade-auto.sh
+		sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
+		sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
+		systemctl --user daemon-reload
+		systemctl --user enable --now hyprshade-auto.timer
     fi
 
 
@@ -1146,8 +1146,8 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "screenrec config file selected, running extra configuration..."
 		sudo mkdir -p ~/.config/screenrec/
 		sudo mkdir -p ~/Resimler/
-		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
-		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
+		sudo cp -f ./.config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
+		sudo cp -f ./.config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
 	    
 		chmod +x ~/.config/screenrec/screenrec-ui.py  
 		chmod +x ~/.config/screenrec/screenrec.sh  
@@ -1160,7 +1160,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-screenprint config file selected, running extra configuration..."
         sudo mkdir -p ~/.config/scripts/
 	    sudo mkdir -p ~/Resimler/
-        sudo cp -f .config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
+        sudo cp -f ./.config/scripts/screenprint.sh ~/.config/scripts/screenprint.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
@@ -1170,7 +1170,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-wifi config file selected, running extra configuration..."
 	    sudo systemctl enable --now NetworkManager
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo cp -f ./.config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
@@ -1180,7 +1180,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         echo "script-vpn config file selected, running extra configuration..."
 	    sudo systemctl enable --now NetworkManager
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/vpn.sh ~/.config/scripts/vpn.sh
+        sudo cp -f ./.config/scripts/vpn.sh ~/.config/scripts/vpn.sh
         sudo chmod +x ~/.config/scripts/*.sh
 
 		echo "Checking NetworkManager..."
@@ -1206,9 +1206,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		sudo mkdir -p ~/.config/keyboard-mouse/
 	    systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
-        sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
-		sudo cp -f .config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
-		sudo cp -f .config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
+        sudo cp -f ./.config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
+		sudo cp -f ./.config/keyboard-mouse/keyboard-mouse-ui.py ~/.config/keyboard-mouse/keyboard-mouse-ui.py
+		sudo cp -f ./.config/keyboard-mouse/keyboard-mouse-daemon.py ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse.sh
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-daemon.py
 		sudo chown "$USER:$USER" ~/.config/keyboard-mouse/keyboard-mouse-ui.py
@@ -1225,15 +1225,15 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
 		echo "blacklayer config file selected, running extra configuration..."
 		sudo mkdir -p ~/.config/blacklayer/
-		sudo cp -f .config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
-		sudo cp -f .config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
-		sudo cp -f .config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
-		sudo cp -f .config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
-		sudo cp -f .config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
-		sudo cp -f .config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
-		sudo cp -f .config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
-		sudo cp -f .config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
-		sudo cp -f .config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
+		sudo cp -f ./.config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
+		sudo cp -f ./.config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
+		sudo cp -f ./.config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
+		sudo cp -f ./.config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
+		sudo cp -f ./.config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
+		sudo cp -f ./.config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
+		sudo cp -f ./.config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
+		sudo cp -f ./.config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
+		sudo cp -f ./.config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
         
 		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
 		chmod 700 ~/.config/blacklayer
@@ -1265,9 +1265,9 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "usage-tracker config file selected, running extra configuration..."
 	    mkdir -p ~/.config/usage-tracker/
-		sudo cp -f .config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
-		sudo cp -f .config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
-		sudo cp -f .config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
+		sudo cp -f ./.config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
+		sudo cp -f ./.config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
+		sudo cp -f ./.config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
 		
 		chmod +x ~/.config/usage-tracker/usage-widget.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.py  
@@ -1284,7 +1284,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo systemctl enable --now bluetooth
         sudo usermod -aG bluetooth "$USER"
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
+        sudo cp -f ./.config/scripts/wifi-bt.sh ~/.config/scripts/wifi-bt.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
@@ -1293,7 +1293,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "script-gamemode config file selected, running extra configuration..."
         sudo mkdir -p ~/.config/scripts/
-        sudo cp -f .config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
+        sudo cp -f ./.config/scripts/gamemode.sh ~/.config/scripts/gamemode.sh
         sudo chmod +x ~/.config/scripts/*.sh
     fi
 
