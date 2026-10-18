@@ -112,6 +112,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
 		
 		sudo mkdir -p ~/.config/screenrec/
+		sudo mkdir -p ~/Resimler/
 		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
 		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
 	    
@@ -649,6 +650,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "screenrec config file selected, running extra configuration..."
 		sudo mkdir -p ~/.config/screenrec/
+		sudo mkdir -p ~/Resimler/
 		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
 		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
 	    
@@ -1143,6 +1145,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     then
         echo "screenrec config file selected, running extra configuration..."
 		sudo mkdir -p ~/.config/screenrec/
+		sudo mkdir -p ~/Resimler/
 		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
 		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
 	    
