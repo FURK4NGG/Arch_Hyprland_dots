@@ -20,7 +20,7 @@ M_PACKAGES=(linux linux-zen hyprlock mesa vulkan-radeon libva libva-utils waylan
 'script-bootloader("Set your boot time to 8 second")'
 'script-keyboard-language("A program that switches between the keyboard layouts(US:TR) using the Alt + Shift keys\nRecommended for XFCE desktop environments")'
 'script-brightness-control("This package allows you to control your screen brightness using five different modes\nDesigned for Sway, but can also be controlled through the terminal." ddcutil i2c-tools libnotify)'
-'script-screenrec("This package for recording the screen\nDesigned for Sway, but can also be controlled through the terminal." wf-recorder slurp libnotify python python-evdev)'
+'screenrec("This package for recording the screen\nDesigned for Sway, but can also be controlled through the terminal." git python python-gobject python-cairo python-evdev gtk4 libadwaita ffmpeg wf-recorder slurp libnotify jq)'
 'script-screenprint("This package for take screenshot of the screen\nDesigned for Sway, but can also be controlled through the terminal." grim slurp libnotify)'
 'script-wifi("Wifi control with sway\nDesigned for Sway, but can also be controlled through the terminal." networkmanager network-manager-applet)'
 'script-vpn("For connect the vpn server, you can follow the instructions in https://github.com/FURK4NGG/Server-Setup or https://git.furk4ngg.me/furk4ngg/Server-Setup" networkmanager wireguard-tools libnotify)'
@@ -110,6 +110,17 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
         sudo chmod +x ~/.config/waybar/scripts/weather.py
 
+		
+		sudo mkdir -p ~/.config/screenrec/
+		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
+		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
+	    
+		chmod +x ~/.config/screenrec/screenrec-ui.py  
+		chmod +x ~/.config/screenrec/screenrec.sh  
+		chmod +x ~/.config/screenrec/install.sh  
+		
+
+		sudo mkdir -p ~/.config/keyboard-mouse/
 		systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
 		sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
@@ -124,18 +135,16 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		~/.config/keyboard-mouse/keyboard-mouse.sh daemon
 
 
-        mkdir -p ~/.config/blacklayer
-		cd ./.config/blacklayer/
-		cp blacklayer \
-		   blacklayer.c \
-		   blacklayer.conf \
-		   blacklayer-worker.sh \
-		   clock-widget.py \
-		   input-activity.py \
-		   blacklayer-ui.py \
-		   start-waybars.sh \
-		   generate-waybar-configs.sh \
-		   ~/.config/blacklayer/
+        sudo mkdir -p ~/.config/blacklayer/
+		sudo cp -f .config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
+		sudo cp -f .config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
+		sudo cp -f .config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
+		sudo cp -f .config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
+		sudo cp -f .config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
+		sudo cp -f .config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
+		sudo cp -f .config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
+		sudo cp -f .config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
+		sudo cp -f .config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
         
 		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
 		chmod 700 ~/.config/blacklayer
@@ -162,17 +171,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 		HINTS+="Run: ./generate-waybar-configs.sh"$'\n'
 
 
-		mkdir -p ~/.config/usage-tracker
-		cd ./.config/usage-tracker/
-		cp usage-tracker.py \
-		   usage-tracker.service \
-		   usage-widget.py \
-		   ~/.config/usage-tracker/
+		mkdir -p ~/.config/usage-tracker/
+		sudo cp -f .config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
+		sudo cp -f .config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
+		sudo cp -f .config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
 		
 		chmod +x ~/.config/usage-tracker/usage-widget.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.service  
-		chmod +x ~/.config/usage-tracker/install.sh  
 		systemctl --user daemon-reload  
 		systemctl --user enable --now usage-tracker.service  
 		
@@ -639,14 +645,16 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     fi
 
 
-	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-screenrec"
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "screenrec"
     then
-        echo "script-screenrec config file selected, running extra configuration..."
-	    sudo mkdir -p ~/.config/scripts/
-	    sudo mkdir -p ~/Resimler/
-        sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
-	    sudo chmod +x ~/.config/scripts/*.sh
-		sudo chmod +x ~/.config/scripts/screenrec-ui.py
+        echo "screenrec config file selected, running extra configuration..."
+		sudo mkdir -p ~/.config/screenrec/
+		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
+		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
+	    
+		chmod +x ~/.config/screenrec/screenrec-ui.py  
+		chmod +x ~/.config/screenrec/screenrec.sh  
+		chmod +x ~/.config/screenrec/install.sh  
     fi
 
 
@@ -698,6 +706,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-keyboard-mouse"
     then
         echo "script-keyboard-mouse config file selected, running extra configuration..."
+		sudo mkdir -p ~/.config/keyboard-mouse/
 	    systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
         sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
@@ -718,18 +727,16 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "blacklayer"
     then
 		echo "blacklayer config file selected, running extra configuration..."
-		mkdir -p ~/.config/blacklayer
-		cd ./.config/blacklayer/
-		cp blacklayer \
-		   blacklayer.c \
-		   blacklayer.conf \
-		   blacklayer-worker.sh \
-		   clock-widget.py \
-		   input-activity.py \
-		   blacklayer-ui.py \
-		   start-waybars.sh \
-		   generate-waybar-configs.sh \
-		   ~/.config/blacklayer/
+		sudo mkdir -p ~/.config/blacklayer/
+		sudo cp -f .config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
+		sudo cp -f .config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
+		sudo cp -f .config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
+		sudo cp -f .config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
+		sudo cp -f .config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
+		sudo cp -f .config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
+		sudo cp -f .config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
+		sudo cp -f .config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
+		sudo cp -f .config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
         
 		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
 		chmod 700 ~/.config/blacklayer
@@ -760,17 +767,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "usage-tracker"
     then
         echo "usage-tracker config file selected, running extra configuration..."
-	    mkdir -p ~/.config/usage-tracker
-		cd ./.config/usage-tracker/
-		cp usage-tracker.py \
-		   usage-tracker.service \
-		   usage-widget.py \
-		   ~/.config/usage-tracker/
+	    mkdir -p ~/.config/usage-tracker/
+		sudo cp -f .config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
+		sudo cp -f .config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
+		sudo cp -f .config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
 		
 		chmod +x ~/.config/usage-tracker/usage-widget.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.service  
-		chmod +x ~/.config/usage-tracker/install.sh  
 		systemctl --user daemon-reload  
 		systemctl --user enable --now usage-tracker.service  
     fi
@@ -1135,14 +1139,16 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
     fi
 
 
-	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-screenrec"
+	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "screenrec"
     then
-        echo "script-screenrec config file selected, running extra configuration..."
-	    sudo mkdir -p ~/.config/scripts/
-	    sudo mkdir -p ~/Resimler/
-        sudo cp -f .config/scripts/screenrec.sh ~/.config/scripts/screenrec.sh
-	    sudo chmod +x ~/.config/scripts/*.sh
-		sudo chmod +x ~/.config/scripts/screenrec-ui.py
+        echo "screenrec config file selected, running extra configuration..."
+		sudo mkdir -p ~/.config/screenrec/
+		sudo cp -f .config/screenrec/screenrec-ui.py ~/.config/screenrec/screenrec-ui.py
+		sudo cp -f .config/screenrec/screenrec.sh ~/.config/screenrec/screenrec.sh
+	    
+		chmod +x ~/.config/screenrec/screenrec-ui.py  
+		chmod +x ~/.config/screenrec/screenrec.sh  
+		chmod +x ~/.config/screenrec/install.sh  
     fi
 
 
@@ -1194,6 +1200,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-keyboard-mouse"
     then
         echo "script-keyboard-mouse config file selected, running extra configuration..."
+		sudo mkdir -p ~/.config/keyboard-mouse/
 	    systemctl --user enable --now ydotool.service
 		sudo usermod -aG input "$USER"
         sudo cp -f .config/keyboard-mouse/keyboard-mouse.sh ~/.config/keyboard-mouse/keyboard-mouse.sh
@@ -1214,18 +1221,16 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "blacklayer"
     then
 		echo "blacklayer config file selected, running extra configuration..."
-		mkdir -p ~/.config/blacklayer
-		cd ./.config/blacklayer/
-		cp blacklayer \
-		   blacklayer.c \
-		   blacklayer.conf \
-		   blacklayer-worker.sh \
-		   clock-widget.py \
-		   input-activity.py \
-		   blacklayer-ui.py \
-		   start-waybars.sh \
-		   generate-waybar-configs.sh \
-		   ~/.config/blacklayer/
+		sudo mkdir -p ~/.config/blacklayer/
+		sudo cp -f .config/blacklayer/blacklayer ~/.config/blacklayer/blacklayer
+		sudo cp -f .config/blacklayer/blacklayer.c ~/.config/blacklayer/blacklayer.c
+		sudo cp -f .config/blacklayer/blacklayer.conf ~/.config/blacklayer/blacklayer.conf
+		sudo cp -f .config/blacklayer/blacklayer-worker.sh ~/.config/blacklayer/blacklayer-worker.sh
+		sudo cp -f .config/blacklayer/clock-widget.py ~/.config/blacklayer/clock-widget.py
+		sudo cp -f .config/blacklayer/input-activity.py ~/.config/blacklayer/input-activity.py
+		sudo cp -f .config/blacklayer/blacklayer-ui.py ~/.config/blacklayer/blacklayer-ui.py
+		sudo cp -f .config/blacklayer/start-waybars.sh ~/.config/blacklayer/start-waybars.sh
+		sudo cp -f .config/blacklayer/generate-waybar-configs.sh ~/.config/blacklayer/generate-waybar-configs.sh
         
 		sudo chown -R "$USER:$USER" ~/.config/blacklayer/
 		chmod 700 ~/.config/blacklayer
@@ -1256,17 +1261,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "usage-tracker"
     then
         echo "usage-tracker config file selected, running extra configuration..."
-	    mkdir -p ~/.config/usage-tracker
-		cd ./.config/usage-tracker/
-		cp usage-tracker.py \
-		   usage-tracker.service \
-		   usage-widget.py \
-		   ~/.config/usage-tracker/
+	    mkdir -p ~/.config/usage-tracker/
+		sudo cp -f .config/usage-tracker/usage-tracker.py ~/.config/usage-tracker/usage-tracker.py
+		sudo cp -f .config/usage-tracker/usage-tracker.service ~/.config/usage-tracker/usage-tracker.service
+		sudo cp -f .config/usage-tracker/usage-widget.py ~/.config/usage-tracker/usage-widget.py
 		
 		chmod +x ~/.config/usage-tracker/usage-widget.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.py  
 		chmod +x ~/.config/usage-tracker/usage-tracker.service  
-		chmod +x ~/.config/usage-tracker/install.sh  
 		systemctl --user daemon-reload  
 		systemctl --user enable --now usage-tracker.service  
     fi
