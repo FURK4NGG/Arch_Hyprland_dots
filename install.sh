@@ -97,13 +97,14 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 
         hyprctl reload
 		mkdir -p ~/.local/bin
+		sudo mkdir -p ~/.config/scripts/
+		sudo chmod +x ~/.config/scripts/*.sh
 
 		sudo mkdir -p /etc/xdg/swaync/
 		sudo mkdir -p /home/$USER/.config/swaync
         sudo cp -f ./.config/swaync/style.css /etc/xdg/swaync/style.css
 	    sudo cp -f ./.config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
 	    sudo cp -f ./.config/swaync/config.json ~/.config/swaync/config.json
-	    sudo chmod +x ~/.config/scripts/*.sh
 	    systemctl --user enable --now swaync
 
         sudo mkdir -p /home/$USER/Resimler/wallpapers/
@@ -565,7 +566,6 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo cp -f ./.config/swaync/style.css /etc/xdg/swaync/style.css
 	    sudo cp -f ./.config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
 	    sudo cp -f ./.config/swaync/config.json ~/.config/swaync/config.json
-	    sudo chmod +x ~/.config/scripts/*.sh
 	    systemctl --user enable --now swaync
     fi
 
@@ -1058,7 +1058,6 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
         sudo cp -f ./.config/swaync/style.css /etc/xdg/swaync/style.css
 	    sudo cp -f ./.config/swaync/configSchema.json /etc/xdg/swaync/configSchema.json
 	    sudo cp -f ./.config/swaync/config.json ~/.config/swaync/config.json
-	    sudo chmod +x ~/.config/scripts/*.sh
 	    systemctl --user enable --now swaync
     fi
 
