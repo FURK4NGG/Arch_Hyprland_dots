@@ -100,7 +100,7 @@
         },
         {
           "label": "",
-          "command": "~/.config/scripts/screenrec-ui.py"
+          "command": "~/.config/screenrec/screenrec-ui.py"
         },
         {
           "label": "",
