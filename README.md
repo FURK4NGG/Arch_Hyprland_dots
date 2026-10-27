@@ -9,7 +9,7 @@
 
 <h1 align="center">blacklayer(special app)</h1>  
 
-![Blacklayer Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/blacklayer.gif)  
+[![blacklayer Demo Video](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/blacklayer.webp)](https://github.com/user-attachments/assets/2e7c48d9-89dc-4f05-8b57-03c944d85e2f)  
 
 ➡️ [Go to Blacklayer](https://github.com/FURK4NGG/blacklayer)
 
