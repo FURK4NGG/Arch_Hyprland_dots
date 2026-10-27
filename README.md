@@ -38,6 +38,8 @@ chmod +x install.sh
 
 ![screenrec Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/screenrec.gif)  
 
+➡️ [Go to Screenrec](https://github.com/FURK4NGG/screenrec)
+
 <details>
 <summary>screenrec</summary>
   
