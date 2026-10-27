@@ -72,7 +72,7 @@ chmod +x install.sh
 ➡️ [Go to Usage-Tracker](https://github.com/FURK4NGG/usage-tracker)
 
 
-<h1 align="center">hyprshade(special app)</h1>  
+<h1 align="center">hyprshade</h1>  
 
 ![hyprshade Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/hyprshade.gif)  
 
