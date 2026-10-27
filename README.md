@@ -10,6 +10,8 @@
 
 ![keyboard-mouse Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/keyboard-mouse.gif)  
 
+➡️ [Go to Keyboard-Mouse](https://github.com/FURK4NGG/keyboard-mouse)
+
 <details>
 <summary>keyboard-mouse</summary>
 
