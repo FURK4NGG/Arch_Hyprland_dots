@@ -635,6 +635,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-hyprshade"
     then
         echo "script-hyprshade config file selected, running extra configuration..."
+		sudo pacman -S --needed --noconfirm python-pip python-pipx
         mkdir -p ~/.local/bin
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo chmod +x ~/.config/scripts/*.sh
@@ -1127,6 +1128,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	if printf '%s\n' "${SELECTED_PKGS[@]}" "${SELECTED_PKGS_AUR[@]}" "${DOWNLOAD_PKGS[@]}" "${DOWNLOAD_PKGS_AUR[@]}" | grep -qx "script-hyprshade"
     then
         echo "script-hyprshade config file selected, running extra configuration..."
+		sudo pacman -S --needed --noconfirm python-pip python-pipx
         mkdir -p ~/.local/bin
 	    sudo mkdir -p ~/.config/scripts/
 	    sudo chmod +x ~/.config/scripts/*.sh
