@@ -644,6 +644,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	    sudo chmod +x ~/.config/scripts/*.sh
        	
 		sudo cp -f ./.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
+		sudo cp -f ./night-screen-overlay.py ~/.local/bin/night-screen-overlay.py
 		sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 		sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
 		sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
@@ -1140,6 +1141,7 @@ if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
 	    sudo chmod +x ~/.config/scripts/*.sh
        	
 		sudo cp -f ./.config/scripts/hyprshade-auto.sh ~/.local/bin/hyprshade-auto.sh
+		sudo cp -f ./night-screen-overlay.py ~/.local/bin/night-screen-overlay.py
 		sudo chmod +x ~/.local/bin/hyprshade-auto.sh
 		sudo chmod 600 ~/.config/scripts/hyprshade-toggle-state
 		sudo chown $USER:$USER ~/.config/scripts/hyprshade-toggle-state
