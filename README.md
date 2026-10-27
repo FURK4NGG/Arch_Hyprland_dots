@@ -6,6 +6,14 @@
 
 ![Arch_Hyprland_dots Login Manager Demo Image](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/%7B%7D/login_manager.webp)  
 
+
+<h1 align="center">blacklayer(special app)</h1>  
+
+![Blacklayer Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/blacklayer.gif)  
+
+➡️ [Go to Blacklayer](https://github.com/FURK4NGG/blacklayer)
+
+
 <h1 align="center">keyboard-mouse(special app)</h1>  
 
 ![keyboard-mouse Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/keyboard-mouse.gif)  
@@ -55,6 +63,20 @@ chmod +x install.sh
 ./install.sh
 ```
 </details>
+
+
+<h1 align="center">usage-tracker(special app)</h1>  
+
+![usage-tracker Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/usage-tracker.gif)  
+
+➡️ [Go to Usage-Tracker](https://github.com/FURK4NGG/usage-tracker)
+
+
+<h1 align="center">hyprshade(special app)</h1>  
+
+![hyprshade Demo GIF](https://github.com/FURK4NGG/Arch_Hyprland_dots/blob/main/{}/hyprshade.gif)  
+
+➡️ [Go to Hyprshade](https://github.com/FURK4NGG/hyprshade)
 
 # Basic Apps and Packets (Download Section)
 
