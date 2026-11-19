@@ -5,32 +5,33 @@ STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/toggle-gamemode-state"
 hk() { hyprctl keyword "$@" > /dev/null 2>&1; }
 
 if [ -f "$STATE_FILE" ]; then
-    # ---------- KAPAT ----------
+    # ---------- DISABLE ----------
     # shellcheck disable=SC1090
     . "$STATE_FILE"
     rm -f "$STATE_FILE"
 
-    # Hyprland ayarlarını config'ten geri yükle
+    # Restore Hyprland settings from the config file
     hyprctl dispatch submap reset > /dev/null
     hyprctl reload > /dev/null
 
-    # Güç profili
+    # Power profile
     command -v powerprofilesctl > /dev/null && \
         powerprofilesctl set "${PREV_PROFILE:-balanced}" 2> /dev/null
 
-    # swaync: önceden kapalıysa DND'yi kapat
+    # swaync: turn DND off only if it was off before
     if [ "$PREV_DND" != "true" ]; then
         swaync-client --dnd-off > /dev/null 2>&1
     fi
 
-    # hypridle: önceden çalışıyorsa yeniden başlat
+    # hypridle: restart it if it was running before
     if [ "$PREV_HYPRIDLE" = "1" ]; then
         setsid -f hypridle > /dev/null 2>&1
     fi
 
     notify-send -a "Game Mode" "Game Mode" "Closed"
 else
-    # ---------- AÇ ----------
+    # ---------- ENABLE ----------
+    # Save previous state
     {
         echo "PREV_PROFILE=$(powerprofilesctl get 2> /dev/null || echo balanced)"
         echo "PREV_DND=$(swaync-client --get-dnd 2> /dev/null || echo false)"
@@ -41,7 +42,7 @@ else
         fi
     } > "$STATE_FILE"
 
-    # Bildirimi DND açılmadan önce göster
+    # Show the notification before DND is enabled
     notify-send -a "Game Mode" "Game Mode" "Active (Close with ALT + G)"
     sleep 0.5
 
@@ -51,29 +52,29 @@ else
     hk general:border_size 0
     hk decoration:rounding 0
 
-    # Görsel efektler
+    # Visual effects
     hk decoration:blur:enabled false
     hk animations:enabled false
-    hk decoration:shadow:enabled false   # yeni sürümler
-    hk decoration:drop_shadow false      # eski sürümler
+    hk decoration:shadow:enabled false   # newer versions
+    hk decoration:drop_shadow false      # older versions
 
     # Tearing, VRR, direct scanout
     hk general:allow_tearing true
     hk misc:vrr 2
     hk render:direct_scanout 1
 
-    # Düz fare ivmesi
+    # Flat mouse acceleration
     hk input:accel_profile flat
     hk input:force_no_accel 1
 
-    # CPU/güç profili
+    # CPU/power profile
     command -v powerprofilesctl > /dev/null && \
         powerprofilesctl set performance 2> /dev/null
 
-    # Bildirimleri sustur
+    # Silence notifications
     swaync-client --dnd-on > /dev/null 2>&1
 
-    # Ekran kilidi/uyku (hypridle) durdur
+    # Stop screen lock/idle handling (hypridle)
     pkill -x hypridle
 
     hyprctl dispatch submap gamemode > /dev/null
